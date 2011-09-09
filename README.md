@@ -1,0 +1,1 @@
+This provides parsing in various markup languages (Markdown. Textile, Wikisyntax...) to Joomla! content articles.
