@@ -32,27 +32,59 @@ class KuKuKontentViewKuKuKontent extends JView
      */
     public function display($tpl = null)
     {
-        $tag = JFactory::getLanguage()->getTag();
+        JPluginHelper::importPlugin('content');
 
-        if(JFile::exists(JPATH_COMPONENT_SITE.'/demo/'.$tag.'.md'))
+        $this->content = $this->get('content');
+
+        $task = JRequest::getCmd('task');
+
+        if( ! $this->content->text
+        || 'edit' == $task)
         {
-            $content = JFile::read(JPATH_COMPONENT_SITE.'/demo/'.$tag.'.md');
+            $this->setLayout('edit');
         }
         else
         {
-            $content = JFile::read(JPATH_COMPONENT_SITE.'/demo/en-GB.md');
+            $content = JDispatcher::getInstance()->trigger('onContentPrepare'
+            , array('text', &$this->content, &$this->params));
         }
 
-        JPluginHelper::importPlugin('content');
 
-        $o = new stdClass;
-        $o->text = $content;
-
-        $content = JDispatcher::getInstance()->trigger('onContentPrepare'
-        , array('text', &$o, &$this->params));
-
-        $this->content = $o->text;
+        $this->setPathway();
 
         parent::display($tpl);
     }//function
+
+    protected function setPathway()
+    {
+        if( ! $this->content->path)
+        return;
+
+        $pathway = JFactory::getApplication()->getPathway();
+
+        $items = $pathway->getPathway();
+
+        $parts = explode('/', $this->content->path);
+
+        $combined = '';
+
+        $baseLink = $items[0]->link;
+
+        foreach ($parts as $part)
+        {
+            if( ! $part)
+            continue;
+
+            $combined .=($combined) ? '/'.$part : $part;
+
+            $p = new stdClass;
+
+            $p->name = $part;
+            $p->link = JRoute::_($baseLink.'&p='.$combined);
+
+            $items[] = $p;
+        }//foreach
+
+        $pathway->setPathway($items);
+    }
 }//class

@@ -11,5 +11,9 @@
 //-- No direct access
 defined('_JEXEC') || die('=;)');
 
+?>
+<a href="<?php echo JURI::current().'?task=edit'; ?>">Edit</a>
+<?php
+echo $this->content->text;
 
-echo $this->content;
+// var_dump($this->content);

@@ -21,4 +21,10 @@ jimport('joomla.application.component.controller');
  */
 class KuKuKontentController extends JController
 {
+    public function edit()
+    {
+        //@TODO access check !
+
+        parent::display();
+    }
 }//class

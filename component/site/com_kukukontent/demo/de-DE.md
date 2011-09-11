@@ -18,6 +18,8 @@ echo 'Hallo Wörld';
 
 Bilder ? Ein ![KoalaBärschn](images/sampledata/parks/animals/180px_koala_ag1.jpg) kleiner Bär zum [Bleistift](http://de.wikipedia.org/wiki/Beispiel_%28Rhetorik%29)... :)
 
+Ein interner Link [[den gibt\'s nüsch]](gar/nixda) - noch nüsch :P
+
 [^1]:Find it on [GitHub](https://github.com/elkuku/KuKuKontent)
 
     oder auch nicht ;)
