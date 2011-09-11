@@ -1,4 +1,6 @@
 <?php
+// No direct access allowed to this file
+defined('_JEXEC') || die('=;)');
 
 #
 # SmartyPants  -  Smart punctuation for web sites
@@ -82,7 +84,7 @@ function SmartyPants($text, $attr = NULL, $ctx = NULL) {
 	# 1 : set all
 	# 2 : set all, using old school en- and em- dash shortcuts
 	# 3 : set all, using inverted old school en and em- dash shortcuts
-	# 
+	#
 	# q : quotes
 	# b : backtick quotes (``double'' only)
 	# B : backtick quotes (``double'' and `single')
@@ -143,7 +145,7 @@ function SmartyPants($text, $attr = NULL, $ctx = NULL) {
 	$in_pre = 0;  # Keep track of when we're inside <pre> or <code> tags.
 
 	$prev_token_last_char = "";     # This is a cheat, used to get some context
-									# for one-character tokens that consist of 
+									# for one-character tokens that consist of
 									# just a quote char. What we do is remember
 									# the last character of the previous text
 									# token, to use as context to curl single-
@@ -252,7 +254,7 @@ function SmartQuotes($text, $attr = NULL, $ctx = NULL) {
 	$in_pre = 0;  # Keep track of when we're inside <pre> or <code> tags
 
 	$prev_token_last_char = "";     # This is a cheat, used to get some context
-									# for one-character tokens that consist of 
+									# for one-character tokens that consist of
 									# just a quote char. What we do is remember
 									# the last character of the previous text
 									# token, to use as context to curl single-
@@ -327,11 +329,11 @@ function SmartDashes($text, $attr = NULL, $ctx = NULL) {
 	}
 	else if ($attr == 2) {
 		# use old smart dash shortcuts, "--" for en, "---" for em
-		$dash_sub_ref = 'EducateDashesOldSchool'; 
+		$dash_sub_ref = 'EducateDashesOldSchool';
 	}
 	else if ($attr == 3) {
 		# inverse of 2, "--" for em, "---" for en
-		$dash_sub_ref = 'EducateDashesOldSchoolInverted'; 
+		$dash_sub_ref = 'EducateDashesOldSchoolInverted';
 	}
 
 	$tokens;
@@ -649,7 +651,7 @@ function _TokenizeHTML($str) {
 #               the second is the actual value.
 #
 #
-#   Regular expression derived from the _tokenize() subroutine in 
+#   Regular expression derived from the _tokenize() subroutine in
 #   Brad Choate's MTRegex plugin.
 #   <http://www.bradchoate.com/past/mtregex.php>
 #
@@ -663,7 +665,7 @@ function _TokenizeHTML($str) {
 	$parts = preg_split("{($match)}", $str, -1, PREG_SPLIT_DELIM_CAPTURE);
 
 	foreach ($parts as $part) {
-		if (++$index % 2 && $part != '') 
+		if (++$index % 2 && $part != '')
 			array_push($tokens, array('text', $part));
 		else
 			array_push($tokens, array('tag', $part));
@@ -690,14 +692,14 @@ punctuation characters into "smart" typographic punctuation HTML
 entities. SmartyPants can perform the following transformations:
 
 *	Straight quotes (`"` and `'`) into "curly" quote HTML entities
-*	Backticks-style quotes (` ``like this'' `) into "curly" quote HTML 
+*	Backticks-style quotes (` ``like this'' `) into "curly" quote HTML
 	entities
 *	Dashes (`--` and `---`) into en- and em-dash entities
 *	Three consecutive dots (`...`) into an ellipsis entity
 
-SmartyPants does not modify characters within `<pre>`, `<code>`, `<kbd>`, 
-`<script>`, or `<math>` tag blocks. Typically, these tags are used to 
-display text where smart quotes and other "smart punctuation" would not 
+SmartyPants does not modify characters within `<pre>`, `<code>`, `<kbd>`,
+`<script>`, or `<math>` tag blocks. Typically, these tags are used to
+display text where smart quotes and other "smart punctuation" would not
 be appropriate, such as source code or example markup.
 
 
@@ -764,10 +766,10 @@ See the readme file for detailed release notes for this version.
 Author
 ------
 
-Original Perl version by John Gruber  
+Original Perl version by John Gruber
 <http://daringfireball.net/>
 
-PHP port by Michel Fortin  
+PHP port by Michel Fortin
 <http://www.michelf.com/>
 
 
@@ -781,12 +783,12 @@ Jeremy Hedley (<http://antipixel.com/>) and Charles Wiltgen
 Copyright and License
 ---------------------
 
-Copyright (c) 2003 John Gruber  
-<http://daringfireball.net/>  
+Copyright (c) 2003 John Gruber
+<http://daringfireball.net/>
 All rights reserved.
 
-Copyright (c) 2004 Michel Fortin  
-<http://www.michelf.com>  
+Copyright (c) 2004 Michel Fortin
+<http://www.michelf.com>
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -804,14 +806,14 @@ modification, are permitted provided that the following conditions are met:
 	without specific prior written permission.
 
 This software is provided by the copyright holders and contributors "as is"
-and any express or implied warranties, including, but not limited to, the 
-implied warranties of merchantability and fitness for a particular purpose 
-are disclaimed. In no event shall the copyright owner or contributors be 
-liable for any direct, indirect, incidental, special, exemplary, or 
-consequential damages (including, but not limited to, procurement of 
-substitute goods or services; loss of use, data, or profits; or business 
-interruption) however caused and on any theory of liability, whether in 
-contract, strict liability, or tort (including negligence or otherwise) 
+and any express or implied warranties, including, but not limited to, the
+implied warranties of merchantability and fitness for a particular purpose
+are disclaimed. In no event shall the copyright owner or contributors be
+liable for any direct, indirect, incidental, special, exemplary, or
+consequential damages (including, but not limited to, procurement of
+substitute goods or services; loss of use, data, or profits; or business
+interruption) however caused and on any theory of liability, whether in
+contract, strict liability, or tort (including negligence or otherwise)
 arising in any way out of the use of this software, even if advised of the
 possibility of such damage.
 

@@ -1,4 +1,6 @@
 <?php
+// No direct access allowed to this file
+defined('_JEXEC') || die('=;)');
 
 /**
  * Example: get XHTML from a given Textile-markup string ($string)
