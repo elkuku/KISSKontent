@@ -73,6 +73,9 @@ class KuKuKontentViewKuKuKontent extends JView
 
         $items = $pathway->getPathway();
 
+        if( ! $items)
+        return;// No pathway :(
+
         $parts = explode('/', $this->content->path);
 
         $combined = '';

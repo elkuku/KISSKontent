@@ -1,18 +1,18 @@
 function kukukontentPreview(baseUri)
 {
-	var kontent = document.id('kukukontentKontent').value;
+	var preview = document.id('kukukontentPreview');
+	var kontent = document.id('kukukontentKontent');
 
-var req = new Request({
+    new Request({
+    	url: baseUri + 'index.php?option=com_kukukontent&task=preview&tmpl=component&format=raw',
 		method: 'post',
-		data: 'kontent='+kontent,
-		url: baseUri+'index.php?option=com_kukukontent&task=preview&tmpl=component&format=raw',
+		data: 'kontent=' + kontent.value,
+		
+		//onRequest..
 		
 		onSuccess: function(response) {
-			document.id('kukukontentPreview').set('html', response);
+			preview.set('html', response);
+			preview.set('class', 'kukukuntentPreview');
 		}
-	});
-	
-	req.send();
-	
-	//alert('hu');
-}
+	}).send();
+}//function

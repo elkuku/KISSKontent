@@ -13,15 +13,19 @@ class KuKuKontentHelper
 
     public static function isLink($link)
     {
-        static $db;
+        static $query, $db;
 
-        if( ! $db)
-        $db = JFactory::getDbo();
+        if( ! $query)
+        {
+            $db = JFactory::getDbo();
 
-        $query = $db->getQuery(true);
+            $query = $db->getQuery(true);
 
-        $query->from('#__kukukontent');
-        $query->select('count(*)');
+            $query->from('#__kukukontent');
+            $query->select('count(*)');
+        }
+
+        $query->clear('where');
         $query->where('title='.$db->quote(urldecode($link)));
 
         $db->setQuery($query);

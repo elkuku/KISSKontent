@@ -1,12 +1,21 @@
 @CHARSET "UTF-8";
 
-a.internal.red {
+a.internal.redlink {
 	color: red;
 }
 
 a.external {
 	background-image: url(../images/external_link.png);
-	background-repeat:no-repeat;
- /*  background-position:100px 50%; */
- padding-left: 14px;
+	background-repeat: no-repeat;
+	padding-left: 14px;
+}
+
+p.previewMessage {
+	color: red;
+	background-color: #ffc;
+}
+
+div.kukukuntentPreview {
+	border: 1px dashed gray;
+	padding: 0.3em;
 }

@@ -50,7 +50,8 @@ class KuKuKontentController extends JController
     {
         $p = JRequest::getString('p');
 
-        $raw = JRequest::getVar('kontent', '', 'post', 'none', JREQUEST_ALLOWRAW);//@todo clean me up mom =;)
+        //@todo clean me up mom =;)
+        $raw = JRequest::getVar('kontent', '', 'post', 'none', JREQUEST_ALLOWRAW);
 
         $o = new stdClass;
         $o->text = $raw;
@@ -59,7 +60,11 @@ class KuKuKontentController extends JController
         && ! $raw)
         return;
 
-//         $content = $this->getModel()->getContent();
+        $previewText = '<p class="previewMessage">'
+        .jgettext('This is a preview only. The content has not been saved yet !')
+        .'</p>';
+
+        //         $content = $this->getModel()->getContent();
 
         $params = null;
 
@@ -68,7 +73,6 @@ class KuKuKontentController extends JController
         JDispatcher::getInstance()->trigger('onContentPrepare'
         , array('text', &$o, &$params));
 
-
-        echo $o->text;
+        echo $previewText.$o->text;
     }//function
 }//class

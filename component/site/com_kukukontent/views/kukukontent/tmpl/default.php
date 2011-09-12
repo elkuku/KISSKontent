@@ -12,7 +12,9 @@
 defined('_JEXEC') || die('=;)');
 
 ?>
-<a href="<?php echo JURI::current().'?task=edit'; ?>">Edit</a>
+<div style="text-align: right">
+	<a href="<?php echo JURI::current().'?task=edit'; ?>">Edit</a>
+</div>
 <?php
 echo $this->content->text;
 
