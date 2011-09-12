@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="component" version="1.6">
+<extension type="component" version="1.6" method="upgrade">
   <name>KuKuKontent</name>
-  <creationDate>09-Sep-2011</creationDate>
+  <creationDate>12-Sep-2011</creationDate>
   <author>Nikolai Plath</author>
   <authorEmail>info@nik-it.de</authorEmail>
   <authorUrl>http://nik-it.de</authorUrl>
@@ -9,28 +9,50 @@
   <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
   <version>1.0</version>
   <description>A new content manager</description>
-  <scriptfile/>
+  <scriptfile>install/script.php</scriptfile>
   <install>
-    <sql/>
+    <sql>
+      <file driver="mysql" charset="utf8">install/sql/install.utf8.sql</file>
+    </sql>
   </install>
   <uninstall>
-    <sql/>
+    <sql>
+      <file driver="mysql" charset="utf8">install/sql/uninstall.utf8.sql</file>
+    </sql>
   </uninstall>
   <update>
-    <schemas/>
+    <schemas>
+      <schemapath type="mysql">/install/sql/updates/mysql</schemapath>
+    </schemas>
   </update>
   <files folder="site">
+    <folder>demo</folder>
+    <folder>g11n</folder>
+    <folder>helpers</folder>
+    <folder>models</folder>
     <folder>views</folder>
     <filename>controller.php</filename>
     <filename>kukukontent.php</filename>
+    <filename>router.php</filename>
   </files>
   <administration>
     <menu img="components/com_kukukontent/assets/images/com_kukukontent-16.png">KuKuKontent</menu>
     <files folder="admin">
       <folder>assets</folder>
+      <folder>helpers</folder>
+      <folder>install</folder>
       <folder>language</folder>
+      <folder>tables</folder>
       <filename>CHANGELOG.php</filename>
+      <filename>easycreator.xml</filename>
       <filename>kukukontent.php</filename>
     </files>
   </administration>
+  <media destination="com_kukukontent" folder="media">
+    <folder>css</folder>
+    <folder>images</folder>
+    <folder>js</folder>
+  </media>
+  <params/>
+  <config/>
 </extension>
