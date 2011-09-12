@@ -727,6 +727,19 @@ class Markdown_Parser {
 
 
         //
+        // Next, inline-style internal links: [[link text]]
+        // @add KuKu
+        //
+        $text = preg_replace_callback('{
+			(				# wrap whole match in $1
+			  \[\[
+				('.$this->nested_brackets_re.')	# link text = $2
+			  \]\]
+			)
+			}xs',
+        array(&$this, '_DoAnchors_internal_callback'), $text);
+
+        //
         // Next, inline-style links: [link text](url "optional title")
         //
         $text = preg_replace_callback('{
@@ -777,7 +790,8 @@ class Markdown_Parser {
         $link_text   =  $matches[2];
         $link_id     =& $matches[3];
 
-        if ($link_id == "") {
+        if ($link_id == '')
+        {
             // for shortcut links like [this][] or [this].
             $link_id = $link_text;
         }
@@ -835,12 +849,27 @@ class Markdown_Parser {
         return $this->hashPart($result);
     }//function
 
+    /**
+     *
+     * Enter description here ...
+     * @author elkuku
+     * @param unknown_type $matches
+     */
     protected function _doAnchors_internal_callback($matches)
     {
-        $whole_match	=  $matches[1];
-        $link_text		=  $this->runSpanGamut($matches[2]);
-        $url			=  $matches[3] == '' ? $matches[4] : $matches[3];
-        $title			=& $matches[7];
+        $whole_match = $matches[1];
+        $link_text = $this->runSpanGamut($matches[2]);
+
+        if(count($matches) > 3)
+        {
+            $url = $matches[3] == '' ? $matches[4] : $matches[3];
+            $title =& $matches[7];
+        }
+        else
+        {
+            $url = $matches[2];
+            $title = '';
+        }
 
         $red =(KuKuKontentHelper::isLink($url)) ? '' : ' redlink';
 
@@ -850,10 +879,11 @@ class Markdown_Parser {
 
         $url = $this->encodeAttribute($fullUrl);
 
-
         $result = '<a href="'.$url.'" class="internal'.$red.'"';
 
-        $result .=(isset($title)) ? ' title="'.$this->encodeAttribute($title).'"' : '';
+        $redAdvise =($red) ? jgettext('Click to create this page...') : '';
+
+        $result .=(isset($title) || $redAdvise) ? ' title="'.$this->encodeAttribute($redAdvise.$title).'"' : '';
 
         $link_text = $this->runSpanGamut($link_text);
         $result .= ">$link_text</a>";
