@@ -32,6 +32,8 @@ class KuKuKontentViewKuKuKontent extends JView
      */
     public function display($tpl = null)
     {
+        JHtml::_('stylesheet', 'com_kukukontent/kukukontent.css', array(), true);
+        JHtml::_('script', 'com_kukukontent/kukukontent.js', array(), true);
 
         $this->content = $this->get('content');
 

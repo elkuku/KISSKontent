@@ -50,19 +50,25 @@ class KuKuKontentController extends JController
     {
         $p = JRequest::getString('p');
 
-        if( ! $p)
+        $raw = JRequest::getVar('kontent', '', 'post', 'none', JREQUEST_ALLOWRAW);//@todo clean me up mom =;)
+
+        $o = new stdClass;
+        $o->text = $raw;
+
+        if( ! $p
+        && ! $raw)
         return;
 
-        $content = $this->getModel()->getContent();
+//         $content = $this->getModel()->getContent();
 
         $params = null;
 
         JPluginHelper::importPlugin('content');
 
         JDispatcher::getInstance()->trigger('onContentPrepare'
-        , array('text', &$content, &$params));
+        , array('text', &$o, &$params));
 
 
-        echo $content->text;
+        echo $o->text;
     }//function
 }//class
