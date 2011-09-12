@@ -1,1 +1,2 @@
-This provides parsing in various markup languages (Markdown. Textile, Wikisyntax...) to Joomla! content articles.
+* The plugin provides parsing in various markup languages (Markdown. Textile, Wikisyntax...) to Joomla! content articles.
+* The component provides a new way of organizing your creating and editing content in a KISS way.

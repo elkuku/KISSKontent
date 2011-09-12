@@ -9,40 +9,43 @@ class KuKuKontentModelKuKuKontent extends JModel
      */
     function getContent()
     {
-        $content = new KuKuKontent;
+        $p = JRequest::getString('p', 'default');
 
-        $p = JRequest::getString('p');
+        $table = $this->getTable();
 
-        if( ! $p)
+        if('default' == $p)
         {
-            $content->text = self::getDefault();
-            return $content;
-        }
-
-        $query = $this->_db->getQuery(true);
-
-        $query->from('#__kukukontent');
-        $query->select('*');
-        $query->where('title='.$this->_db->quote($p));
-
-        $this->_db->setQuery($query);
-
-        $c = $this->_db->loadObject();
-
-        $content->path = $p;
-
-        if($c)
-        {
-            $content->text = $c->text;
+            try
+            {
+                $table->load(array('title' => 'default'));
+            }
+            catch (Exception $e)
+            {
+//                 $table->title = 'Default';
+                $table->text = self::getDefault();
+            }//try
         }
         else
         {
-            //$content->text = 'NEW CONTENT...'.$p;
+            try
+            {
+                $table->load(array('title' => $p));
+            }
+            catch (Exception $e)
+            {
+                $table->title = $p;
+            }//try
         }
 
-        return $content;
+        $table->path = $table->title;
+
+        return $table;
     }//function
 
+    /**
+     *
+     * Enter description here ...
+     */
     protected static function getDefault()
     {
         $tag = JFactory::getLanguage()->getTag();
@@ -64,10 +67,27 @@ class KuKuKontentModelKuKuKontent extends JModel
 
         return ($content) ?: '';
     }//function
-}//class
 
-class KuKuKontent
-{
-    public $path = '';
-    public $text = '';
-}
+    /**
+     *
+     * Enter description here ...
+     */
+    public function save()
+    {
+        $src = new stdClass;
+
+        $src->id = JRequest::getInt('id', 0);
+        $src->title = JRequest::getString('p', 'Default');
+        $src->text = JRequest::getVar('content', '', 'post', 'none', JREQUEST_ALLOWRAW);//@todo clean me up mom =;)
+
+        try
+        {
+            $this->getTable()
+            ->bind($src)->check()->store();
+        }
+        catch(Exception $e)
+        {
+            throw new Exception($e->getMessage());
+        }//try
+    }//function
+}//class

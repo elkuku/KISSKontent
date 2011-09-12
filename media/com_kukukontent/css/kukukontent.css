@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+
+a.internal.red {
+	color: red;
+}
+
+a.external {
+	background-image: url(../images/external_link.png);
+	background-repeat:no-repeat;
+ /*  background-position:100px 50%; */
+ padding-left: 14px;
+}

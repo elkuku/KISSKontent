@@ -27,4 +27,42 @@ class KuKuKontentController extends JController
 
         parent::display();
     }
+
+    public function save()
+    {
+        JRequest::checkToken() or jexit(jgettext('Invalid token'));
+
+        try
+        {
+            $this->getModel()->save();
+
+            JFactory::getApplication()->enqueueMessage(jgettext('Your content has been saved'));
+        }
+        catch (Exception $e)
+        {
+            JError::raiseWarning(1, $e->getMessage());
+        }//try
+
+        parent::display();
+    }//function
+
+    public function preview()
+    {
+        $p = JRequest::getString('p');
+
+        if( ! $p)
+        return;
+
+        $content = $this->getModel()->getContent();
+
+        $params = null;
+
+        JPluginHelper::importPlugin('content');
+
+        JDispatcher::getInstance()->trigger('onContentPrepare'
+        , array('text', &$content, &$params));
+
+
+        echo $content->text;
+    }//function
 }//class

@@ -14,6 +14,37 @@ defined('_JEXEC') || die('=;)');
 //-- Import the class JController
 jimport('joomla.application.component.controller');
 
+//-- Load the special Language
+try
+{
+    if( ! jimport('g11n.language'))
+    {
+        //-- Load dummy language handler -> english only !
+        JLoader::import('g11n_dummy', JPATH_COMPONENT_ADMINISTRATOR.'/helpers');
+
+//         ecrScript('g11n_dummy');
+//         ecrScript('php2js');
+    }
+    else
+    {
+        //TEMP@@debug
+        if(0)//ECR_DEV_MODE && ECR_DEBUG_LANG)
+        {
+            g11n::cleanStorage();//@@DEBUG
+            g11n::setDebug(ECR_DEBUG_LANG);
+        }
+
+        //-- Get our special language file
+        g11n::loadLanguage();
+    }
+}
+catch(Exception $e)
+{
+    JError::raiseWarning(0, $e->getMessage());
+
+    return;
+}//try
+
 //-- Get an instance of the controller with the prefix 'KuKuKontent'
 $controller = JController::getInstance('KuKuKontent');
 

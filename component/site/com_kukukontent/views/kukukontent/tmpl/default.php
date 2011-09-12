@@ -11,6 +11,8 @@
 //-- No direct access
 defined('_JEXEC') || die('=;)');
 
+JHtml::_('stylesheet', 'com_kukukontent/kukukontent.css', array(), true);
+
 ?>
 <a href="<?php echo JURI::current().'?task=edit'; ?>">Edit</a>
 <?php

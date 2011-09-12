@@ -32,7 +32,6 @@ class KuKuKontentViewKuKuKontent extends JView
      */
     public function display($tpl = null)
     {
-        JPluginHelper::importPlugin('content');
 
         $this->content = $this->get('content');
 
@@ -45,16 +44,24 @@ class KuKuKontentViewKuKuKontent extends JView
         }
         else
         {
+            JPluginHelper::importPlugin('content');
+
             $content = JDispatcher::getInstance()->trigger('onContentPrepare'
             , array('text', &$this->content, &$this->params));
         }
 
-
         $this->setPathway();
 
         parent::display($tpl);
+
+        return;
     }//function
 
+    /**
+     * Set the pathway.
+     *
+     * @return void
+     */
     protected function setPathway()
     {
         if( ! $this->content->path)
@@ -70,9 +77,10 @@ class KuKuKontentViewKuKuKontent extends JView
 
         $baseLink = $items[0]->link;
 
-        foreach ($parts as $part)
+        foreach($parts as $part)
         {
-            if( ! $part)
+            if( ! $part
+            || 'Default' == $part)
             continue;
 
             $combined .=($combined) ? '/'.$part : $part;
@@ -86,5 +94,7 @@ class KuKuKontentViewKuKuKontent extends JView
         }//foreach
 
         $pathway->setPathway($items);
-    }
+
+        return;
+    }//function
 }//class
