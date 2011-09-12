@@ -1,27 +1,11 @@
-# Welcome =;)
-... to KuKuKontent [^1]
-## Meine erste Seite
-* One
-* Two
+# Willkommen
+... bei KuKuKontent [^1]
 
-1. Eins
-2. Zwei
+## Dies sollten sie *jetzt* tun
 
-Der PR(
+* *Bearbeiten* Sie diese Seite und füllen Sie sie mit *Ihren eigenen Worten*.
+* Bei Fragen konsultiern Sie die [Syntaxregeln](http://daringfireball.net/projects/markdown/syntax).
+* Setzen Sie [[Interne Links]](Meine_erste_Seite) so viel Sie können.
+* Have a lot of **Fun** `=;)`
 
-Schon [den da](http://echo.com) gesähn [^2] ?¿
-
-~~~
-<?php
-echo 'Hallo Wörld';
-~~~
-
-Bilder ? Ein ![KoalaBärschn](images/sampledata/parks/animals/180px_koala_ag1.jpg) kleiner Bär zum [Bleistift](http://de.wikipedia.org/wiki/Beispiel_%28Rhetorik%29)... :)
-
-Ein interner Link [[den gibt\'s nüsch]](gar/nixda) - noch nüsch :P
-
-[^1]:Find it on [GitHub](https://github.com/elkuku/KuKuKontent)
-
-    oder auch nicht ;)
-
-[^2]:Das gibt's im [Joomla! Portal](https://joomlaportal.de)";
+[^1]: KuKuKontent wird auf [GitHub](https://github.com/elkuku/KuKuKontent) gehostet.
