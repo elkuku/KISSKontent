@@ -1,0 +1,59 @@
+# Language de-DE translations for com_kukukontent - site package.
+# Copyright (C) 2011 NiK(C)
+# This file is distributed under the same license as the com_kukukontent - site package.
+# Nikolai Plath <EMAIL@ADDRESS>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: com_kukukontent - site 123.456\n"
+"Report-Msgid-Bugs-To: info@nik.it.de\n"
+"POT-Creation-Date: 2011-09-12 15:14-0500\n"
+"PO-Revision-Date: 2011-09-12 15:15-0500\n"
+"Last-Translator: Nikolai Plath <EMAIL@ADDRESS>\n"
+"Language-Team: Language de-DE\n"
+"Language: de-DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ASCII\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: components/com_kukukontent/controller.php:33
+msgid "Invalid token"
+msgstr "Ungültiges Token"
+
+#: components/com_kukukontent/controller.php:39
+msgid "Your content has been saved"
+msgstr "Ihr Content wurde gespeichert"
+
+#: components/com_kukukontent/controller.php:64
+msgid "This is a preview only. The content has not been saved yet !"
+msgstr "Dies ist nur eine Vorschau. Der Content wurde noch nicht gespeichert !"
+
+#: components/com_kukukontent/controller.php:65
+msgid "Close preview"
+msgstr "Vorschau schliessen"
+
+#. TRANSLATORS: Plugin translations (@todo move)
+#: components/com_kukukontent/kukukontent.php:61
+msgid "Click to create this page..."
+msgstr "Klick um diese Seite zu Erstellen..."
+
+#: components/com_kukukontent/views/kukukontent/tmpl/default.php:17
+#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:4
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:4
+msgid "New"
+msgstr "Neu"
+
+#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:11
+msgid "Preview"
+msgstr "Vorschau"
+
+#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:12
+msgid "Save"
+msgstr "Speichern"
+
+#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:15
+msgid "Cancel"
+msgstr "Abbrechen"
