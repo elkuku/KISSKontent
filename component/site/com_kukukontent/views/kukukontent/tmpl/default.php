@@ -10,12 +10,13 @@
 
 //-- No direct access
 defined('_JEXEC') || die('=;)');
-
 ?>
-<div style="text-align: right">
-	<a href="<?php echo JURI::current().'?task=edit'; ?>">Edit</a>
-</div>
-<?php
-echo $this->content->text;
 
-// var_dump($this->content);
+<div class="kukuKontent">
+    <div style="text-align: right">
+    	<a href="<?php echo JURI::current().'?task=edit'; ?>"><?php echo jgettext('Edit'); ?></a>
+    </div>
+
+    <?php echo $this->content->text; ?>
+
+</div>

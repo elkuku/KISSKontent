@@ -62,6 +62,7 @@ class KuKuKontentController extends JController
 
         $previewText = '<p class="previewMessage">'
         .jgettext('This is a preview only. The content has not been saved yet !')
+        .'&nbsp;<a href="#" onclick="document.id(\'kukukontentPreview\').set(\'html\', \'\'); return false;">'.jgettext('Close preview').'</a>'
         .'</p>';
 
         //         $content = $this->getModel()->getContent();

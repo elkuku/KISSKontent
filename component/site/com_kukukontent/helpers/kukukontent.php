@@ -8,15 +8,24 @@ class KuKuKontentHelper
     {
         $parsed = $text;
 
+        $p = JRequest::getString('p');
+
+        if(0 === strpos($text, '/'))
+        {
+            // The text starts with a / - This is a relative internal link.
+            $parsed = $p.$text;
+        }
+
         return JRoute::_('index.php?option=com_kukukontent&p='.$parsed);
     }//function
 
     public static function isLink($link)
     {
-        static $query, $db;
+        static $query, $db, $p;
 
         if( ! $query)
         {
+            $p = JRequest::getString('p');
             $db = JFactory::getDbo();
 
             $query = $db->getQuery(true);
@@ -25,8 +34,10 @@ class KuKuKontentHelper
             $query->select('count(*)');
         }
 
+        $parsed =(0 === strpos($link, '/')) ? $p.$link : $link;
+
         $query->clear('where');
-        $query->where('title='.$db->quote(urldecode($link)));
+        $query->where('title='.$db->quote(urldecode($parsed)));
 
         $db->setQuery($query);
 

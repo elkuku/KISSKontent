@@ -31,7 +31,7 @@ try
         if(0)//ECR_DEV_MODE && ECR_DEBUG_LANG)
         {
             g11n::cleanStorage();//@@DEBUG
-            g11n::setDebug(ECR_DEBUG_LANG);
+            g11n::setDebug(1);
         }
 
         //-- Get our special language file
@@ -53,3 +53,8 @@ $controller->execute(JRequest::getCmd('task'));
 
 //-- Redirect if set by the controller
 $controller->redirect();
+
+//g11n::debugPrintTranslateds(true);
+
+// TRANSLATORS: Plugin translations (@todo move)
+jgettext('Click to create this page...');

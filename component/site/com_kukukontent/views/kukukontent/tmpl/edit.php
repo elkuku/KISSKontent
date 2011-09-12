@@ -8,7 +8,7 @@
 
 <form method="post">
 
-<input type="button" value="<?php echo jgettext('Preview'); ?>" onclick="kukukontentPreview('<?php echo JURI::root(); ?>');" />
+<input type="button" value="<?php echo jgettext('Preview'); ?>" onclick="kukukontentPreview('<?php echo JURI::root(); ?>', '<?php echo JRequest::getString('p'); ?>');" />
 <input type="submit" value="<?php echo jgettext('Save'); ?>" />
 
 <?php if($this->content->text) : ?>
