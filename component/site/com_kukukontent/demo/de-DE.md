@@ -4,8 +4,8 @@
 ## Dies sollten sie *jetzt* tun
 
 * *Bearbeiten* Sie diese Seite und füllen Sie sie mit *Ihren eigenen Worten*.
-* Bei Fragen konsultiern Sie die [Syntaxregeln](http://daringfireball.net/projects/markdown/syntax).
+* Bei Fragen konsultieren Sie die [Syntaxregeln](http://daringfireball.net/projects/markdown/syntax).
 * Setzen Sie [[Interne Links]](Meine_erste_Seite) so viel Sie können.
-* Have a lot of **Fun** `=;)`
+* Haben Sie viel **Spaß** `=;)`
 
 [^1]: KuKuKontent wird auf [GitHub](https://github.com/elkuku/KuKuKontent) gehostet.
