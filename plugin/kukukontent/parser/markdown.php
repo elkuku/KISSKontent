@@ -841,7 +841,8 @@ class Markdown_Parser {
         $link_text		=  $this->runSpanGamut($matches[2]);
         $url			=  $matches[3] == '' ? $matches[4] : $matches[3];
         $title			=& $matches[7];
-        $red =(KuKuKontentHelper::isLink($url)) ? '' : ' red';
+
+        $red =(KuKuKontentHelper::isLink($url)) ? '' : ' redlink';
 
         $fullUrl = KuKuKontentHelper::getLink($url);
 
