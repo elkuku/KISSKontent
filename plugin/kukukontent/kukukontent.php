@@ -16,21 +16,13 @@ class plgContentKuKuKontent extends JPlugin
         if( ! $row->text)
         return true;
 
-        if( ! defined('KUKUKONTENT_CSS_ADDED'))
-        {
-            JFactory::getDocument()->addStyleSheet('components/com_kukukontent/assets/css/kukukontent.css');
-
-            define('KUKUKONTENT_CSS_ADDED', 1);
-        }
-
-        include_once JPATH_ROOT.'/components/com_kukukontent/helpers/kukukontent.php';
-
-        include_once dirname(__FILE__).'/parser/markdown.php';
-
+        include_once dirname(__FILE__).'/parser/emarkdown.php';
 
         $row->text = Markdown($row->text);
 
         return true;
+
+        ##### @TODO include other parser..
 
         include_once JPATH_SITE.'/plugins/content/kukukontent/parser/classTextile.php';
         //         include_once JPATH_SITE.'/plugins/content/jTextile/textile/smartypants.php';
