@@ -698,48 +698,6 @@ class Markdown_Parser {
         array(&$this, '_doAnchors_reference_callback'), $text);
 
         //
-        // Next, inline-style internal links: [[link text]](url "optional title")
-        // @add KuKu
-        //
-        $text = preg_replace_callback('{
-			(				# wrap whole match in $1
-			  \[\[
-				('.$this->nested_brackets_re.')	# link text = $2
-			  \]\]
-			  \(			# literal paren
-				[ ]*
-				(?:
-					<(\S*)>	# href = $3
-				|
-					('.$this->nested_url_parenthesis_re.')	# href = $4
-				)
-				[ ]*
-				(			# $5
-				  ([\'"])	# quote char = $6
-				  (.*?)		# Title = $7
-				  \6		# matching quote
-				  [ ]*	# ignore any spaces/tabs between closing quote and )
-				)?			# title is optional
-			  \)
-			)
-			}xs',
-        array(&$this, '_DoAnchors_internal_callback'), $text);
-
-
-        //
-        // Next, inline-style internal links: [[link text]]
-        // @add KuKu
-        //
-        $text = preg_replace_callback('{
-			(				# wrap whole match in $1
-			  \[\[
-				('.$this->nested_brackets_re.')	# link text = $2
-			  \]\]
-			)
-			}xs',
-        array(&$this, '_DoAnchors_internal_callback'), $text);
-
-        //
         // Next, inline-style links: [link text](url "optional title")
         //
         $text = preg_replace_callback('{
@@ -849,48 +807,6 @@ class Markdown_Parser {
         return $this->hashPart($result);
     }//function
 
-    /**
-     *
-     * Enter description here ...
-     * @author elkuku
-     * @param unknown_type $matches
-     */
-    protected function _doAnchors_internal_callback($matches)
-    {
-        $whole_match = $matches[1];
-        $link_text = $this->runSpanGamut($matches[2]);
-
-        if(count($matches) > 3)
-        {
-            $url = $matches[3] == '' ? $matches[4] : $matches[3];
-            $title =& $matches[7];
-        }
-        else
-        {
-            $url = $matches[2];
-            $title = '';
-        }
-
-        $red =(KuKuKontentHelper::isLink($url)) ? '' : ' redlink';
-
-        $fullUrl = KuKuKontentHelper::getLink($url);
-
-        //##@TODO KuKu - make some really nice URIs =;)
-
-        $url = $this->encodeAttribute($fullUrl);
-
-        $result = '<a href="'.$url.'" class="internal'.$red.'"';
-
-        $redAdvise =($red) ? jgettext('Click to create this page...') : '';
-
-        $result .=(isset($title) || $redAdvise) ? ' title="'.$this->encodeAttribute($redAdvise.$title).'"' : '';
-
-        $link_text = $this->runSpanGamut($link_text);
-        $result .= ">$link_text</a>";
-
-        return $this->hashPart($result);
-    }//function
-
     function doImages($text) {
         //
         // Turn Markdown image shortcuts into <img> tags.
@@ -946,6 +862,7 @@ class Markdown_Parser {
 
         return $text;
     }
+
     function _doImages_reference_callback($matches) {
         $whole_match = $matches[1];
         $alt_text    = $matches[2];
