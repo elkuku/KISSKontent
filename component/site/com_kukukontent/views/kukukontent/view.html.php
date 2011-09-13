@@ -46,6 +46,9 @@ class KuKuKontentViewKuKuKontent extends JView
         }
         else
         {
+            //-- Process internal links
+            $this->content->text = KuKuKontentHelper::doInternalAnchors($this->content->text);
+
             JPluginHelper::importPlugin('content');
 
             $content = JDispatcher::getInstance()->trigger('onContentPrepare'

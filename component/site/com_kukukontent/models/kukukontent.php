@@ -13,31 +13,38 @@ class KuKuKontentModelKuKuKontent extends JModel
 
         $table = $this->getTable();
 
-        if('default' == $p)
+        if('default' == strtolower($p))
         {
+            //-- Default page
+
             try
             {
+                //-- Retrieve default page from database
                 $table->load(array('title' => 'default'));
             }
             catch (Exception $e)
             {
-//                 $table->title = 'Default';
+                //-- No default page found in database
+                $table->title = 'Default';
                 $table->text = self::getDefault();
             }//try
         }
         else
         {
+            //-- A page has been requested
             try
             {
+                //-- Try to load the page from database
                 $table->load(array('title' => $p));
             }
             catch (Exception $e)
             {
+                //-- Must be a new page
                 $table->title = $p;
             }//try
         }
 
-        $table->path = $table->title;
+        $table->path = $table->title;//@todo remove ?
 
         return $table;
     }//function
@@ -62,7 +69,8 @@ class KuKuKontentModelKuKuKontent extends JModel
         }
         else
         {
-            $content = 'Hallo [[echo]](a/b/c/d/e/f/huhu) [[den gibt\'s nüsch]](gar/nixda) und [hier](http://ga.ga)';//@todo create simple default
+            //@todo create simple default
+            $content = 'Hallo [[echo]](a/b/c/d/e/f/huhu) [[den gibt\'s nüsch]](gar/nixda) und [hier](http://ga.ga)';
         }
 
         return ($content) ?: '';

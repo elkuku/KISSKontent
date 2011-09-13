@@ -14,16 +14,17 @@ defined('_JEXEC') || die('=;)');
 //-- Import the class JController
 jimport('joomla.application.component.controller');
 
-//-- Load the special Language
 try
 {
+    //-- Load the special Language
+
     if( ! jimport('g11n.language'))
     {
         //-- Load dummy language handler -> english only !
         JLoader::import('g11n_dummy', JPATH_COMPONENT_ADMINISTRATOR.'/helpers');
 
-//         ecrScript('g11n_dummy');
-//         ecrScript('php2js');
+        //         ecrScript('g11n_dummy');
+        //         ecrScript('php2js');
     }
     else
     {
@@ -45,6 +46,8 @@ catch(Exception $e)
     return;
 }//try
 
+JLoader::register('KuKuKontentHelper', JPATH_COMPONENT_SITE.'/helpers/kukukontent.php');
+
 //-- Get an instance of the controller with the prefix 'KuKuKontent'
 $controller = JController::getInstance('KuKuKontent');
 
@@ -55,6 +58,3 @@ $controller->execute(JRequest::getCmd('task'));
 $controller->redirect();
 
 //g11n::debugPrintTranslateds(true);
-
-// TRANSLATORS: Plugin translations (@todo move)
-jgettext('Click to create this page...');

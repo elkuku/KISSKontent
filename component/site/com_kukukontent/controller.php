@@ -32,6 +32,8 @@ class KuKuKontentController extends JController
     {
         JRequest::checkToken() or jexit(jgettext('Invalid token'));
 
+        //@TODO access check !
+
         try
         {
             $this->getModel()->save();
@@ -52,6 +54,10 @@ class KuKuKontentController extends JController
 
         //@todo clean me up mom =;)
         $raw = JRequest::getVar('kontent', '', 'post', 'none', JREQUEST_ALLOWRAW);
+
+        //-- Process internal links
+        $raw = KuKuKontentHelper::doInternalAnchors($raw);
+
 
         $o = new stdClass;
         $o->text = $raw;

@@ -10,6 +10,7 @@
 
 //-- No direct access
 defined('_JEXEC') || die('=;)');
+
 ?>
 
 <div class="kukuKontent">
