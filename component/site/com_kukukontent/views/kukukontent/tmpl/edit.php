@@ -15,11 +15,11 @@
 <input type="button" value="<?php echo jgettext('Cancel'); ?>" onClick="document.location.href='<?php echo JURI::current(); ?>';">
 <?php endif; ?>
 
-<textarea id="kukukontentKontent" name="content" style="width: 100%; height: 300px;"><?php echo $this->content->text; ?></textarea>
+<textarea id="kukukontentKontent" name="content"
+style="width: 100%; height: 300px;"><?php echo $this->content->text; ?></textarea>
 
 <input type="hidden" name="id" value="<?php echo $this->content->id; ?>" />
 <input type="hidden" name="task" value="save" />
 <?php echo JHtml::_('form.token'); ?>
 
 </form>
-
