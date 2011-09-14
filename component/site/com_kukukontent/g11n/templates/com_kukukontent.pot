@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com_kukukontent - site 123.456\n"
 "Report-Msgid-Bugs-To: info@nik.it.de\n"
-"POT-Creation-Date: 2011-09-12 15:14-0500\n"
+"POT-Creation-Date: 2011-09-14 14:36-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,28 +17,37 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: components/com_kukukontent/controller.php:33
+#: components/com_kukukontent/controller.php:28
+#: components/com_kukukontent/models/kukukontent.php:99
+#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:13
+msgid "You are not allowed to edit Kontent pages."
+msgstr ""
+
+#: components/com_kukukontent/controller.php:36
 msgid "Invalid token"
 msgstr ""
 
-#: components/com_kukukontent/controller.php:39
+#: components/com_kukukontent/controller.php:42
 msgid "Your content has been saved"
 msgstr ""
 
-#: components/com_kukukontent/controller.php:64
+#: components/com_kukukontent/controller.php:71
 msgid "This is a preview only. The content has not been saved yet !"
 msgstr ""
 
-#: components/com_kukukontent/controller.php:65
+#: components/com_kukukontent/controller.php:72
 msgid "Close preview"
 msgstr ""
 
-#. TRANSLATORS: Plugin translations (@todo move)
-#: components/com_kukukontent/kukukontent.php:61
+#: components/com_kukukontent/helpers/kukukontent.php:122
 msgid "Click to create this page..."
 msgstr ""
 
-#: components/com_kukukontent/views/kukukontent/tmpl/default.php:17
+#: components/com_kukukontent/models/kukukontent.php:107
+msgid "You are not allowed to create Kontent pages"
+msgstr ""
+
+#: components/com_kukukontent/views/kukukontent/tmpl/default.php:19
 #: components/com_kukukontent/views/kukukontent/tmpl/edit.php:4
 msgid "Edit"
 msgstr ""
@@ -47,14 +56,22 @@ msgstr ""
 msgid "New"
 msgstr ""
 
-#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:11
+#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:22
+msgid "This page does not exist (yet), and you are not allowed to create pages."
+msgstr ""
+
+#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:33
 msgid "Preview"
 msgstr ""
 
-#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:12
+#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:34
 msgid "Save"
 msgstr ""
 
-#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:15
+#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:37
 msgid "Cancel"
+msgstr ""
+
+#: components/com_kukukontent/views/listkontent/tmpl/default.php:4
+msgid "No items found"
 msgstr ""

@@ -25,7 +25,7 @@ class KuKuKontentController extends JController
     {
         if( ! KuKuKontentHelper::getActions()->get('core.edit'))
         {
-            JError::raiseError(403, jgettext('You are not allowed to edit Kontent pages'));
+            JError::raiseError(403, jgettext('You are not allowed to edit Kontent pages.'));
         }
 
         parent::display();
@@ -66,7 +66,8 @@ class KuKuKontentController extends JController
         && ! $raw)
         return;
 
-        $previewText = '<p class="previewMessage">'//@todo - move the preview message to a view ¿
+        //@todo - move the preview message to a view ¿
+        $previewText = '<p class="previewMessage">'
         .jgettext('This is a preview only. The content has not been saved yet !')
         .'&nbsp;<a href="#" onclick="document.id(\'kukukontentPreview\').set(\'html\', \'\'); return false;">'.jgettext('Close preview').'</a>'
         .'</p>';

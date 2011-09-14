@@ -7,37 +7,46 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com_kukukontent - site 123.456\n"
 "Report-Msgid-Bugs-To: info@nik.it.de\n"
-"POT-Creation-Date: 2011-09-12 15:14-0500\n"
+"POT-Creation-Date: 2011-09-14 14:36-0500\n"
 "PO-Revision-Date: 2011-09-12 15:15-0500\n"
 "Last-Translator: Nikolai Plath <EMAIL@ADDRESS>\n"
 "Language-Team: Language de-DE\n"
 "Language: de-DE\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: components/com_kukukontent/controller.php:33
+#: components/com_kukukontent/controller.php:28
+#: components/com_kukukontent/models/kukukontent.php:99
+#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:13
+msgid "You are not allowed to edit Kontent pages."
+msgstr "Sie sind nicht berechtigt Kontentseiten zu bearbeiten."
+
+#: components/com_kukukontent/controller.php:36
 msgid "Invalid token"
 msgstr "Ungültiges Token"
 
-#: components/com_kukukontent/controller.php:39
+#: components/com_kukukontent/controller.php:42
 msgid "Your content has been saved"
 msgstr "Ihr Content wurde gespeichert"
 
-#: components/com_kukukontent/controller.php:64
+#: components/com_kukukontent/controller.php:71
 msgid "This is a preview only. The content has not been saved yet !"
 msgstr "Dies ist nur eine Vorschau. Der Content wurde noch nicht gespeichert !"
 
-#: components/com_kukukontent/controller.php:65
+#: components/com_kukukontent/controller.php:72
 msgid "Close preview"
 msgstr "Vorschau schliessen"
 
-#. TRANSLATORS: Plugin translations (@todo move)
-#: components/com_kukukontent/kukukontent.php:61
+#: components/com_kukukontent/helpers/kukukontent.php:122
 msgid "Click to create this page..."
 msgstr "Klick um diese Seite zu Erstellen..."
 
-#: components/com_kukukontent/views/kukukontent/tmpl/default.php:17
+#: components/com_kukukontent/models/kukukontent.php:107
+msgid "You are not allowed to create Kontent pages"
+msgstr "Sie sind nicht berechtigt Kontentseiten zu erstellen."
+
+#: components/com_kukukontent/views/kukukontent/tmpl/default.php:19
 #: components/com_kukukontent/views/kukukontent/tmpl/edit.php:4
 msgid "Edit"
 msgstr "Bearbeiten"
@@ -46,14 +55,22 @@ msgstr "Bearbeiten"
 msgid "New"
 msgstr "Neu"
 
-#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:11
+#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:22
+msgid "This page does not exist (yet), and you are not allowed to create pages."
+msgstr "Diese Seite existiert (noch) nicht, und Sie sind nicht berechtigt Seiten zu erstellen."
+
+#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:33
 msgid "Preview"
 msgstr "Vorschau"
 
-#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:12
+#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:34
 msgid "Save"
 msgstr "Speichern"
 
-#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:15
+#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:37
 msgid "Cancel"
 msgstr "Abbrechen"
+
+#: components/com_kukukontent/views/listkontent/tmpl/default.php:4
+msgid "No items found"
+msgstr "Keine Einträge gefunden"

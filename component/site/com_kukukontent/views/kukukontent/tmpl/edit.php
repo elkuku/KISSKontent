@@ -10,7 +10,7 @@ if($this->content->text)
 {
     if( ! $this->canDo->get('core.edit'))
     {
-        echo '<p>'.jgettext('You are not allowed to edit pages.');
+        echo '<p>'.jgettext('You are not allowed to edit Kontent pages.');
 
         return;
     }

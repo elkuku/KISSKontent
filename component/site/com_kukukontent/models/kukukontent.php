@@ -96,7 +96,7 @@ class KuKuKontentModelKuKuKontent extends JModel
             //-- Existing Kontent
             if( ! KuKuKontentHelper::getActions()->get('core.edit'))
             {
-                throw new Exception(jgettext('You are not allowed to edit Kontent pages'));
+                throw new Exception(jgettext('You are not allowed to edit Kontent pages.'));
             }
         }
         else
