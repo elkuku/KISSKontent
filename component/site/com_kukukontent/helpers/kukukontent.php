@@ -126,8 +126,40 @@ class KuKuKontentHelper
         return $text;
     }
 
-    protected static function getLink($text)
+    public static function getLink($text)
     {
+        static $id;
+
+        if( ! $id)
+        {
+            //-- Hey mom can I have my J! Itemid(tm) plz......
+
+            $menus = JFactory::getApplication()->getMenu('site');
+
+            $cId = JComponentHelper::getComponent('com_kukukontent')->id;
+
+            $items = $menus->getItems('component_id', $cId);
+
+            foreach($items as $item)
+            {
+                if(isset($item->query)
+                && isset($item->query['view'])
+                && 'kukukontent' == $item->query['view'])
+                {
+                    $id = $item->id;
+
+                    break;
+                }
+            }//foreach
+
+            if( ! $id)
+            {
+                $active = $menus->getActive();
+
+                $id =($active) ? $active->id : 1;
+            }
+        }
+
         $raw = $text;
 
         if(0 === strpos($text, '/'))
@@ -147,10 +179,17 @@ class KuKuKontentHelper
 
         $parsed = implode('/', $results);
 
-        return JRoute::_('index.php?option=com_kukukontent&p='.$parsed);
+        $link = '';
+        $link .= 'index.php?option=com_kukukontent';
+
+        $link .=($id) ? '&Itemid='.$id : '&view=kukukontent';
+
+        $link .= '&p='.$parsed;
+
+        return JRoute::_($link);
     }//function
 
-    protected static function isLink($link)
+    public static function isLink($link)
     {
         static $query, $db;
 
