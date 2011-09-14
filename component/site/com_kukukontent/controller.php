@@ -23,7 +23,7 @@ class KuKuKontentController extends JController
 {
     public function edit()
     {
-        if( ! KuKuKontentHelper::getActions()->get('core.edit'));
+        if( ! KuKuKontentHelper::getActions()->get('core.edit'))
         {
             JError::raiseError(403, jgettext('You are not allowed to edit Kontent pages'));
         }
@@ -33,7 +33,7 @@ class KuKuKontentController extends JController
 
     public function save()
     {
-        JRequest::checkToken() or jexit(jgettext('Invalid token'));
+        JRequest::checkToken() || jexit(jgettext('Invalid token'));
 
         try
         {
@@ -41,7 +41,7 @@ class KuKuKontentController extends JController
 
             JFactory::getApplication()->enqueueMessage(jgettext('Your content has been saved'));
         }
-        catch (Exception $e)
+        catch(Exception $e)
         {
             JError::raiseWarning(1, $e->getMessage());
         }//try

@@ -7,7 +7,7 @@ class KuKuKontentModelKuKuKontent extends JModel
      *
      * @return KuKuKontent
      */
-    function getContent()
+    public function getContent()
     {
         $p = JRequest::getString('p', 'default');
 
@@ -22,7 +22,7 @@ class KuKuKontentModelKuKuKontent extends JModel
                 //-- Retrieve default page from database
                 $table->load(array('title' => 'default'));
             }
-            catch (Exception $e)
+            catch(Exception $e)
             {
                 //-- No default page found in database
                 $table->title = 'Default';
@@ -37,7 +37,7 @@ class KuKuKontentModelKuKuKontent extends JModel
                 //-- Try to load the page from database
                 $table->load(array('title' => $p));
             }
-            catch (Exception $e)
+            catch(Exception $e)
             {
                 //-- Must be a new page
                 $table->title = $p;
@@ -70,7 +70,8 @@ class KuKuKontentModelKuKuKontent extends JModel
         else
         {
             //@todo create simple default
-            $content = 'Hallo [[echo]](a/b/c/d/e/f/huhu) [[den gibt\'s nüsch]](gar/nixda) und [hier](http://ga.ga)';
+            $content = 'Hallo [[echo]](a/b/c/d/e/f/huhu) '
+            .'[[den gibt\'s nüsch]](gar/nixda) und [hier](http://ga.ga)';
         }
 
         return ($content) ?: '';
@@ -86,12 +87,14 @@ class KuKuKontentModelKuKuKontent extends JModel
 
         $src->id = JRequest::getInt('id', 0);
         $src->title = JRequest::getString('p', 'Default');
-        $src->text = JRequest::getVar('content', '', 'post', 'none', JREQUEST_ALLOWRAW);//@todo clean me up mom =;)
+
+        $src->text = JRequest::getVar('content', '', 'post', 'none'
+        , JREQUEST_ALLOWRAW);//@todo clean me up mom =;)
 
         if($src->id)
         {
             //-- Existing Kontent
-            if( ! KuKuKontentHelper::getActions()->get('core.edit'));
+            if( ! KuKuKontentHelper::getActions()->get('core.edit'))
             {
                 throw new Exception(jgettext('You are not allowed to edit Kontent pages'));
             }
@@ -99,7 +102,7 @@ class KuKuKontentModelKuKuKontent extends JModel
         else
         {
             //-- New Kontent
-            if( ! KuKuKontentHelper::getActions()->get('core.create'));
+            if( ! KuKuKontentHelper::getActions()->get('core.create'))
             {
                 throw new Exception(jgettext('You are not allowed to create Kontent pages'));
             }

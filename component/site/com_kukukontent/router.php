@@ -23,7 +23,7 @@ function KuKuKontentBuildRoute(&$query)
     }
 
     return $segments;
-}
+}//function
 
 function KuKuKontentParseRoute($segments)
 {

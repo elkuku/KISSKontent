@@ -26,7 +26,7 @@ class KuKuKontentHelper
 
         $assetName =(empty($kontentId))
         ? 'com_kukukontent'
-        : 'com_kukukontent.kontent.'.(int) $kontentId;
+        : 'com_kukukontent.kontent.'.(int)$kontentId;
 
 //         $actions = array('core.admin', 'core.manage', 'core.create'
 //         , 'core.edit', 'core.delete');
@@ -75,7 +75,6 @@ class KuKuKontentHelper
     			}xs',
         'KuKuKontentHelper::doAnchorsCallback', $text);
 
-
         //
         // Next, inline-style internal links: [[link text]]
         // @add KuKu
@@ -122,7 +121,9 @@ class KuKuKontentHelper
 
         $redAdvise =($red) ? jgettext('Click to create this page...') : '';
 
-        $result .=(isset($title) || $redAdvise) ? ' title="'.self::encodeAttribute($redAdvise.$title).'"' : '';
+        $result .=(isset($title) || $redAdvise)
+        ? ' title="'.self::encodeAttribute($redAdvise.$title).'"'
+        : '';
 
         $result .= ">$link_text</a>";
 
@@ -139,7 +140,7 @@ class KuKuKontentHelper
         $text = str_replace('"', '&quot;', $text);
 
         return $text;
-    }
+    }//function
 
     protected static function encodeAmpsAndAngles($text)
     {
@@ -149,13 +150,13 @@ class KuKuKontentHelper
         // Ampersand-encoding based entirely on Nat Irons's Amputator
         // MT plugin: <http://bumppo.net/projects/amputator/>
         $text = preg_replace('/&(?!#?[xX]?(?:[0-9a-fA-F]+|\w+);)/',
-                '&amp;', $text);;
+                '&amp;', $text);
 
         // Encode remaining <'s
         $text = str_replace('<', '&lt;', $text);
 
         return $text;
-    }
+    }//function
 
     public static function getLink($text)
     {
@@ -244,6 +245,6 @@ class KuKuKontentHelper
 
         $c = $db->loadResult();
 
-        return($c) ? true : false;
+        return ($c) ? true : false;
     }//function
 }//class
