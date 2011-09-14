@@ -21,7 +21,7 @@ jimport('joomla.application.component.view');
  */
 class KuKuKontentViewListKontent extends JView
 {
-    protected $content = '';
+    protected $list = array();
 
     /**
      * KuKuKontent view display method.
@@ -33,9 +33,12 @@ class KuKuKontentViewListKontent extends JView
     public function display($tpl = null)
     {
         JHtml::_('stylesheet', 'com_kukukontent/kukukontent.css', array(), true);
-//         JHtml::_('script', 'com_kukukontent/kukukontent.js', array(), true);
+        //         JHtml::_('script', 'com_kukukontent/kukukontent.js', array(), true);
 
-        $this->selected = 'b';
+        $menu = JFactory::getApplication()->getMenu('site')->getActive()->query;
+
+        $this->startLevel =(isset($menu['start'])) ? $menu['start'] : '';
+        $this->maxLevel =(isset($menu['depth'])) ? $menu['depth'] : 0;
 
         $list = $this->get('list');
 
@@ -50,6 +53,23 @@ class KuKuKontentViewListKontent extends JView
 
         foreach ($items as $name => $entries)
         {
+            if($this->startLevel)
+            {
+                if($level == 0)
+                {
+                    if($name != $this->startLevel)
+                    continue;
+
+                    $found == true;
+                }
+            }
+
+            if($this->maxLevel
+            && $level > $this->maxLevel)
+            {
+                continue;
+            }
+
             $cItems[] = $name;
 
             $full = implode('/', $cItems);
@@ -58,7 +78,7 @@ class KuKuKontentViewListKontent extends JView
             $type .= KuKuKontentHelper::isLink($full) ? '' : ' redlink';
 
             $link = '<a class="'.$type.'" href="'.KuKuKontentHelper::getLink($full).'">'.$name.'</a>';
-            $list[] = str_repeat('-', $level).$link;
+            $list[] = str_repeat('&nbsp;&bull;', $level).'&nbsp;'.$link;
 
             if(count($entries))//-- recurse...
             $this->processItems($entries, ++$level);
