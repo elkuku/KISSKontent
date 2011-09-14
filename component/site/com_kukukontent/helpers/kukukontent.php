@@ -12,6 +12,37 @@ class KuKuKontentHelper
      */
     protected static $p = '';
 
+    public static function getActions($kontentId = 0)
+    {
+        //--- @TODO implement "real" ACL
+        static $result;
+
+        if($result)
+        return $result;
+
+        $user = JFactory::getUser();
+
+        $result	= new JObject;
+
+        $assetName =(empty($kontentId))
+        ? 'com_kukukontent'
+        : 'com_kukukontent.kontent.'.(int) $kontentId;
+
+//         $actions = array('core.admin', 'core.manage', 'core.create'
+//         , 'core.edit', 'core.delete');
+        $actions = array('core.create', 'core.edit', 'core.delete');
+
+        $x =($user->guest) ? false : true;//@todo häck.. all registered user allowed everything
+
+        foreach($actions as $action)
+        {
+//             $result->set($action, $user->authorise($action, $assetName));
+            $result->set($action, $x);
+        }//foreach
+
+        return $result;
+    }//function
+
     public static function doInternalAnchors($text)
     {
         self::$p = JRequest::getString('p');

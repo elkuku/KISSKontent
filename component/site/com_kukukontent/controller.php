@@ -23,16 +23,17 @@ class KuKuKontentController extends JController
 {
     public function edit()
     {
-        //@TODO access check !
+        if( ! KuKuKontentHelper::getActions()->get('core.edit'));
+        {
+            JError::raiseError(403, jgettext('You are not allowed to edit Kontent pages'));
+        }
 
         parent::display();
-    }
+    }//function
 
     public function save()
     {
         JRequest::checkToken() or jexit(jgettext('Invalid token'));
-
-        //@TODO access check !
 
         try
         {
@@ -58,7 +59,6 @@ class KuKuKontentController extends JController
         //-- Process internal links
         $raw = KuKuKontentHelper::doInternalAnchors($raw);
 
-
         $o = new stdClass;
         $o->text = $raw;
 
@@ -66,7 +66,7 @@ class KuKuKontentController extends JController
         && ! $raw)
         return;
 
-        $previewText = '<p class="previewMessage">'
+        $previewText = '<p class="previewMessage">'//@todo - move the preview message to a view ¿
         .jgettext('This is a preview only. The content has not been saved yet !')
         .'&nbsp;<a href="#" onclick="document.id(\'kukukontentPreview\').set(\'html\', \'\'); return false;">'.jgettext('Close preview').'</a>'
         .'</p>';

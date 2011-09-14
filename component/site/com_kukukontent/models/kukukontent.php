@@ -88,6 +88,23 @@ class KuKuKontentModelKuKuKontent extends JModel
         $src->title = JRequest::getString('p', 'Default');
         $src->text = JRequest::getVar('content', '', 'post', 'none', JREQUEST_ALLOWRAW);//@todo clean me up mom =;)
 
+        if($src->id)
+        {
+            //-- Existing Kontent
+            if( ! KuKuKontentHelper::getActions()->get('core.edit'));
+            {
+                throw new Exception(jgettext('You are not allowed to edit Kontent pages'));
+            }
+        }
+        else
+        {
+            //-- New Kontent
+            if( ! KuKuKontentHelper::getActions()->get('core.create'));
+            {
+                throw new Exception(jgettext('You are not allowed to create Kontent pages'));
+            }
+        }
+
         try
         {
             $this->getTable()

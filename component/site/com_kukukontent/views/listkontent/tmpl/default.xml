@@ -5,8 +5,7 @@
 	</layout>
 
 	<fields name="request">
-		<fieldset name="request"
-			addfieldpath="/administrator/components/com_contact/models/fields">
+		<fieldset name="request">
 
 			<field name="start" type="text" description="The title of the start page"
 				label="Start at" size="7" />

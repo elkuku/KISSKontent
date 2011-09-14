@@ -23,6 +23,8 @@ class KuKuKontentViewKuKuKontent extends JView
 {
     protected $content = '';
 
+    protected $canDo = false;
+
     /**
      * KuKuKontent view display method.
      *
@@ -34,6 +36,8 @@ class KuKuKontentViewKuKuKontent extends JView
     {
         JHtml::_('stylesheet', 'com_kukukontent/kukukontent.css', array(), true);
         JHtml::_('script', 'com_kukukontent/kukukontent.js', array(), true);
+
+        $this->canDo = KuKuKontentHelper::getActions();
 
         $this->content = $this->get('content');
 
@@ -69,7 +73,7 @@ class KuKuKontentViewKuKuKontent extends JView
      */
     protected function setPathway()
     {
-        if( ! $this->content->path)
+        if( ! $this->content->path)//-- No path, no -way...
         return;
 
         $pathway = JFactory::getApplication()->getPathway();

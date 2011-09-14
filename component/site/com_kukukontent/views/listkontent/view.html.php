@@ -51,7 +51,7 @@ class KuKuKontentViewListKontent extends JView
     {
         static $list, $cItems, $found;
 
-        foreach ($items as $name => $entries)
+        foreach($items as $name => $entries)
         {
             if($this->startLevel)
             {

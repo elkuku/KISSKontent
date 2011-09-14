@@ -14,9 +14,11 @@ defined('_JEXEC') || die('=;)');
 ?>
 
 <div class="kukuKontent">
-    <div style="text-align: right">
-    	<a href="<?php echo JURI::current().'?task=edit'; ?>"><?php echo jgettext('Edit'); ?></a>
-    </div>
+	<?php if($this->canDo->get('core.edit')) : ?>
+        <div style="text-align: right">
+        	<a href="<?php echo JURI::current().'?task=edit'; ?>"><?php echo jgettext('Edit'); ?></a>
+        </div>
+    <?php endif; ?>
 
     <?php echo $this->content->text; ?>
 

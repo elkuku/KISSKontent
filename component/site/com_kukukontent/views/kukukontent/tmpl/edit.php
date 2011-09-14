@@ -1,8 +1,30 @@
 <?php
 // var_dump($this->content);
 ?>
-<h1><?php echo($this->content->text) ? jgettext('Edit') : jgettext('New'); ?></h1>
+<h1><?php echo ($this->content->text) ? jgettext('Edit') : jgettext('New'); ?></h1>
 <h2><?php echo $this->content->path; ?></h2>
+
+<?php
+//-- ACL check
+if($this->content->text)
+{
+    if( ! $this->canDo->get('core.edit'))
+    {
+        echo '<p>'.jgettext('You are not allowed to edit pages.');
+
+        return;
+    }
+}
+else
+{
+    if( ! $this->canDo->get('core.create'))
+    {
+        echo '<p>'.jgettext('This page does not exist (yet), and you are not allowed to create pages.');
+
+        return;
+    }
+}
+?>
 
 <div id="kukukontentPreview"></div>
 
