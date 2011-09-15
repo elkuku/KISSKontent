@@ -1,5 +1,17 @@
 <?php
-// var_dump($this->content);
+/**
+ * @package    KuKuKontent
+ * @subpackage Views
+ * @author     Nikolai Plath {@link http://nik-it.de}
+ * @author     Created on 09-Sep-2011
+ * @license    GNU/GPL
+ */
+
+//-- No direct access
+defined('_JEXEC') || die('=;)');
+
+echo $this->menu();
+
 ?>
 <h1><?php echo ($this->content->text) ? jgettext('Edit') : jgettext('New'); ?></h1>
 <h2><?php echo $this->content->path; ?></h2>

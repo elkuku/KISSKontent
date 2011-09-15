@@ -49,6 +49,96 @@ class KuKuKontentModelKuKuKontent extends JModel
         return $table;
     }//function
 
+    public function getVersions()
+    {
+        static $versions;
+
+        if($versions)
+        return $versions;
+
+        $query = $this->_db->getQuery(true);
+
+        $p = JRequest::getString('p', 'default');
+
+        $query->from($this->_db->nameQuote('#__kukukontent_versions').' AS k');
+        $query->select('k.id, k.text, k.modified, u.name, u.username');
+        $query->where('k.title='.$this->_db->quote($p));
+        $query->leftJoin($this->_db->nameQuote('#__users').' AS u ON u.id = k.id_user');
+        $query->order('k.modified DESC');
+
+        $this->_db->setQuery($query);
+
+        $versions = $this->_db->loadObjectList();
+
+        return $versions;
+    }//function
+
+    public function getVersionOne()
+    {
+        $versions = $this->getVersions();
+
+        $v = JRequest::getInt('v1', 'HEAD');
+
+        if('HEAD' == $v
+        || ! array_key_exists($v, $versions))
+        {
+            return(isset($versions[0])) ? $versions[0] : false;
+        }
+
+        return(isset($versions[$v])) ? $versions[$v] : false;
+    }//function
+
+    public function getVersionTwo()
+    {
+
+//         $versions = $this->getVersions();
+
+        $v = JRequest::getInt('v2');
+// var_dump($versions);
+// die();
+        if(! $v)
+        throw new Exception('Missing version number two');
+
+        return $this->findVersion($v);
+
+
+
+
+
+
+//         || ! array_key_exists($v, $versions))
+//         return $versions[$v];
+
+
+
+
+
+
+        if( ! $vNo)
+
+        $table = $this->getTable('KuKuKontentVersions');
+        $table->load($vNo);
+
+        $v = new stdClass;
+
+
+
+        return $table;
+    }//function
+
+    protected function findVersion($id)
+    {
+        foreach ($this->getVersions() as $version)
+        {
+            if($id == $version->id)
+            {
+                return $version;
+            }
+        }//foreach
+
+        throw new Exception('Illegal version two');
+    }//function
+
     /**
      *
      * Enter description here ...
@@ -110,8 +200,13 @@ class KuKuKontentModelKuKuKontent extends JModel
 
         try
         {
+            $this->getTable('KuKuKontentVersions')
+            ->bind($src)->check()->store();
+
             $this->getTable()
             ->bind($src)->check()->store();
+
+
         }
         catch(Exception $e)
         {

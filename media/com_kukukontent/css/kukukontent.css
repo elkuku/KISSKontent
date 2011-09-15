@@ -19,3 +19,7 @@ div.kukukuntentPreview {
 	border: 1px dashed gray;
 	padding: 0.3em;
 }
+
+a.active {
+	font-weight: bold;
+}

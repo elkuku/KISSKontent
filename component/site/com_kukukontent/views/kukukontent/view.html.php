@@ -25,6 +25,8 @@ class KuKuKontentViewKuKuKontent extends JView
 
     protected $canDo = false;
 
+    protected $p = '';
+
     /**
      * KuKuKontent view display method.
      *
@@ -34,36 +36,83 @@ class KuKuKontentViewKuKuKontent extends JView
      */
     public function display($tpl = null)
     {
+        $this->p = JRequest::getString('p');
+
+        $task = JRequest::getCmd('task');
+
+        if(in_array($task, get_class_methods($this)))
+        {
+            $this->$task();
+        }
+        else
+        {
+            if($task)
+            echo sprintf('UNDEFINED Task %s in view %s', $task, $this->_name).'<br />';
+
+            $this->defaultTask();
+        }
+
         JHtml::_('stylesheet', 'com_kukukontent/kukukontent.css', array(), true);
         JHtml::_('script', 'com_kukukontent/kukukontent.js', array(), true);
 
         $this->canDo = KuKuKontentHelper::getActions();
-
-        $this->content = $this->get('content');
-
-        $task = JRequest::getCmd('task');
-
-        if( ! $this->content->text
-        || 'edit' == $task)
-        {
-            $this->setLayout('edit');
-        }
-        else
-        {
-            //-- Process internal links
-            $this->content->text = KuKuKontentHelper::doInternalAnchors($this->content->text);
-
-            JPluginHelper::importPlugin('content');
-
-            $content = JDispatcher::getInstance()->trigger('onContentPrepare'
-            , array('text', &$this->content, &$this->params));
-        }
 
         $this->setPathway();
 
         parent::display($tpl);
 
         return;
+    }//function
+
+    protected function save()
+    {
+        $this->defaultTask();
+    }
+
+    protected function defaultTask()
+    {
+        $this->content = $this->get('content');
+
+        if( ! $this->content->text)
+        {
+            $this->setLayout('edit');
+
+            return;
+        }
+
+        //-- Process internal links
+        $this->content->text = KuKuKontentHelper::doInternalAnchors($this->content->text);
+
+        JPluginHelper::importPlugin('content');
+
+        $content = JDispatcher::getInstance()->trigger('onContentPrepare'
+        , array('text', &$this->content, &$this->params));
+    }//function
+
+    protected function edit()
+    {
+        $this->content = $this->get('content');
+
+        $this->setLayout('edit');
+    }//function
+
+    protected function versions()
+    {
+        $this->versions = $this->get('versions');
+
+        $this->setLayout('versions');
+    }//function
+
+    protected function diff()
+    {
+        JHtml::_('stylesheet', 'com_kukukontent/diff.css', array(), true);
+
+        $this->versionOne = $this->get('versionOne');
+        $this->versionTwo = $this->get('versionTwo');
+
+        $this->diff = $this->getDiffTable($this->versionOne->text, $this->versionTwo->text);
+
+        $this->setLayout('diff');
     }//function
 
     /**
@@ -73,7 +122,7 @@ class KuKuKontentViewKuKuKontent extends JView
      */
     protected function setPathway()
     {
-        if( ! $this->content->path)//-- No path, no -way...
+        if( ! $this->p)//-- No path, no -way...
         return;
 
         $pathway = JFactory::getApplication()->getPathway();
@@ -83,7 +132,7 @@ class KuKuKontentViewKuKuKontent extends JView
         if( ! $items)
         return;// No pathway :(
 
-        $parts = explode('/', $this->content->path);
+        $parts = explode('/', $this->p);
 
         $combined = '';
 
@@ -109,4 +158,61 @@ class KuKuKontentViewKuKuKontent extends JView
 
         return;
     }//function
+
+    protected function menu()
+    {
+        $task = JRequest::getCmd('task');
+
+        $html = '';
+
+        $html .= '<div style="text-align: right">';
+
+        $activeS =' class="active"';
+
+        $active =('' == $task) ? $activeS : '';
+        $html .= '<a'.$active.' href="'.JURI::current().'">'.jgettext('Read').'</a> ';
+
+        $active =('edit' == $task) ? $activeS : '';
+
+        if($this->canDo->get('core.edit'))
+        $html .= '<a'.$active.' href="'.JURI::current().'?task=edit'.'">'.jgettext('Edit').'</a> ';
+
+        $active =('versions' == $task) ? $activeS : '';
+        $html .= '<a'.$active.' href="'.JURI::current().'?task=versions">'.jgettext('Version history').'</a>';
+        $html .= '</div>';
+
+        return $html;
+    }//function
+
+    protected function getDiffTable($origCode, $newCode, $showAll = true)
+    {
+        $codeOrig = explode("\n", htmlentities($origCode));
+        $codeNew = explode("\n", htmlentities($newCode));
+
+        JLoader::register('Diff', JPATH_COMPONENT_SITE.'/helpers/DifferenceEngine.php');
+
+        //--we are adding a blank line to the end.. this is somewhat 'required' by PHPdiff
+        if($codeOrig[count($codeOrig) - 1] != '')
+        {
+            $codeOrig[] = '';
+        }
+
+        if($codeNew[count($codeNew) - 1] != '')
+        {
+            $codeNew[] = '';
+        }
+
+        $dwDiff = new Diff($codeOrig, $codeNew);
+        $dwFormatter = new TableDiffFormatter();
+
+        //-- Small hack to display the whole file - :|
+        if($showAll)
+        {
+            $dwFormatter->leading_context_lines = 99999;
+            $dwFormatter->trailing_context_lines = 99999;
+        }
+
+        return $dwFormatter->format($dwDiff);
+    }//function
+
 }//class
