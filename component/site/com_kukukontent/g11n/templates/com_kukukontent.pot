@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com_kukukontent - site 123.456\n"
 "Report-Msgid-Bugs-To: info@nik.it.de\n"
-"POT-Creation-Date: 2011-09-14 14:36-0500\n"
+"POT-Creation-Date: 2011-09-15 18:45-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,8 +18,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: components/com_kukukontent/controller.php:28
-#: components/com_kukukontent/models/kukukontent.php:99
-#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:13
+#: components/com_kukukontent/models/kukukontent.php:189
+#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:25
 msgid "You are not allowed to edit Kontent pages."
 msgstr ""
 
@@ -43,33 +43,46 @@ msgstr ""
 msgid "Click to create this page..."
 msgstr ""
 
-#: components/com_kukukontent/models/kukukontent.php:107
+#: components/com_kukukontent/models/kukukontent.php:197
 msgid "You are not allowed to create Kontent pages"
 msgstr ""
 
-#: components/com_kukukontent/views/kukukontent/tmpl/default.php:19
-#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:4
+#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:16
+#: components/com_kukukontent/views/kukukontent/view.html.php:178
 msgid "Edit"
 msgstr ""
 
-#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:4
+#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:16
 msgid "New"
 msgstr ""
 
-#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:22
+#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:34
 msgid "This page does not exist (yet), and you are not allowed to create pages."
 msgstr ""
 
-#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:33
+#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:45
 msgid "Preview"
 msgstr ""
 
-#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:34
+#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:46
 msgid "Save"
 msgstr ""
 
-#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:37
+#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:49
 msgid "Cancel"
+msgstr ""
+
+#: components/com_kukukontent/views/kukukontent/tmpl/versions.php:15
+#: components/com_kukukontent/views/kukukontent/view.html.php:181
+msgid "Version history"
+msgstr ""
+
+#: components/com_kukukontent/views/kukukontent/tmpl/versions.php:19
+msgid "No versions found."
+msgstr ""
+
+#: components/com_kukukontent/views/kukukontent/view.html.php:173
+msgid "Read"
 msgstr ""
 
 #: components/com_kukukontent/views/listkontent/tmpl/default.php:4
