@@ -24,11 +24,12 @@ class KuKuKontentModelRecentChanges extends JModel
 
         foreach ($list as $item)
         {
-            $previous = $model->getPrevious($item->title, $item->id);
+            $previous = $model->getPrevious($item->id, $item->title);
 
             $item->link = KuKuKontentHelper::getLink($item->title);
 
-            $item->diffLink =($previous) ? $item->link.'?task=diff&v1='.$previous->id.'&v2='.$item->id : '';
+//             $item->diffLink =($previous) ?  $item->link.'?task=diff&v1='.$previous->id.'&v2='.$item->id : '';
+            $item->diffLink =($previous) ? KuKuKontentHelper::getDiffLink($item->title, $previous->id, $item->id) : '';
 
             $item->versionsLink = $item->link.'?task=versions';
 

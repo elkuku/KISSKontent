@@ -5,20 +5,36 @@
  * @author     Nikolai Plath (elkuku) {@link http://www.nik-it.de NiK-IT.de}
  * @author     Created on 20-Mar-2009
  */
+table.diff {
+	width: 100%;
+	border: 1px solid gray;
+	background-color: #fff;
+/* 	font-size: 90%;
+ */}
+
+table.diff th {
+	/* font-size: 95%; */
+}
+
 td.diff-addedline {
-   background-color: #ffffbb;
+	background-color: #ffffbb;
 }
 
 td.diff-deletedline {
-   background-color: #ddffdd;
+	background-color: #ddffdd;
 }
 
 table.diff td {
-   font-family: monospace;
-   font-size: 100%;
+	/* font-family: monospace;
+	font-size: 100%; */
 }
 
-table.diff td.diff-addedline strong,table.diff td.diff-deletedline strong
-   {
-   color: red;
+table.diff td.diff-addedline strong {
+	color: green;
+	
+}
+
+table.diff td.diff-deletedline strong
+	{
+	color: red;
 }

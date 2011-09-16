@@ -57,7 +57,7 @@ class KuKuKontentController extends JController
         $raw = JRequest::getVar('kontent', '', 'post', 'none', JREQUEST_ALLOWRAW);
 
         //-- Process internal links
-        $raw = KuKuKontentHelper::doInternalAnchors($raw);
+        $raw = KuKuKontentHelper::preParse($raw);
 
         $o = new stdClass;
         $o->text = $raw;
@@ -71,8 +71,6 @@ class KuKuKontentController extends JController
         .jgettext('This is a preview only. The content has not been saved yet !')
         .'&nbsp;<a href="#" onclick="document.id(\'kukukontentPreview\').set(\'html\', \'\'); return false;">'.jgettext('Close preview').'</a>'
         .'</p>';
-
-        //         $content = $this->getModel()->getContent();
 
         $params = null;
 

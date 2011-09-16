@@ -36,8 +36,9 @@ endif;
 	 <?php endif; ?>
 	<?php echo $version->modified; ?>
 	&nbsp;<?php echo $version->name; ?>
+	&nbsp;(<?php echo sprintf(jgettext('%s Bytes'), KuKuKontentHelper::strBytes($version->text)); ?>)
     </li>
 <?php endforeach; ?>
 </ul>
 <?php
-// var_dump($this->versions);
+//  var_dump($this->versions);

@@ -53,12 +53,12 @@ class KuKuKontentModelKuKuKontent extends JModel
     {
         static $versions;
 
-        if(isset($versions[$title]))
-        return $versions[$title];
+        $p =($title) ?: JRequest::getString('p', 'default');
+
+        if(isset($versions[$p]))
+        return $versions[$p];
 
         $query = $this->_db->getQuery(true);
-
-        $p =($title) ?: JRequest::getString('p', 'default');
 
         $query->from($this->_db->nameQuote('#__kukukontent_versions').' AS k');
         $query->select('k.id, k.text, k.modified, u.name, u.username');
@@ -73,7 +73,7 @@ class KuKuKontentModelKuKuKontent extends JModel
         return $versions[$p];
     }//function
 
-    public function getPrevious($title, $id)
+    public function getPrevious($id, $title = '')
     {
         $versions = $this->getVersions($title);
 
@@ -83,6 +83,24 @@ class KuKuKontentModelKuKuKontent extends JModel
             {
                 if(isset($versions[$i + 1]))
                 return $versions[$i + 1];
+
+                return false;
+            }
+        }//foreach
+
+        return false;
+    }//function
+
+    public function getNext($id, $title = '')
+    {
+        $versions = $this->getVersions($title);
+
+        foreach($versions as $i => $version)
+        {
+            if($id == $version->id)
+            {
+                if(isset($versions[$i - 1]))
+                return $versions[$i - 1];
 
                 return false;
             }
@@ -105,7 +123,7 @@ class KuKuKontentModelKuKuKontent extends JModel
         return $this->findVersion($v);
     }//function
 
-    protected function findVersion($id)
+    public function findVersion($id)
     {
         $versions = $this->getVersions();
 
@@ -118,7 +136,7 @@ class KuKuKontentModelKuKuKontent extends JModel
             return $version;
         }//foreach
 
-        throw new Exception('Illegal version two');
+        throw new Exception('Illegal version');
     }//function
 
     /**
@@ -141,7 +159,7 @@ class KuKuKontentModelKuKuKontent extends JModel
         }
         else
         {
-            //@todo create simple default
+            //@todo create simple default =;)
             $content = 'Hallo [[echo]](a/b/c/d/e/f/huhu) '
             .'[[den gibt\'s nüsch]](gar/nixda) und [hier](http://ga.ga)';
         }

@@ -25,7 +25,7 @@
 
     if($item->diffLink) :
         echo '&nbsp;(';
-        echo JHtml::link($item->diffLink, jgettext('Difference'));
+        echo JHtml::link($item->diffLink, jgettext('Differences'));
         echo '&nbsp;|&nbsp;';
         echo JHtml::link($item->versionsLink, jgettext('Versions'));
         echo ')';

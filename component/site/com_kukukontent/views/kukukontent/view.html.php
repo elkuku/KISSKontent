@@ -81,7 +81,7 @@ class KuKuKontentViewKuKuKontent extends JView
         }
 
         //-- Process internal links
-        $this->content->text = KuKuKontentHelper::doInternalAnchors($this->content->text);
+        $this->content->text = KuKuKontentHelper::preParse($this->content->text);
 
         JPluginHelper::importPlugin('content');
 
@@ -107,8 +107,35 @@ class KuKuKontentViewKuKuKontent extends JView
     {
         JHtml::_('stylesheet', 'com_kukukontent/diff.css', array(), true);
 
-        $this->versionOne = $this->get('versionOne');
-        $this->versionTwo = $this->get('versionTwo');
+        $model = $this->getModel();
+
+        $this->versionOne = $model->findVersion(JRequest::getInt('v1'));
+        $this->versionTwo = $model->findVersion(JRequest::getInt('v2'));
+
+
+        $this->previous = $model->getPrevious($this->versionOne->id);
+
+        if($this->previous)
+        {
+            $url = KuKuKontentHelper::getDiffLink($this->p, $this->previous->id, $this->versionOne->id);
+            $this->previous->link = JHtml::link($url, jgettext('To previous version difference'));
+        }
+        else
+        {
+            $this->previous->link = '';
+        }
+
+        $this->next = $model->getNext($this->versionTwo->id);
+
+        if($this->next)
+        {
+            $url = KuKuKontentHelper::getDiffLink($this->p, $this->versionTwo->id, $this->next->id);
+            $this->next->link = JHtml::link($url, jgettext('To next version difference'));
+        }
+        else
+        {
+            $this->next->link = '';
+        }
 
         $this->diff = $this->getDiffTable($this->versionOne->text, $this->versionTwo->text);
 
@@ -186,8 +213,8 @@ class KuKuKontentViewKuKuKontent extends JView
 
     protected function getDiffTable($origCode, $newCode, $showAll = true)
     {
-        $codeOrig = explode("\n", htmlentities($origCode));
-        $codeNew = explode("\n", htmlentities($newCode));
+        $codeOrig = explode("\n", htmlspecialchars($origCode));
+        $codeNew = explode("\n", htmlspecialchars($newCode));
 
         JLoader::register('Diff', JPATH_COMPONENT_SITE.'/helpers/DifferenceEngine.php');
 

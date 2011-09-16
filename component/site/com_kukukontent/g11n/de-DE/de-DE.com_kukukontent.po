@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com_kukukontent - site 123.456\n"
 "Report-Msgid-Bugs-To: info@nik.it.de\n"
-"POT-Creation-Date: 2011-09-15 18:45-0500\n"
+"POT-Creation-Date: 2011-09-16 09:36-0500\n"
 "PO-Revision-Date: 2011-09-12 15:15-0500\n"
 "Last-Translator: Nikolai Plath <EMAIL@ADDRESS>\n"
 "Language-Team: Language de-DE\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: components/com_kukukontent/controller.php:28
-#: components/com_kukukontent/models/kukukontent.php:189
+#: components/com_kukukontent/models/kukukontent.php:170
 #: components/com_kukukontent/views/kukukontent/tmpl/edit.php:25
 msgid "You are not allowed to edit Kontent pages."
 msgstr "Sie sind nicht berechtigt Kontentseiten zu bearbeiten."
@@ -42,9 +42,14 @@ msgstr "Vorschau schliessen"
 msgid "Click to create this page..."
 msgstr "Klick um diese Seite zu Erstellen..."
 
-#: components/com_kukukontent/models/kukukontent.php:197
+#: components/com_kukukontent/models/kukukontent.php:176
 msgid "You are not allowed to create Kontent pages"
 msgstr "Sie sind nicht berechtigt Kontentseiten zu erstellen."
+
+#: components/com_kukukontent/views/kukukontent/tmpl/diff.php:16
+#: components/com_kukukontent/views/recentchanges/tmpl/default.php:28
+msgid "Differences"
+msgstr "Unterschiede"
 
 #: components/com_kukukontent/views/kukukontent/tmpl/edit.php:16
 #: components/com_kukukontent/views/kukukontent/view.html.php:178
@@ -80,6 +85,16 @@ msgstr "Versionsgeschichte"
 msgid "No versions found."
 msgstr "Keine Versionen gefunden."
 
+#: components/com_kukukontent/views/kukukontent/tmpl/versions.php:29
+#: components/com_kukukontent/views/kukukontent/tmpl/versions.php:30
+msgid "Current"
+msgstr "Aktuell"
+
+#: components/com_kukukontent/views/kukukontent/tmpl/versions.php:33
+#: components/com_kukukontent/views/kukukontent/tmpl/versions.php:34
+msgid "Previous"
+msgstr "Vorherige"
+
 #: components/com_kukukontent/views/kukukontent/view.html.php:173
 msgid "Read"
 msgstr "Lesen"
@@ -87,3 +102,20 @@ msgstr "Lesen"
 #: components/com_kukukontent/views/listkontent/tmpl/default.php:4
 msgid "No items found"
 msgstr "Keine Einträge gefunden"
+
+#: components/com_kukukontent/views/recentchanges/tmpl/default.php:4
+msgid "Recent changes"
+msgstr "Letzte Änderungen"
+
+#: components/com_kukukontent/views/recentchanges/tmpl/default.php:7
+msgid "Display options"
+msgstr "Anzeigeoptionen"
+
+#: components/com_kukukontent/views/recentchanges/tmpl/default.php:8
+#, php-format
+msgid "Show the latest %s | %s | %s | %s | %s changes."
+msgstr "Zeige die letzten %s | %s | %s | %s | %s Änderungen."
+
+#: components/com_kukukontent/views/recentchanges/tmpl/default.php:30
+msgid "Versions"
+msgstr "Versionen"
