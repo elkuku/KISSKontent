@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="COM_KUKUKONTENT_KUKUKONTENT_VIEW_RECENT_TITLE">
+		<message>COM_KUKUKONTENT_KUKUKONTENT_VIEW_RECENT_DESC</message>
+	</layout>
+
+	<fields name="request">
+		<fieldset name="request">
+
+			<field name="start" type="text" description="The title of the start page"
+				label="Start at" size="7" />
+
+			<field name="depth" type="text" description="The depth (number)"
+				label="Depth" size="3" />
+		</fieldset>
+	</fields>
+
+</metadata>
