@@ -49,16 +49,16 @@ class KuKuKontentModelKuKuKontent extends JModel
         return $table;
     }//function
 
-    public function getVersions()
+    public function getVersions($title = '')
     {
         static $versions;
 
-        if($versions)
-        return $versions;
+        if(isset($versions[$title]))
+        return $versions[$title];
 
         $query = $this->_db->getQuery(true);
 
-        $p = JRequest::getString('p', 'default');
+        $p =($title) ?: JRequest::getString('p', 'default');
 
         $query->from($this->_db->nameQuote('#__kukukontent_versions').' AS k');
         $query->select('k.id, k.text, k.modified, u.name, u.username');
@@ -68,72 +68,54 @@ class KuKuKontentModelKuKuKontent extends JModel
 
         $this->_db->setQuery($query);
 
-        $versions = $this->_db->loadObjectList();
+        $versions[$p] = $this->_db->loadObjectList();
 
-        return $versions;
+        return $versions[$p];
+    }//function
+
+    public function getPrevious($title, $id)
+    {
+        $versions = $this->getVersions($title);
+
+        foreach($versions as $i => $version)
+        {
+            if($id == $version->id)
+            {
+                if(isset($versions[$i + 1]))
+                return $versions[$i + 1];
+
+                return false;
+            }
+        }//foreach
+
+        return false;
     }//function
 
     public function getVersionOne()
     {
-        $versions = $this->getVersions();
+        $v = JRequest::getInt('v1');
 
-        $v = JRequest::getInt('v1', 'HEAD');
-
-        if('HEAD' == $v
-        || ! array_key_exists($v, $versions))
-        {
-            return(isset($versions[0])) ? $versions[0] : false;
-        }
-
-        return(isset($versions[$v])) ? $versions[$v] : false;
+        return $this->findVersion($v);
     }//function
 
     public function getVersionTwo()
     {
-
-//         $versions = $this->getVersions();
-
         $v = JRequest::getInt('v2');
-// var_dump($versions);
-// die();
-        if(! $v)
-        throw new Exception('Missing version number two');
 
         return $this->findVersion($v);
-
-
-
-
-
-
-//         || ! array_key_exists($v, $versions))
-//         return $versions[$v];
-
-
-
-
-
-
-        if( ! $vNo)
-
-        $table = $this->getTable('KuKuKontentVersions');
-        $table->load($vNo);
-
-        $v = new stdClass;
-
-
-
-        return $table;
     }//function
 
     protected function findVersion($id)
     {
+        $versions = $this->getVersions();
+
+        if(0 == $id)
+        return(isset($versions[0])) ? $versions[0] : false;
+
         foreach ($this->getVersions() as $version)
         {
             if($id == $version->id)
-            {
-                return $version;
-            }
+            return $version;
         }//foreach
 
         throw new Exception('Illegal version two');
@@ -185,17 +167,13 @@ class KuKuKontentModelKuKuKontent extends JModel
         {
             //-- Existing Kontent
             if( ! KuKuKontentHelper::getActions()->get('core.edit'))
-            {
-                throw new Exception(jgettext('You are not allowed to edit Kontent pages.'));
-            }
+            throw new Exception(jgettext('You are not allowed to edit Kontent pages.'));
         }
         else
         {
             //-- New Kontent
             if( ! KuKuKontentHelper::getActions()->get('core.create'))
-            {
-                throw new Exception(jgettext('You are not allowed to create Kontent pages'));
-            }
+            throw new Exception(jgettext('You are not allowed to create Kontent pages'));
         }
 
         try
@@ -205,8 +183,6 @@ class KuKuKontentModelKuKuKontent extends JModel
 
             $this->getTable()
             ->bind($src)->check()->store();
-
-
         }
         catch(Exception $e)
         {

@@ -25,8 +25,14 @@ endif;
 <ul>
 <?php foreach ($this->versions as $i => $version) : ?>
 	<li>
-	<?php if($i) : ?>
-	 <a href="<?php echo jroute::_(JURI::current().'?task=diff&v1=HEAD&v2='.$version->id); ?>">diff</a>
+	<?php echo ($i)
+	? JHtml::link(JURI::current().'?task=diff&v1='.$version->id.'&v2=0', jgettext('Current'))
+	: jgettext('Current'); ?>
+
+	<?php echo (isset($this->versions[$i + 1]))
+	? JHtml::link(JURI::current().'?task=diff&v1='.$this->versions[$i + 1]->id.'&v2='.$version->id, jgettext('Previous'))
+	: jgettext('Previous'); ?>
+	<?php if(isset($this->versions[$i + 1])) : ?>
 	 <?php endif; ?>
 	<?php echo $version->modified; ?>
 	&nbsp;<?php echo $version->name; ?>

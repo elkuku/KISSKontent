@@ -160,9 +160,9 @@ class KuKuKontentHelper
 
     public static function getLink($text)
     {
-        static $id;
+        static $Itemid;
 
-        if( ! $id)
+        if( ! $Itemid)
         {
             //-- Hey mom can I have my J! Itemid(tm) plz......
 
@@ -178,25 +178,26 @@ class KuKuKontentHelper
                 && isset($item->query['view'])
                 && 'kukukontent' == $item->query['view'])
                 {
-                    $id = $item->id;
+                    $Itemid = $item->id;
 
                     break;
                 }
             }//foreach
 
-            if( ! $id)
+            if( ! $Itemid)
             {
                 $active = $menus->getActive();
 
-                $id =($active) ? $active->id : 1;
+                $Itemid =($active) ? $active->id : 1;
             }
-        }
+        }//-- end get Itemid...
 
         $raw = $text;
 
         if(0 === strpos($text, '/'))
         {
-            // The text starts with a "/" - This is a relative internal link.
+            //-- The text starts with a "/" - This is a relative internal link.
+            //-- @todo add support for "../" syntax ¿
             $raw = self::$p.$text;
         }
 
@@ -214,7 +215,7 @@ class KuKuKontentHelper
         $link = '';
         $link .= 'index.php?option=com_kukukontent';
 
-        $link .=($id) ? '&Itemid='.$id : '&view=kukukontent';
+        $link .=($Itemid) ? '&Itemid='.$Itemid : '&view=kukukontent';
 
         $link .= '&p='.$parsed;
 

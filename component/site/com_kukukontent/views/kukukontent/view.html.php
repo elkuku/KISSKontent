@@ -170,15 +170,15 @@ class KuKuKontentViewKuKuKontent extends JView
         $activeS =' class="active"';
 
         $active =('' == $task) ? $activeS : '';
-        $html .= '<a'.$active.' href="'.JURI::current().'">'.jgettext('Read').'</a> ';
+        $html .= '<a'.$active.' href="'.JURI::current().'">'.jgettext('Read').'</a>';
 
         $active =('edit' == $task) ? $activeS : '';
 
         if($this->canDo->get('core.edit'))
-        $html .= '<a'.$active.' href="'.JURI::current().'?task=edit'.'">'.jgettext('Edit').'</a> ';
+        $html .= '&nbsp;&bull;&nbsp;<a'.$active.' href="'.JURI::current().'?task=edit'.'">'.jgettext('Edit').'</a>';
 
         $active =('versions' == $task) ? $activeS : '';
-        $html .= '<a'.$active.' href="'.JURI::current().'?task=versions">'.jgettext('Version history').'</a>';
+        $html .= '&nbsp;&bull;&nbsp;<a'.$active.' href="'.JURI::current().'?task=versions">'.jgettext('Version history').'</a>';
         $html .= '</div>';
 
         return $html;

@@ -23,3 +23,7 @@ div.kukukuntentPreview {
 a.active {
 	font-weight: bold;
 }
+
+:target {
+	border: 1px solid orange;
+}
