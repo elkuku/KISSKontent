@@ -2,11 +2,11 @@
 /**
  * CHANGELOG
  *
- * This is the changelog for KuKuKontent.<br>
+ * This is the changelog for KISSKontent.<br>
  * <b>Please</b> be patient =;)
  *
  * @version    SVN $Id: CHANGELOG.php 466 2011-07-28 01:48:35Z elkuku $
- * @package    KuKuKontent
+ * @package    KISSKontent
  * @subpackage Documentation
  * @author     Nikolai Plath {@link http://nik-it.de}
  * @author     Created on 09-Sep-2011
@@ -26,7 +26,7 @@ function CHANGELOG()
 _______________________________________________
 _______________________________________________
 
-This is the changelog for KuKuKontent
+This is the changelog for KISSKontent
 
 Please be patient =;)
 _______________________________________________

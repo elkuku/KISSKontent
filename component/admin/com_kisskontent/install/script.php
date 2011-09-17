@@ -1,7 +1,7 @@
 <?php
 /**
  * @version SVN: $Id$
- * @package    KuKuKontent
+ * @package    KISSKontent
  * @subpackage Install
  * @author     Nikolai Plath {@link http://nik-it.de}
  * @author     Created on 12-Sep-2011
@@ -12,9 +12,9 @@
 defined('_JEXEC') || die('=;)');
 
 /**
- * Script file for KuKuKontent component.
+ * Script file for KISSKontent component.
  */
-class com_kukukontentInstallerScript
+class com_kisskontentInstallerScript
 {
     /**
      * Method to run before an install/update/uninstall method.
@@ -25,7 +25,7 @@ class com_kukukontentInstallerScript
     {
         // $parent is the class calling this method
         // $type is the type of change (install, update or discover_install)
-        echo '<p>'.JText::_('COM_KUKUKONTENT_PREFLIGHT_'.$type.'_TEXT').'</p>';
+        echo '<p>'.JText::_('COM_KISSKONTENT_PREFLIGHT_'.$type.'_TEXT').'</p>';
     }//function
 
     /**
@@ -36,8 +36,8 @@ class com_kukukontentInstallerScript
     public function install($parent)
     {
         // $parent is the class calling this method
-        //	$parent->getParent()->setRedirectURL('index.php?option=com_kukukontent');
-        echo '<p>'.JText::_('COM_KUKUKONTENT_INSTALL_TEXT').'</p>';
+        //	$parent->getParent()->setRedirectURL('index.php?option=com_kisskontent');
+        echo '<p>'.JText::_('COM_KISSKONTENT_INSTALL_TEXT').'</p>';
     }//function
 
     /**
@@ -48,7 +48,7 @@ class com_kukukontentInstallerScript
     public function update($parent)
     {
         // $parent is the class calling this method
-        echo '<p>'.JText::_('COM_KUKUKONTENT_UPDATE_TEXT').'</p>';
+        echo '<p>'.JText::_('COM_KISSKONTENT_UPDATE_TEXT').'</p>';
     }//function
 
     /**
@@ -60,7 +60,7 @@ class com_kukukontentInstallerScript
     {
         // $parent is the class calling this method
         // $type is the type of change (install, update or discover_install)
-        echo '<p>'.JText::_('COM_KUKUKONTENT_POSTFLIGHT_'.$type.'_TEXT').'</p>';
+        echo '<p>'.JText::_('COM_KISSKONTENT_POSTFLIGHT_'.$type.'_TEXT').'</p>';
     }//function
 
     /**
@@ -71,6 +71,6 @@ class com_kukukontentInstallerScript
     public function uninstall($parent)
     {
         // $parent is the class calling this method
-        echo '<p>'.JText::_('COM_KUKUKONTENT_UNINSTALL_TEXT').'</p>';
+        echo '<p>'.JText::_('COM_KISSKONTENT_UNINSTALL_TEXT').'</p>';
     }//function
 }//class

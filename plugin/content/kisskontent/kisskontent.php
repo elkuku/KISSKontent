@@ -6,7 +6,7 @@ defined('_JEXEC') || die('=;)');
 // Import Joomla! Plugin library file
 jimport('joomla.plugin.plugin');
 
-class plgContentKuKuKontent extends JPlugin
+class plgContentKISSKontent extends JPlugin
 {
     /**
      * Plugin...
@@ -24,7 +24,7 @@ class plgContentKuKuKontent extends JPlugin
 
         ##### @TODO include other parser..
 
-        include_once JPATH_SITE.'/plugins/content/kukukontent/parser/classTextile.php';
+        include_once JPATH_SITE.'/plugins/content/kisskontent/parser/classTextile.php';
         //         include_once JPATH_SITE.'/plugins/content/jTextile/textile/smartypants.php';
 
         $textile = new Textile;

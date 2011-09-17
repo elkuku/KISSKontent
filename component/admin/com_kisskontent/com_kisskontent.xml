@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <extension type="component" version="1.6" method="upgrade">
-  <name>KuKuKontent</name>
+  <name>KISSKontent</name>
   <creationDate>12-Sep-2011</creationDate>
   <author>Nikolai Plath</author>
   <authorEmail>info@nik-it.de</authorEmail>
@@ -33,11 +33,11 @@
     <folder>models</folder>
     <folder>views</folder>
     <filename>controller.php</filename>
-    <filename>kukukontent.php</filename>
+    <filename>kisskontent.php</filename>
     <filename>router.php</filename>
   </files>
   <administration>
-    <menu img="components/com_kukukontent/assets/images/com_kukukontent-16.png">KuKuKontent</menu>
+    <menu img="components/com_kisskontent/assets/images/com_kisskontent-16.png">KISSKontent</menu>
     <files folder="admin">
       <folder>assets</folder>
       <folder>helpers</folder>
@@ -49,7 +49,7 @@
       <filename>kukukontent.php</filename>
     </files>
   </administration>
-  <media destination="com_kukukontent" folder="media">
+  <media destination="com_kisskontent" folder="media">
     <folder>css</folder>
     <folder>images</folder>
     <folder>js</folder>

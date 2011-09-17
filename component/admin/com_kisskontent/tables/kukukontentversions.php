@@ -1,12 +1,12 @@
 <?php
-class TableKuKuKontentVersions extends JTable
+class TableKISSKontentVersions extends JTable
 {
     /**
      * @param	JDatabase	A database connector object
      */
     public function __construct(&$db)
     {
-        parent::__construct('#__kukukontent_versions', 'id', $db);
+        parent::__construct('#__kisskontent_versions', 'id', $db);
     }//function
 
     public function load($keys = null, $reset = true)

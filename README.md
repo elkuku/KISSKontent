@@ -3,7 +3,7 @@
 
 ## First steps for *alpha testers*
 
-1. Download the **package** `pgk_kukukontent...` and install it. This contains a component and a plugin.
+1. Download the **package** `pgk_kisskontent...` and install it. This contains a component and a plugin.
 2. Publish the plugin `KuKuKontent`.
 3. Create a menu link to the component `KuKuKontent`.
 4. Enjoy `=;)`
