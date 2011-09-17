@@ -66,7 +66,12 @@ class KISSKontentViewKISSKontent extends JView
     protected function save()
     {
         $this->defaultTask();
-    }
+    }//function
+
+    protected function read()
+    {
+        $this->defaultTask();
+    }//function
 
     protected function defaultTask()
     {
@@ -140,7 +145,7 @@ class KISSKontentViewKISSKontent extends JView
 
         //-- Process internal links
         $this->preview = $this->versionTwo;
-//         $this->preview->text = $this->versionTwo->text;
+
         $this->preview->text = KISSKontentHelper::preParse($this->preview->text);
 
         JPluginHelper::importPlugin('content');
@@ -195,6 +200,11 @@ class KISSKontentViewKISSKontent extends JView
         return;
     }//function
 
+    /**
+     * KISS menu =;)
+     *
+     * @return string
+     */
     protected function menu()
     {
         $task = JRequest::getCmd('task');
@@ -205,16 +215,17 @@ class KISSKontentViewKISSKontent extends JView
 
         $activeS =' class="active"';
 
-        $active =('' == $task) ? $activeS : '';
-        $html .= '<a'.$active.' href="'.JURI::current().'">'.jgettext('Read').'</a>';
+        $active =('' == $task || in_array($task, array('read', 'save'))) ? $activeS : '';
+        $html .= JHtml::link(JRoute::_('&task=read'), jgettext('Read'), $active);
 
         $active =('edit' == $task) ? $activeS : '';
 
         if($this->canDo->get('core.edit'))
-        $html .= '&nbsp;&bull;&nbsp;<a'.$active.' href="'.JURI::current().'?task=edit'.'">'.jgettext('Edit').'</a>';
+        $html .= '&nbsp;&bull;&nbsp;'.JHtml::link(JRoute::_('&task=edit'), jgettext('Edit'), $active);
 
         $active =('versions' == $task) ? $activeS : '';
-        $html .= '&nbsp;&bull;&nbsp;<a'.$active.' href="'.JURI::current().'?task=versions">'.jgettext('Version history').'</a>';
+        $html .= '&nbsp;&bull;&nbsp;'.JHtml::link(JRoute::_('&task=versions'), jgettext('Version history'), $active);
+
         $html .= '</div>';
 
         return $html;

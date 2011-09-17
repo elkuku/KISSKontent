@@ -288,7 +288,7 @@ class KISSKontentHelper
     {
         $link = self::getLink($title, false);
 
-        return JRoute::_($link.'?task=diff&amp;v1='.$v1.'&amp;v2='.$v2);
+        return JRoute::_($link.'&task=diff&amp;v1='.$v1.'&amp;v2='.$v2);
     }//function
 
     /**

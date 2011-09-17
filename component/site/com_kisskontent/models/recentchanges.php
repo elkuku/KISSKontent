@@ -31,6 +31,9 @@ class KISSKontentModelRecentChanges extends JModel
 
         $result = array();
 
+        if( ! $list)
+        return $result;
+
         foreach ($list as $item)
         {
             $previous = $model->getPrevious($item->id, $item->title);
@@ -39,7 +42,8 @@ class KISSKontentModelRecentChanges extends JModel
 
             $item->diffLink =($previous) ? KISSKontentHelper::getDiffLink($item->title, $previous->id, $item->id) : '';
 
-            $item->versionsLink = $item->link.'?task=versions';
+            $item->versionsLink = JRoute::_(KISSKontentHelper::getLink($item->title, false).'&task=versions');
+//             $item->versionsLink = $item->link.'?task=versions';
 
             $result[] = $item;
         }//foreach

@@ -1,4 +1,14 @@
 <?php
+/**
+ * @package    KISSKontent
+ * @subpackage Views
+ * @author     Nikolai Plath {@link http://nik-it.de}
+ * @author     Created on 09-Sep-2011
+ * @license    GNU/GPL
+ */
+
+//-- No direct access
+defined('_JEXEC') || die('=;)');
 
 $actDate = '';
 $actTitle = '';
@@ -16,18 +26,26 @@ $actTitle = '';
 );?>
 </fieldset>
 
-<?php foreach ($this->list as $item) :
-list($date, $time) = explode(' ', $item->modified);
+<?php if( ! $this->list) : ?>
+	<h2><?php echo jgettext('Nothing has changed'); ?></h2>
+	<?php return; ?>
+<?php endif; ?>
 
-if( ! $actDate || $actDate != $date)
-{
-    echo ($actDate) ? '</ul>' : '';
-    echo '<h2>'.$date.'</h2>';
-    echo '<ul>';
+<?php foreach($this->list as $item) :
+    list($date, $time) = explode(' ', $item->modified);
 
-    $actDate = $date;
-}
+    if( ! $actDate || $actDate != $date)
+    {
+        echo ($actDate) ? '</ul>' : '';//-- Close previous
+
+        echo '<h2>'.$date.'</h2>';
+        echo '<ul>';
+
+        $actDate = $date;
+    }
+
     echo '<li>';
+
     echo $time;
 
     echo ($item->diffLink) ? '&nbsp;&bull;&nbsp;' : '&nbsp;<b>N</b>&nbsp;';
@@ -56,8 +74,6 @@ if( ! $actDate || $actDate != $date)
             echo JHtml::link($item->link, $item->title);
         endif;
     }
-
-
 
     echo ' .. '.$item->name;
 

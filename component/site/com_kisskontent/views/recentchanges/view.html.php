@@ -42,6 +42,6 @@ class KISSKontentViewRecentChanges extends JView
     {
         $attribs =($num == JRequest::getInt('limit', 10)) ? ' class="active"' : '';
 
-        return JHtml::link(JURI::current().'?limit='.$num, $num, $attribs);
+        return JHtml::link(JRoute::_('&limit='.$num), $num, $attribs);
     }//function
 }//class
