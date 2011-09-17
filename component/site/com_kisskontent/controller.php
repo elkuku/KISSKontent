@@ -38,7 +38,7 @@ class KISSKontentController extends JController
         {
             $this->getModel()->save();
 
-            JFactory::getApplication()->enqueueMessage(jgettext('Your content has been saved'));
+            JFactory::getApplication()->enqueueMessage(jgettext('Your Kontent has been saved'));
         }
         catch(Exception $e)
         {
@@ -56,7 +56,7 @@ class KISSKontentController extends JController
         $raw = JRequest::getVar('kontent', '', 'post', 'none', JREQUEST_ALLOWRAW);
 
         //-- Process internal links
-        $raw = KISSKontentHelper::preParse($raw);
+       $raw = KISSKontentHelper::preParse($raw);
 
         $o = new stdClass;
         $o->text = $raw;
