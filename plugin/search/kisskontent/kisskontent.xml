@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" version="1.6" group="search">
+  <name>Search - KISSKontent</name>
+  <creationDate>16-Sep-2011</creationDate>
+  <author>Nikolai Plath</author>
+  <authorEmail>info@nik-it.de</authorEmail>
+  <authorUrl>http://nik-it.de</authorUrl>
+  <copyright>2011 Nikolai Plath</copyright>
+  <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+  <version>1.0</version>
+  <description>Kontent search</description>
+  <files folder="site">
+    <filename plugin="kisskontent">kisskontent.php</filename>
+    <filename>kisskontent_CHANGELOG.php</filename>
+  </files>
+</extension>
