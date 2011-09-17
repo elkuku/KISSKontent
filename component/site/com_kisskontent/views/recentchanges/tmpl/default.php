@@ -66,7 +66,7 @@ $actTitle = '';
     }
     else
     {
-        echo ' ... ';
+        echo str_repeat('.', strlen($actTitle)).' ';
 
         if($item->diffLink) :
             echo JHtml::link($item->diffLink, jgettext('Differences'));
