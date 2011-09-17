@@ -5,7 +5,6 @@
  * This is the changelog for KISSKontent.<br>
  * <b>Please</b> be patient =;)
  *
- * @version    SVN $Id: CHANGELOG.php 466 2011-07-28 01:48:35Z elkuku $
  * @package    KISSKontent
  * @subpackage Documentation
  * @author     Nikolai Plath {@link http://nik-it.de}

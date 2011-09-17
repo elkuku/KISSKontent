@@ -46,7 +46,7 @@
       <folder>tables</folder>
       <filename>CHANGELOG.php</filename>
       <filename>easycreator.xml</filename>
-      <filename>kukukontent.php</filename>
+      <filename>kisskontent.php</filename>
     </files>
   </administration>
   <media destination="com_kisskontent" folder="media">

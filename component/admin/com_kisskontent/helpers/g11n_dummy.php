@@ -1,7 +1,6 @@
 <?php
 /**
- * @version $Id: g11n_dummy.php 456 2011-07-23 07:56:59Z elkuku $
- * @package    EasyCreator
+ * @package    KISSKontent
  * @subpackage Helpers
  * @author     Nikolai Plath (elkuku) {@link http://www.nik-it.de NiK-IT.de}
  * @author     Created on 21-May-2011

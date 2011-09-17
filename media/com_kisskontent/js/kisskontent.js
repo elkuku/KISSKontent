@@ -1,10 +1,10 @@
-function kukukontentPreview(baseUri, p)
+function kisskontentPreview(baseUri, p)
 {
-	var preview = document.id('kukukontentPreview');
-	var kontent = document.id('kukukontentKontent');
+	var preview = document.id('kisskontentPreview');
+	var kontent = document.id('kisskontentKontent');
 
     new Request({
-    	url: baseUri + 'index.php?option=com_kukukontent'
+    	url: baseUri + 'index.php?option=com_kisskontent'
     	+ '&task=preview&tmpl=component&format=raw'
     	+ '&p=' + p,
 
@@ -15,7 +15,7 @@ function kukukontentPreview(baseUri, p)
 		
 		onSuccess: function(response) {
 			preview.set('html', response);
-			preview.set('class', 'kukukuntentPreview');
+			preview.set('class', 'kisskuntentPreview');
 		}
 	}).send();
 }//function

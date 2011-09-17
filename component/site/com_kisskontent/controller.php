@@ -1,6 +1,5 @@
 <?php
 /**
- * @version SVN: $Id: builder.php 469 2011-07-29 19:03:30Z elkuku $
  * @package    KISSKontent
  * @subpackage Base
  * @author     Nikolai Plath {@link http://nik-it.de}
