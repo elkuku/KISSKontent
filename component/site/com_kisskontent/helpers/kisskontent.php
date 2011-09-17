@@ -53,7 +53,7 @@ class KISSKontentHelper
 
     protected static function doAnchors($text)
     {
-        return preg_replace_callback('@(https?://([-\w\.]+)+(:\d+)?(/([\w/_\.\-]*(\?\S+)?)?)?)@'
+        return preg_replace_callback('@\s(https?://([-\w\.]+)+(:\d+)?(/([\w/_\.\-]*(\?\S+)?)?)?)\s@'
         , 'KISSKontentHelper::doAnchorsCallback', $text);
 
     }//function
@@ -120,7 +120,7 @@ class KISSKontentHelper
         'class' => 'external'
         );
 
-        return JHtml::link($url, $text, $attribs);
+        return ' '.JHtml::link($url, $text, $attribs).' ';
     }//function
 
     /**
@@ -132,7 +132,7 @@ class KISSKontentHelper
     {
         $whole_match = $matches[1];
 
-        $link_text = trim($matches[2], '/');
+        $text = trim($matches[2], '/');
 
         if(count($matches) > 3)
         {
@@ -147,19 +147,17 @@ class KISSKontentHelper
 
         $red =(self::isLink($url)) ? '' : ' redlink';
 
-        $url = self::encodeAttribute(self::getLink($url));
+        $attribs = 'class="internal'.$red.'"';
 
-        $result = '<a href="'.$url.'" class="internal'.$red.'"';
+        $url = self::encodeAttribute(self::getLink($url));
 
         $redAdvise =($red) ? jgettext('Click to create this page...') : '';
 
-        $result .=(isset($title) || $redAdvise)
+        $attribs .=(isset($title) || $redAdvise)
         ? ' title="'.self::encodeAttribute($redAdvise.$title).'"'
         : '';
 
-        $result .= ">$link_text</a>";
-
-        return $result;
+        return JHtml::link($url, $text, $attribs);
     }//function
 
     protected static function encodeAttribute($text)
