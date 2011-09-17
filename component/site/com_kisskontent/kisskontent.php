@@ -1,7 +1,7 @@
 <?php
 /**
  * @version SVN: $Id: builder.php 469 2011-07-29 19:03:30Z elkuku $
- * @package    KuKuKontent
+ * @package    KISSKontent
  * @subpackage Base
  * @author     Nikolai Plath {@link http://nik-it.de}
  * @author     Created on 09-Sep-2011
@@ -46,10 +46,10 @@ catch(Exception $e)
     return;
 }//try
 
-JLoader::register('KuKuKontentHelper', JPATH_COMPONENT_SITE.'/helpers/kukukontent.php');
+JLoader::register('KISSKontentHelper', JPATH_COMPONENT_SITE.'/helpers/kisskontent.php');
 
-//-- Get an instance of the controller with the prefix 'KuKuKontent'
-$controller = JController::getInstance('KuKuKontent');
+//-- Get an instance of the controller with the prefix 'KISSKontent'
+$controller = JController::getInstance('KISSKontent');
 
 //-- Execute the 'task' from the Request
 $controller->execute(JRequest::getCmd('task'));

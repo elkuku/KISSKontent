@@ -1,7 +1,7 @@
 <?php
 /**
  * @version SVN: $Id: builder.php 469 2011-07-29 19:03:30Z elkuku $
- * @package    KuKuKontent
+ * @package    KISSKontent
  * @subpackage Views
  * @author     Nikolai Plath {@link http://nik-it.de}
  * @author     Created on 09-Sep-2011
@@ -15,11 +15,11 @@ defined('_JEXEC') || die('=;)');
 jimport('joomla.application.component.view');
 
 /**
- * HTML View class for the KuKuKontent Component.
+ * HTML View class for the KISSKontent Component.
  *
- * @package KuKuKontent
+ * @package KISSKontent
  */
-class KuKuKontentViewKuKuKontent extends JView
+class KISSKontentViewKISSKontent extends JView
 {
     protected $content = '';
 
@@ -28,7 +28,7 @@ class KuKuKontentViewKuKuKontent extends JView
     protected $p = '';
 
     /**
-     * KuKuKontent view display method.
+     * KISSKontent view display method.
      *
      * @param string $tpl The name of the template file to parse;
      *
@@ -52,10 +52,10 @@ class KuKuKontentViewKuKuKontent extends JView
             $this->defaultTask();
         }
 
-        JHtml::_('stylesheet', 'com_kukukontent/kukukontent.css', array(), true);
-        JHtml::_('script', 'com_kukukontent/kukukontent.js', array(), true);
+        JHtml::_('stylesheet', 'com_kisskontent/kisskontent.css', array(), true);
+        JHtml::_('script', 'com_kisskontent/kisskontent.js', array(), true);
 
-        $this->canDo = KuKuKontentHelper::getActions();
+        $this->canDo = KISSKontentHelper::getActions();
 
         $this->setPathway();
 
@@ -81,7 +81,7 @@ class KuKuKontentViewKuKuKontent extends JView
         }
 
         //-- Process internal links
-        $this->content->text = KuKuKontentHelper::preParse($this->content->text);
+        $this->content->text = KISSKontentHelper::preParse($this->content->text);
 
         JPluginHelper::importPlugin('content');
 
@@ -105,7 +105,7 @@ class KuKuKontentViewKuKuKontent extends JView
 
     protected function diff()
     {
-        JHtml::_('stylesheet', 'com_kukukontent/diff.css', array(), true);
+        JHtml::_('stylesheet', 'com_kisskontent/diff.css', array(), true);
 
         $model = $this->getModel();
 
@@ -117,7 +117,7 @@ class KuKuKontentViewKuKuKontent extends JView
 
         if($this->previous)
         {
-            $url = KuKuKontentHelper::getDiffLink($this->p, $this->previous->id, $this->versionOne->id);
+            $url = KISSKontentHelper::getDiffLink($this->p, $this->previous->id, $this->versionOne->id);
             $this->previous->link = JHtml::link($url, jgettext('To previous version difference'));
         }
         else
@@ -129,7 +129,7 @@ class KuKuKontentViewKuKuKontent extends JView
 
         if($this->next)
         {
-            $url = KuKuKontentHelper::getDiffLink($this->p, $this->versionTwo->id, $this->next->id);
+            $url = KISSKontentHelper::getDiffLink($this->p, $this->versionTwo->id, $this->next->id);
             $this->next->link = JHtml::link($url, jgettext('To next version difference'));
         }
         else
@@ -142,7 +142,7 @@ class KuKuKontentViewKuKuKontent extends JView
         //-- Process internal links
         $this->preview = $this->versionTwo;
 //         $this->preview->text = $this->versionTwo->text;
-        $this->preview->text = KuKuKontentHelper::preParse($this->preview->text);
+        $this->preview->text = KISSKontentHelper::preParse($this->preview->text);
 
         JPluginHelper::importPlugin('content');
 

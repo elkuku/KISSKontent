@@ -1,7 +1,7 @@
 <?php
 /**
  * @version SVN: $Id: builder.php 469 2011-07-29 19:03:30Z elkuku $
- * @package    KuKuKontent
+ * @package    KISSKontent
  * @subpackage Base
  * @author     Nikolai Plath {@link http://nik-it.de}
  * @author     Created on 09-Sep-2011
@@ -11,7 +11,7 @@
 //-- No direct access
 defined('_JEXEC') || die('=;)');
 
-function KuKuKontentBuildRoute(&$query)
+function KISSKontentBuildRoute(&$query)
 {
     $segments = array();
 
@@ -25,7 +25,7 @@ function KuKuKontentBuildRoute(&$query)
     return $segments;
 }//function
 
-function KuKuKontentParseRoute($segments)
+function KISSKontentParseRoute($segments)
 {
     $vars = array();
 

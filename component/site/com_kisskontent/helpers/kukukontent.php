@@ -2,7 +2,7 @@
 // No direct access allowed to this file
 defined('_JEXEC') || die('=;)');
 
-class KuKuKontentHelper
+class KISSKontentHelper
 {
     const NESTED_BRACKETS_REGEX = '(?>[^\[\]]+|\[(?>[^\[\]]+|\[(?>[^\[\]]+|\[(?>[^\[\]]+|\[(?>[^\[\]]+|\[(?>[^\[\]]+|\[\])*\])*\])*\])*\])*\])*';
     const NESTED_URL_PARENTHESIS_REGEX = '(?>[^()\s]+|\((?>[^()\s]+|\((?>[^()\s]+|\((?>[^()\s]+|\((?>\)))*(?>\)))*(?>\)))*(?>\)))*';
@@ -25,8 +25,8 @@ class KuKuKontentHelper
         $result	= new JObject;
 
         $assetName =(empty($kontentId))
-        ? 'com_kukukontent'
-        : 'com_kukukontent.kontent.'.(int)$kontentId;
+        ? 'com_kisskontent'
+        : 'com_kisskontent.kontent.'.(int)$kontentId;
 
         //         $actions = array('core.admin', 'core.manage', 'core.create'
         //         , 'core.edit', 'core.delete');
@@ -54,7 +54,7 @@ class KuKuKontentHelper
     protected static function doAnchors($text)
     {
         return preg_replace_callback('@(https?://([-\w\.]+)+(:\d+)?(/([\w/_\.\-]*(\?\S+)?)?)?)@'
-        , 'KuKuKontentHelper::doAnchorsCallback', $text);
+        , 'KISSKontentHelper::doAnchorsCallback', $text);
 
     }//function
 
@@ -88,7 +88,7 @@ class KuKuKontentHelper
     			  \)
     			)
     			}xs',
-        'KuKuKontentHelper::doInternalAnchorsCallback', $text);
+        'KISSKontentHelper::doInternalAnchorsCallback', $text);
 
         //
         // Next, inline-style internal links: [[link text]]
@@ -101,7 +101,7 @@ class KuKuKontentHelper
     			\]\]
     		)
     		}xs',
-        'KuKuKontentHelper::doInternalAnchorsCallback', $text);
+        'KISSKontentHelper::doInternalAnchorsCallback', $text);
 
         return $text;
     }//function
@@ -200,7 +200,7 @@ class KuKuKontentHelper
 
             $menus = JFactory::getApplication()->getMenu('site');
 
-            $cId = JComponentHelper::getComponent('com_kukukontent')->id;
+            $cId = JComponentHelper::getComponent('com_kisskontent')->id;
 
             $items = $menus->getItems('component_id', $cId);
 
@@ -208,7 +208,7 @@ class KuKuKontentHelper
             {
                 if(isset($item->query)
                 && isset($item->query['view'])
-                && 'kukukontent' == $item->query['view'])
+                && 'kisskontent' == $item->query['view'])
                 {
                     $Itemid = $item->id;
 
@@ -245,9 +245,9 @@ class KuKuKontentHelper
         $parsed = implode('/', $results);
 
         $link = '';
-        $link .= 'index.php?option=com_kukukontent';
+        $link .= 'index.php?option=com_kisskontent';
 
-        $link .=($Itemid) ? '&Itemid='.$Itemid : '&view=kukukontent';
+        $link .=($Itemid) ? '&Itemid='.$Itemid : '&view=kisskontent';
 
         $link .= '&p='.$parsed;
 
@@ -264,7 +264,7 @@ class KuKuKontentHelper
 
             $query = $db->getQuery(true);
 
-            $query->from('#__kukukontent');
+            $query->from('#__kisskontent');
             $query->select('count(*)');
         }
 
