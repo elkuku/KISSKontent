@@ -4,6 +4,6 @@
 ## First steps for *alpha testers*
 
 1. Download the **package** `pgk_kisskontent...` and install it. This contains a component and a plugin.
-2. Publish the plugin `KuKuKontent`.
-3. Create a menu link to the component `KuKuKontent`.
+2. Publish the content plugin `KISSKontent`.
+3. Create a menu link to the component `KISSKontent - default view`.
 4. Enjoy `=;)`
