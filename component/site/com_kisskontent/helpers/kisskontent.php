@@ -190,7 +190,7 @@ class KISSKontentHelper
         return $text;
     }//function
 
-    public static function getLink($text, $rawOutput = false)
+    public static function getLink($text, $add = '')
     {
         static $Itemid;
 
@@ -254,7 +254,9 @@ class KISSKontentHelper
 
         $link .= '&p='.$parsed;
 
-        return ($rawOutput) ? $link : JRoute::_($link);
+        $link .= $add;
+
+        return JRoute::_($link);
     }//function
 
     public static function isLink($link)
@@ -286,9 +288,9 @@ class KISSKontentHelper
 
     public static function getDiffLink($title, $v1, $v2)
     {
-        $link = self::getLink($title, false);
+        $add = '&task=diff&amp;v1='.$v1.'&amp;v2='.$v2;
 
-        return JRoute::_($link.'&task=diff&amp;v1='.$v1.'&amp;v2='.$v2);
+        return self::getLink($title, $add);
     }//function
 
     /**
