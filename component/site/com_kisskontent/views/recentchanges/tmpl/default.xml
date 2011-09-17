@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-	<layout title="COM_KUKUKONTENT_KUKUKONTENT_VIEW_RECENT_TITLE">
-		<message>COM_KUKUKONTENT_KUKUKONTENT_VIEW_RECENT_DESC</message>
+	<layout title="Recent changes">
+		<message>The recent changes view</message>
 	</layout>
 
 	<fields name="request">

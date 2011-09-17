@@ -1,5 +1,5 @@
 # Willkommen
-... bei KuKuKontent [^1]
+... bei KISSKontent [^1]
 
 ## Dies sollten sie *jetzt* tun
 
@@ -8,4 +8,4 @@
 * Setzen Sie [[Interne Links]](Meine_erste_Seite) so viel Sie können.
 * Haben Sie viel **Spaß** `=;)`
 
-[^1]: KuKuKontent wird auf [GitHub](https://github.com/elkuku/KuKuKontent) gehostet.
+[^1]: KISSKontent wird auf [GitHub](https://github.com/elkuku/KISSKontent) gehostet.

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-	<layout title="COM_KUKUKONTENT_KUKUKONTENT_VIEW_DEFAULT_TITLE">
-		<message>COM_KUKUKONTENT_KUKUKONTENT_VIEW_DEFAULT_DESC</message>
+	<layout title="Default view">
+		<message>The default Kontent view</message>
 	</layout>
 </metadata>

@@ -1,6 +1,6 @@
 <?php
 /**
- * @package    KuKuKontent
+ * @package    KISSKontent
  * @subpackage Views
  * @author     Nikolai Plath {@link http://nik-it.de}
  * @author     Created on 09-Sep-2011

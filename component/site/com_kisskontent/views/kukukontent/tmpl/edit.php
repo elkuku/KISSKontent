@@ -1,6 +1,6 @@
 <?php
 /**
- * @package    KuKuKontent
+ * @package    KISSKontent
  * @subpackage Views
  * @author     Nikolai Plath {@link http://nik-it.de}
  * @author     Created on 09-Sep-2011
@@ -38,17 +38,17 @@ else
 }
 ?>
 
-<div id="kukukontentPreview"></div>
+<div id="kisskontentPreview"></div>
 
 <form method="post">
 
-<textarea id="kukukontentKontent" name="content"
+<textarea id="kisskontentKontent" name="content"
 style="width: 100%; height: 300px;"><?php echo $this->content->text; ?></textarea>
 <p>
 <?php echo jgettext('Summary:'); ?> <input type=text" style="width: 80%" name="summary" />
 </p>
 
-<input type="button" value="<?php echo jgettext('Preview'); ?>" onclick="kukukontentPreview('<?php echo JURI::root(); ?>', '<?php echo JRequest::getString('p'); ?>');" />
+<input type="button" value="<?php echo jgettext('Preview'); ?>" onclick="kisskontentPreview('<?php echo JURI::root(); ?>', '<?php echo JRequest::getString('p'); ?>');" />
 <input type="submit" value="<?php echo jgettext('Save'); ?>" />
 
 <?php if($this->content->text) : ?>

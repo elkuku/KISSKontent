@@ -1,7 +1,6 @@
 <?php
 /**
- * @version SVN: $Id: builder.php 469 2011-07-29 19:03:30Z elkuku $
- * @package    KuKuKontent
+ * @package    KISSKontent
  * @subpackage Views
  * @author     Nikolai Plath {@link http://nik-it.de}
  * @author     Created on 09-Sep-2011
@@ -15,16 +14,16 @@ defined('_JEXEC') || die('=;)');
 jimport('joomla.application.component.view');
 
 /**
- * HTML View class for the KuKuKontent Component.
+ * HTML View class for the KISSKontent Component.
  *
- * @package KuKuKontent
+ * @package KISSKontent
  */
-class KuKuKontentViewRecentChanges extends JView
+class KISSKontentViewRecentChanges extends JView
 {
     protected $list = array();
 
     /**
-     * KuKuKontent view display method.
+     * KISSKontent view display method.
      *
      * @param string $tpl The name of the template file to parse;
      *
@@ -32,7 +31,7 @@ class KuKuKontentViewRecentChanges extends JView
      */
     public function display($tpl = null)
     {
-        JHtml::_('stylesheet', 'com_kukukontent/kukukontent.css', array(), true);
+        JHtml::_('stylesheet', 'com_kisskontent/kisskontent.css', array(), true);
 
         $this->list = $this->get('list');
 

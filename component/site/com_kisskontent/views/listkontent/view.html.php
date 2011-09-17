@@ -1,7 +1,6 @@
 <?php
 /**
- * @version SVN: $Id: builder.php 469 2011-07-29 19:03:30Z elkuku $
- * @package    KuKuKontent
+ * @package    KISSKontent
  * @subpackage Views
  * @author     Nikolai Plath {@link http://nik-it.de}
  * @author     Created on 09-Sep-2011
@@ -15,16 +14,16 @@ defined('_JEXEC') || die('=;)');
 jimport('joomla.application.component.view');
 
 /**
- * HTML View class for the KuKuKontent Component.
+ * HTML View class for the KISSKontent Component.
  *
- * @package KuKuKontent
+ * @package KISSKontent
  */
-class KuKuKontentViewListKontent extends JView
+class KISSKontentViewListKontent extends JView
 {
     protected $list = array();
 
     /**
-     * KuKuKontent view display method.
+     * KISSKontent view display method.
      *
      * @param string $tpl The name of the template file to parse;
      *
@@ -32,8 +31,8 @@ class KuKuKontentViewListKontent extends JView
      */
     public function display($tpl = null)
     {
-        JHtml::_('stylesheet', 'com_kukukontent/kukukontent.css', array(), true);
-        //         JHtml::_('script', 'com_kukukontent/kukukontent.js', array(), true);
+        JHtml::_('stylesheet', 'com_kisskontent/kisskontent.css', array(), true);
+        //         JHtml::_('script', 'com_kisskontent/kisskontent.js', array(), true);
 
         $menu = JFactory::getApplication()->getMenu('site')->getActive()->query;
 
@@ -75,9 +74,9 @@ class KuKuKontentViewListKontent extends JView
             $full = implode('/', $cItems);
 
             $type = 'internal';
-            $type .= KuKuKontentHelper::isLink($full) ? '' : ' redlink';
+            $type .= KISSKontentHelper::isLink($full) ? '' : ' redlink';
 
-            $link = '<a class="'.$type.'" href="'.KuKuKontentHelper::getLink($full).'">'.$name.'</a>';
+            $link = '<a class="'.$type.'" href="'.KISSKontentHelper::getLink($full).'">'.$name.'</a>';
             $list[] = str_repeat('&nbsp;&bull;', $level).'&nbsp;'.$link;
 
             if(count($entries))//-- recurse...

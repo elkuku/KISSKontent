@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-	<layout title="COM_KUKUKONTENT_KUKUKONTENT_VIEW_LIST_TITLE">
-		<message>COM_KUKUKONTENT_KUKUKONTENT_VIEW_LIST_DESC</message>
+	<layout title="List view">
+		<message>List all or specific Kontent items</message>
 	</layout>
 
 	<fields name="request">

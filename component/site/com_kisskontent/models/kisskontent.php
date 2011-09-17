@@ -1,11 +1,22 @@
 <?php
-class KuKuKontentModelKuKuKontent extends JModel
+/**
+ * @package    KISSKontent
+ * @subpackage Models
+ * @author     Nikolai Plath {@link http://nik-it.de}
+ * @author     Created on 09-Sep-2011
+ * @license    GNU/GPL
+ */
+
+//-- No direct access
+defined('_JEXEC') || die('=;)');
+
+class KISSKontentModelKISSKontent extends JModel
 {
     /**
      *
      * Enter description here ...
      *
-     * @return KuKuKontent
+     * @return KISSKontent
      */
     public function getContent()
     {
@@ -60,7 +71,7 @@ class KuKuKontentModelKuKuKontent extends JModel
 
         $query = $this->_db->getQuery(true);
 
-        $query->from($this->_db->nameQuote('#__kukukontent_versions').' AS k');
+        $query->from($this->_db->nameQuote('#__kisskontent_versions').' AS k');
         $query->select('k.id, k.text, k.summary, k.modified, u.name, u.username');
         $query->where('k.title='.$this->_db->quote($p));
         $query->leftJoin($this->_db->nameQuote('#__users').' AS u ON u.id = k.id_user');
@@ -185,19 +196,19 @@ class KuKuKontentModelKuKuKontent extends JModel
         if($src->id)
         {
             //-- Existing Kontent
-            if( ! KuKuKontentHelper::getActions()->get('core.edit'))
+            if( ! KISSKontentHelper::getActions()->get('core.edit'))
             throw new Exception(jgettext('You are not allowed to edit Kontent pages.'));
         }
         else
         {
             //-- New Kontent
-            if( ! KuKuKontentHelper::getActions()->get('core.create'))
+            if( ! KISSKontentHelper::getActions()->get('core.create'))
             throw new Exception(jgettext('You are not allowed to create Kontent pages'));
         }
 
         try
         {
-            $this->getTable('KuKuKontentVersions')
+            $this->getTable('KISSKontentVersions')
             ->bind($src)->check()->store();
 
             $this->getTable()

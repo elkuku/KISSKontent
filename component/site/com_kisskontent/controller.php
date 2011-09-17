@@ -1,7 +1,7 @@
 <?php
 /**
  * @version SVN: $Id: builder.php 469 2011-07-29 19:03:30Z elkuku $
- * @package    KuKuKontent
+ * @package    KISSKontent
  * @subpackage Base
  * @author     Nikolai Plath {@link http://nik-it.de}
  * @author     Created on 09-Sep-2011
@@ -14,16 +14,16 @@ defined('_JEXEC') || die('=;)');
 jimport('joomla.application.component.controller');
 
 /**
- * KuKuKontent Controller.
+ * KISSKontent Controller.
  *
- * @package    KuKuKontent
+ * @package    KISSKontent
  * @subpackage Controllers
  */
-class KuKuKontentController extends JController
+class KISSKontentController extends JController
 {
     public function edit()
     {
-        if( ! KuKuKontentHelper::getActions()->get('core.edit'))
+        if( ! KISSKontentHelper::getActions()->get('core.edit'))
         {
             JError::raiseError(403, jgettext('You are not allowed to edit Kontent pages.'));
         }
@@ -57,7 +57,7 @@ class KuKuKontentController extends JController
         $raw = JRequest::getVar('kontent', '', 'post', 'none', JREQUEST_ALLOWRAW);
 
         //-- Process internal links
-        $raw = KuKuKontentHelper::preParse($raw);
+        $raw = KISSKontentHelper::preParse($raw);
 
         $o = new stdClass;
         $o->text = $raw;
@@ -69,7 +69,7 @@ class KuKuKontentController extends JController
         //@todo - move the preview message to a view ¿
         $previewText = '<p class="previewMessage">'
         .jgettext('This is a preview only. The content has not been saved yet !')
-        .'&nbsp;<a href="#" onclick="document.id(\'kukukontentPreview\').set(\'html\', \'\'); return false;">'.jgettext('Close preview').'</a>'
+        .'&nbsp;<a href="#" onclick="document.id(\'kisskontentPreview\').set(\'html\', \'\'); return false;">'.jgettext('Close preview').'</a>'
         .'</p>';
 
         $params = null;
