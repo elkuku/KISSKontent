@@ -1,0 +1,153 @@
+# Language zh-CN translations for com_kukukontent - site package.
+# Copyright (C) 2011 NiK(C)
+# This file is distributed under the same license as the com_kukukontent - site package.
+# Nikolai Plath <EMAIL@ADDRESS>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: com_kukukontent - site 123.456\n"
+"Report-Msgid-Bugs-To: info@nik.it.de\n"
+"POT-Creation-Date: 2011-09-17 16:37-0500\n"
+"PO-Revision-Date: 2011-09-17 15:55-0500\n"
+"Last-Translator: Nikolai Plath <EMAIL@ADDRESS>\n"
+"Language-Team: Language zh-CN\n"
+"Language: zh-CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: components/com_kisskontent/controller.php:27
+#: components/com_kisskontent/models/kisskontent.php:200
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:25
+msgid "You are not allowed to edit Kontent pages."
+msgstr "您不得以编辑Kontent页面"
+
+#: components/com_kisskontent/controller.php:35
+msgid "Invalid token"
+msgstr "无效的令牌"
+
+#: components/com_kisskontent/controller.php:41
+msgid "Your Kontent has been saved"
+msgstr "您的Kontent已保存"
+
+#: components/com_kisskontent/controller.php:70
+msgid "This is a preview only. The content has not been saved yet !"
+msgstr "这只是一个预览。内容尚未保存！"
+
+#: components/com_kisskontent/controller.php:71
+msgid "Close preview"
+msgstr "关闭预览"
+
+#: components/com_kisskontent/helpers/kisskontent.php:154
+msgid "Click to create this page..."
+msgstr "点击创建此页面......"
+
+#: components/com_kisskontent/models/kisskontent.php:206
+msgid "You are not allowed to create Kontent pages"
+msgstr "您不得以创建Kontent网页"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:16
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:59
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:72
+msgid "Differences"
+msgstr "差异"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:54
+#, php-format
+msgid "Version as of %s by %s"
+msgstr "由%s%s的版本"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:54
+#, php-format
+msgid "Actual version as of %s by %s"
+msgstr "由%s的%s实际版本"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:16
+#: components/com_kisskontent/views/kisskontent/view.html.php:224
+msgid "Edit"
+msgstr "编辑"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:16
+msgid "New"
+msgstr "新"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:34
+msgid "This page does not exist (yet), and you are not allowed to create pages."
+msgstr "此网页不存在（还），你是不是允许创建页面"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:48
+msgid "Summary:"
+msgstr "概括的"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:51
+msgid "Preview"
+msgstr "预览"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:52
+msgid "Save"
+msgstr "保存"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:55
+msgid "Cancel"
+msgstr "取消"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:15
+#: components/com_kisskontent/views/kisskontent/view.html.php:227
+msgid "Version history"
+msgstr "版本历史"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:19
+msgid "No versions found."
+msgstr "没有任何版本发现"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:31
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:32
+msgid "Current"
+msgstr "当前"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:35
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:36
+msgid "Previous"
+msgstr "上一页"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:41
+#, php-format
+msgid "%s Bytes"
+msgstr "%s 字节"
+
+#: components/com_kisskontent/views/kisskontent/view.html.php:125
+msgid "To previous version difference"
+msgstr "以前的版本不同"
+
+#: components/com_kisskontent/views/kisskontent/view.html.php:137
+msgid "To next version difference"
+msgstr "下一版本的区别"
+
+#: components/com_kisskontent/views/kisskontent/view.html.php:219
+msgid "Read"
+msgstr "看"
+
+#: components/com_kisskontent/views/listkontent/tmpl/default.php:14
+msgid "No items found"
+msgstr "没有物品"
+
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:16
+msgid "Recent changes"
+msgstr "最近更改"
+
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:19
+msgid "Display options"
+msgstr "显示选项"
+
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:20
+#, php-format
+msgid "Show the latest %s | %s | %s | %s | %s changes."
+msgstr "显示最新的 %s | %s | %s | %s | %s 变化"
+
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:30
+msgid "Nothing has changed"
+msgstr "一切都没有改变"
+
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:61
+msgid "Versions"
+msgstr "版本"
