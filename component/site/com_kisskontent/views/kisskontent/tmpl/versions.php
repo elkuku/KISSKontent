@@ -25,15 +25,17 @@ endif;
 <ul>
 <?php foreach ($this->versions as $i => $version) : ?>
 	<li>
-	<?php echo ($i)
-	? JHtml::link(KISSKontentHelper::getDiffLink($this->p, $version->id, 0), jgettext('Current'))
-	: jgettext('Current'); ?>
 
-	<?php echo (isset($this->versions[$i + 1]))
-	? JHtml::link(KISSKontentHelper::getDiffLink($this->p, $this->versions[$i + 1]->id, $version->id), jgettext('Previous'))
-	: jgettext('Previous'); ?>
-	<?php if(isset($this->versions[$i + 1])) : ?>
-	 <?php endif; ?>
+	<?php if(count($this->versions) > 1) : ?>
+    	<?php echo ($i)
+    	? JHtml::link(KISSKontentHelper::getDiffLink($this->p, $version->id, 0), jgettext('Current'))
+    	: jgettext('Current'); ?>
+
+    	<?php echo (isset($this->versions[$i + 1]))
+    	? JHtml::link(KISSKontentHelper::getDiffLink($this->p, $this->versions[$i + 1]->id, $version->id), jgettext('Previous'))
+    	: jgettext('Previous'); ?>
+    <?php endif; ?>
+
 	<?php echo $version->modified; ?>
 	&nbsp;<?php echo $version->name; ?>
 	&nbsp;(<?php echo sprintf(jgettext('%s Bytes'), KISSKontentHelper::strBytes($version->text)); ?>)
