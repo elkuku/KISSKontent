@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com_kukukontent - site 123.456\n"
 "Report-Msgid-Bugs-To: info@nik.it.de\n"
-"POT-Creation-Date: 2011-09-16 17:37-0500\n"
+"POT-Creation-Date: 2011-09-17 16:37-0500\n"
 "PO-Revision-Date: 2011-09-12 15:15-0500\n"
 "Last-Translator: Nikolai Plath <EMAIL@ADDRESS>\n"
 "Language-Team: Language de-DE\n"
@@ -16,133 +16,138 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: components/com_kukukontent/controller.php:28
-#: components/com_kukukontent/models/kukukontent.php:189
-#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:25
+#: components/com_kisskontent/controller.php:27
+#: components/com_kisskontent/models/kisskontent.php:200
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:25
 msgid "You are not allowed to edit Kontent pages."
 msgstr "Sie sind nicht berechtigt Kontentseiten zu bearbeiten."
 
-#: components/com_kukukontent/controller.php:36
+#: components/com_kisskontent/controller.php:35
 msgid "Invalid token"
 msgstr "Ungültiges Token"
 
-#: components/com_kukukontent/controller.php:42
-msgid "Your content has been saved"
-msgstr "Ihr Content wurde gespeichert"
+#: components/com_kisskontent/controller.php:41
+msgid "Your Kontent has been saved"
+msgstr "Ihr Kontent wurde gespeichert"
 
-#: components/com_kukukontent/controller.php:71
+#: components/com_kisskontent/controller.php:70
 msgid "This is a preview only. The content has not been saved yet !"
 msgstr "Dies ist nur eine Vorschau. Der Content wurde noch nicht gespeichert !"
 
-#: components/com_kukukontent/controller.php:72
+#: components/com_kisskontent/controller.php:71
 msgid "Close preview"
 msgstr "Vorschau schliessen"
 
-#: components/com_kukukontent/helpers/kukukontent.php:154
+#: components/com_kisskontent/helpers/kisskontent.php:154
 msgid "Click to create this page..."
 msgstr "Klick um diese Seite zu Erstellen..."
 
-#: components/com_kukukontent/models/kukukontent.php:195
+#: components/com_kisskontent/models/kisskontent.php:206
 msgid "You are not allowed to create Kontent pages"
 msgstr "Sie sind nicht berechtigt Kontentseiten zu erstellen."
 
-#: components/com_kukukontent/views/kukukontent/tmpl/diff.php:16
-#: components/com_kukukontent/views/recentchanges/tmpl/default.php:28
+#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:16
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:59
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:72
 msgid "Differences"
 msgstr "Unterschiede"
 
-#: components/com_kukukontent/views/kukukontent/tmpl/diff.php:54
+#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:54
 #, php-format
 msgid "Version as of %s by %s"
 msgstr "Version vom %s von %s"
 
-#: components/com_kukukontent/views/kukukontent/tmpl/diff.php:54
+#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:54
 #, php-format
 msgid "Actual version as of %s by %s"
 msgstr "Aktuelle Version vom %s von %s"
 
-#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:16
-#: components/com_kukukontent/views/kukukontent/view.html.php:215
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:16
+#: components/com_kisskontent/views/kisskontent/view.html.php:224
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:16
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:16
 msgid "New"
 msgstr "Neu"
 
-#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:34
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:34
 msgid "This page does not exist (yet), and you are not allowed to create pages."
 msgstr "Diese Seite existiert (noch) nicht, und Sie sind nicht berechtigt Seiten zu erstellen."
 
-#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:48
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:48
 msgid "Summary:"
 msgstr "Zusammenfassung:"
 
-#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:51
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:51
 msgid "Preview"
 msgstr "Vorschau"
 
-#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:52
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:52
 msgid "Save"
 msgstr "Speichern"
 
-#: components/com_kukukontent/views/kukukontent/tmpl/edit.php:55
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:55
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: components/com_kukukontent/views/kukukontent/tmpl/versions.php:15
-#: components/com_kukukontent/views/kukukontent/view.html.php:218
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:15
+#: components/com_kisskontent/views/kisskontent/view.html.php:227
 msgid "Version history"
 msgstr "Versionsgeschichte"
 
-#: components/com_kukukontent/views/kukukontent/tmpl/versions.php:19
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:19
 msgid "No versions found."
 msgstr "Keine Versionen gefunden."
 
-#: components/com_kukukontent/views/kukukontent/tmpl/versions.php:29
-#: components/com_kukukontent/views/kukukontent/tmpl/versions.php:30
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:31
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:32
 msgid "Current"
 msgstr "Aktuell"
 
-#: components/com_kukukontent/views/kukukontent/tmpl/versions.php:33
-#: components/com_kukukontent/views/kukukontent/tmpl/versions.php:34
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:35
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:36
 msgid "Previous"
 msgstr "Vorherige"
 
-#: components/com_kukukontent/views/kukukontent/tmpl/versions.php:39
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:41
 #, php-format
 msgid "%s Bytes"
 msgstr "%s Bytes"
 
-#: components/com_kukukontent/views/kukukontent/view.html.php:121
+#: components/com_kisskontent/views/kisskontent/view.html.php:125
 msgid "To previous version difference"
 msgstr "Zum vorherigen Versionsunterschied"
 
-#: components/com_kukukontent/views/kukukontent/view.html.php:133
+#: components/com_kisskontent/views/kisskontent/view.html.php:137
 msgid "To next version difference"
 msgstr "Zum nächsten Versionsunterschied"
 
-#: components/com_kukukontent/views/kukukontent/view.html.php:210
+#: components/com_kisskontent/views/kisskontent/view.html.php:219
 msgid "Read"
 msgstr "Lesen"
 
-#: components/com_kukukontent/views/listkontent/tmpl/default.php:4
+#: components/com_kisskontent/views/listkontent/tmpl/default.php:14
 msgid "No items found"
 msgstr "Keine Einträge gefunden"
 
-#: components/com_kukukontent/views/recentchanges/tmpl/default.php:4
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:16
 msgid "Recent changes"
 msgstr "Letzte Änderungen"
 
-#: components/com_kukukontent/views/recentchanges/tmpl/default.php:7
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:19
 msgid "Display options"
 msgstr "Anzeigeoptionen"
 
-#: components/com_kukukontent/views/recentchanges/tmpl/default.php:8
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:20
 #, php-format
 msgid "Show the latest %s | %s | %s | %s | %s changes."
 msgstr "Zeige die letzten %s | %s | %s | %s | %s Änderungen."
 
-#: components/com_kukukontent/views/recentchanges/tmpl/default.php:30
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:30
+msgid "Nothing has changed"
+msgstr "Keine Veränderungen"
+
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:61
 msgid "Versions"
 msgstr "Versionen"
