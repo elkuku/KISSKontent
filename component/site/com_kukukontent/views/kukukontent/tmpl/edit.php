@@ -42,6 +42,12 @@ else
 
 <form method="post">
 
+<textarea id="kukukontentKontent" name="content"
+style="width: 100%; height: 300px;"><?php echo $this->content->text; ?></textarea>
+<p>
+<?php echo jgettext('Summary:'); ?> <input type=text" style="width: 80%" name="summary" />
+</p>
+
 <input type="button" value="<?php echo jgettext('Preview'); ?>" onclick="kukukontentPreview('<?php echo JURI::root(); ?>', '<?php echo JRequest::getString('p'); ?>');" />
 <input type="submit" value="<?php echo jgettext('Save'); ?>" />
 
@@ -49,8 +55,6 @@ else
 <input type="button" value="<?php echo jgettext('Cancel'); ?>" onClick="document.location.href='<?php echo JURI::current(); ?>';">
 <?php endif; ?>
 
-<textarea id="kukukontentKontent" name="content"
-style="width: 100%; height: 300px;"><?php echo $this->content->text; ?></textarea>
 
 <input type="hidden" name="id" value="<?php echo $this->content->id; ?>" />
 <input type="hidden" name="task" value="save" />

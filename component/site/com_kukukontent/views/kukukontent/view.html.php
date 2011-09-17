@@ -139,6 +139,16 @@ class KuKuKontentViewKuKuKontent extends JView
 
         $this->diff = $this->getDiffTable($this->versionOne->text, $this->versionTwo->text);
 
+        //-- Process internal links
+        $this->preview = $this->versionTwo;
+//         $this->preview->text = $this->versionTwo->text;
+        $this->preview->text = KuKuKontentHelper::preParse($this->preview->text);
+
+        JPluginHelper::importPlugin('content');
+
+        $content = JDispatcher::getInstance()->trigger('onContentPrepare'
+        , array('text', &$this->preview, &$this->params));
+
         $this->setLayout('diff');
     }//function
 

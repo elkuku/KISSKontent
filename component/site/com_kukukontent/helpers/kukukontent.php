@@ -190,7 +190,7 @@ class KuKuKontentHelper
         return $text;
     }//function
 
-    public static function getLink($text)
+    public static function getLink($text, $rawOutput = false)
     {
         static $Itemid;
 
@@ -251,7 +251,7 @@ class KuKuKontentHelper
 
         $link .= '&p='.$parsed;
 
-        return JRoute::_($link);
+        return ($rawOutput) ? $link : JRoute::_($link);
     }//function
 
     public static function isLink($link)
@@ -283,9 +283,9 @@ class KuKuKontentHelper
 
     public static function getDiffLink($title, $v1, $v2)
     {
-        $link = self::getLink($title);
+        $link = self::getLink($title, false);
 
-        return $link.'?task=diff&v1='.$v1.'&v2='.$v2;
+        return JRoute::_($link.'?task=diff&amp;v1='.$v1.'&amp;v2='.$v2);
     }//function
 
     /**

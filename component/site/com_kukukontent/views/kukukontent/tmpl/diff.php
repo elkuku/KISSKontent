@@ -18,27 +18,46 @@ echo $this->menu();
 <h2><?php echo $this->p; ?></h2>
 
 <table class="diff">
-    <tr>
+    <tr valign="top">
     	<th colspan="2" width="50%" style="background-color: #dfd; text-align: center;">
-    	    <?php echo $this->versionOne->modified.' (#'.$this->versionOne->id.')'; ?>
-    	    <br />
-    	    <?php echo $this->versionOne->name; ?>
     	    <div style="text-align: left;">
     	        <?php echo $this->previous->link; ?>
     	    </div>
+    	    <?php echo $this->versionOne->modified.' (#'.$this->versionOne->id.')'; ?>
+    	    <br />
+    	    <?php echo $this->versionOne->name; ?>
+    	    <br />
+    		<em><?php echo $this->versionOne->summary; ?> </em>
     	</th>
     	<th colspan="2" width="50%" style="background-color: #ffc; text-align: center;">
-    	    <?php echo $this->versionTwo->modified.' (#'.$this->versionTwo->id.')'; ?>
-    	    <br />
-    	    <?php echo $this->versionTwo->name; ?>
     	    <div style="text-align: right;">
     	        <?php echo $this->next->link; ?>
     	   </div>
+    	    <?php echo $this->versionTwo->modified.' (#'.$this->versionTwo->id.')'; ?>
+    	    <br />
+    	    <?php echo $this->versionTwo->name; ?>
+    	    <br />
+    		<em><?php echo $this->versionTwo->summary; ?> </em>
     	</th>
 	</tr>
 
 	<?php echo $this->diff; ?>
 
 </table>
+
+<br />
+<hr />
+
+<h1>
 <?php
-// var_dump($this->versionOne);
+//-- TRANSLATORS: A date and user name
+$t =($this->next->link) ? jgettext('Version as of %s by %s') : jgettext('Actual version as of %s by %s');
+echo sprintf($t, $this->preview->modified, $this->preview->name); ?>
+</h1>
+
+<hr />
+
+<?php
+echo $this->preview->text;
+
+// var_dump($this->preview);

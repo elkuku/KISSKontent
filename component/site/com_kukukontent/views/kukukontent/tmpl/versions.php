@@ -26,17 +26,22 @@ endif;
 <?php foreach ($this->versions as $i => $version) : ?>
 	<li>
 	<?php echo ($i)
-	? JHtml::link(JURI::current().'?task=diff&v1='.$version->id.'&v2=0', jgettext('Current'))
+	? JHtml::link(KuKuKontentHelper::getDiffLink($this->p, $version->id, 0), jgettext('Current'))
 	: jgettext('Current'); ?>
 
 	<?php echo (isset($this->versions[$i + 1]))
-	? JHtml::link(JURI::current().'?task=diff&v1='.$this->versions[$i + 1]->id.'&v2='.$version->id, jgettext('Previous'))
+	? JHtml::link(KuKuKontentHelper::getDiffLink($this->p, $this->versions[$i + 1]->id, $version->id), jgettext('Previous'))
 	: jgettext('Previous'); ?>
 	<?php if(isset($this->versions[$i + 1])) : ?>
 	 <?php endif; ?>
 	<?php echo $version->modified; ?>
 	&nbsp;<?php echo $version->name; ?>
 	&nbsp;(<?php echo sprintf(jgettext('%s Bytes'), KuKuKontentHelper::strBytes($version->text)); ?>)
+
+	<?php if($version->summary)
+	echo '&nbsp;(<em>'.$version->summary.'</em>)';
+	?>
+
     </li>
 <?php endforeach; ?>
 </ul>

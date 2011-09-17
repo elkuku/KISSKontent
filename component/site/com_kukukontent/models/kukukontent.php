@@ -61,7 +61,7 @@ class KuKuKontentModelKuKuKontent extends JModel
         $query = $this->_db->getQuery(true);
 
         $query->from($this->_db->nameQuote('#__kukukontent_versions').' AS k');
-        $query->select('k.id, k.text, k.modified, u.name, u.username');
+        $query->select('k.id, k.text, k.summary, k.modified, u.name, u.username');
         $query->where('k.title='.$this->_db->quote($p));
         $query->leftJoin($this->_db->nameQuote('#__users').' AS u ON u.id = k.id_user');
         $query->order('k.modified DESC');
@@ -177,6 +177,7 @@ class KuKuKontentModelKuKuKontent extends JModel
 
         $src->id = JRequest::getInt('id', 0);
         $src->title = JRequest::getString('p', 'Default');
+        $src->summary = JRequest::getString('summary', 'No comment');
 
         $src->text = JRequest::getVar('content', '', 'post', 'none'
         , JREQUEST_ALLOWRAW);//@todo clean me up mom =;)
