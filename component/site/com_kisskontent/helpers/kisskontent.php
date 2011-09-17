@@ -204,17 +204,20 @@ class KISSKontentHelper
 
             $items = $menus->getItems('component_id', $cId);
 
-            foreach($items as $item)
+            if($items)
             {
-                if(isset($item->query)
-                && isset($item->query['view'])
-                && 'kisskontent' == $item->query['view'])
+                foreach($items as $item)
                 {
-                    $Itemid = $item->id;
+                    if(isset($item->query)
+                    && isset($item->query['view'])
+                    && 'kisskontent' == $item->query['view'])
+                    {
+                        $Itemid = $item->id;
 
-                    break;
-                }
-            }//foreach
+                        break;
+                    }
+                }//foreach
+            }
 
             if( ! $Itemid)
             {

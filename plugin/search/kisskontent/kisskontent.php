@@ -1,7 +1,7 @@
 <?php
 /**
  * @package    KISSKontent
- * @subpackage Base
+ * @subpackage Plugins
  * @author     Nikolai Plath {@link http://nik-it.de}
  * @author     Created on 16-Sep-2011
  * @license    GNU/GPL

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <extension version="1.7" type="plugin" group="content">
-  <name>KISSKontent</name>
+  <name>Content - KISSKontent</name>
   <creationDate>September 2011</creationDate>
   <author>Nikolai Plath</author>
   <authorEmail>der.el.kuku@gmail.com</authorEmail>
