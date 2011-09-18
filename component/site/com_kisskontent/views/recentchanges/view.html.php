@@ -33,6 +33,19 @@ class KISSKontentViewRecentChanges extends JView
     {
         JHtml::_('stylesheet', 'com_kisskontent/kisskontent.css', array(), true);
 
+        /*
+         * @todo menu params
+        $state = $this->get('State')->get('parameters.menu');
+
+        $params = $state->params;
+         */
+
+        $appParams = JFactory::getApplication()->getParams();
+
+        $title = $appParams->get('page_title');
+
+        $this->pageclass_sfx = htmlspecialchars($appParams->get('pageclass_sfx'));
+
         $this->list = $this->get('list');
 
         parent::display($tpl);

@@ -13,10 +13,12 @@ defined('_JEXEC') || die('=;)');
 $actDate = '';
 $actTitle = '';
 ?>
-<h1><?php echo jgettext('Recent changes'); ?></h1>
+<div class="kissKontent<?php echo $this->pageclass_sfx;?>">
+	<h1><?php echo jgettext('Recent changes'); ?></h1>
 
-<fieldset>
-<legend><?php echo jgettext('Display options'); ?></legend>
+    <fieldset>
+    <legend><?php echo jgettext('Display options'); ?></legend>
+
 <?php echo sprintf(jgettext('Show the latest %s | %s | %s | %s | %s changes.')
 , $this->getLink('10')
 , $this->getLink('50')
@@ -24,11 +26,15 @@ $actTitle = '';
 , $this->getLink('250')
 , $this->getLink('500')
 );?>
-</fieldset>
+
+	</fieldset>
 
 <?php if( ! $this->list) : ?>
 	<h2><?php echo jgettext('Nothing has changed'); ?></h2>
-	<?php return; ?>
+	<?php
+	echo '</div>';
+	return;
+	?>
 <?php endif; ?>
 
 <?php foreach($this->list as $item) :
@@ -66,7 +72,8 @@ $actTitle = '';
     }
     else
     {
-        echo str_repeat('.', strlen($actTitle)).' ';
+//         echo str_repeat('.', strlen($actTitle)).' ';
+        echo ' .... ';
 
         if($item->diffLink) :
             echo JHtml::link($item->diffLink, jgettext('Differences'));
@@ -86,3 +93,5 @@ endforeach;
 echo '</ul>';
 
 // var_dump($this->list);
+?>
+</div>
