@@ -146,6 +146,8 @@ class KISSKontentHelper
             $title = '';
         }
 
+        $url = self::encodeAttribute($url);
+
         $red =(self::isLink($url)) ? '' : ' redlink';
 
         $attribs = 'class="internal'.$red.'"';
@@ -154,8 +156,8 @@ class KISSKontentHelper
 
         $redAdvise =($red) ? jgettext('Click to create this page...') : '';
 
-        $attribs .=(isset($title) || $redAdvise)
-        ? ' title="'.self::encodeAttribute($redAdvise.$title).'"'
+        $attribs .=((isset($title) && $title) || $redAdvise)
+        ? ' title="'.$redAdvise.$title.'"'
         : '';
 
         return JHtml::link($url, $text, $attribs);
@@ -167,8 +169,13 @@ class KISSKontentHelper
         // Encode text for a double-quoted HTML attribute. This function
         // is *not* suitable for attributes enclosed in single quotes.
         //
-        $text = self::encodeAmpsAndAngles($text);
+//         $text = self::encodeAmpsAndAngles($text);
         $text = str_replace('"', '&quot;', $text);
+
+        $text = str_replace('+','%20',$text);
+        $text = str_replace('_','%5F',$text);
+        $text = str_replace('.','_',$text);
+         $text = str_replace('-',':',$text);
 
         return $text;
     }//function
