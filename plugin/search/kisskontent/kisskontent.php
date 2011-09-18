@@ -32,6 +32,38 @@ class plgSearchKISSKontent extends JPlugin
 
         //Loads the plugin language file:
         //$this->loadLanguage();
+        try
+        {
+            //-- Load the special Language
+
+            if( ! jimport('g11n.language'))
+            {
+                //-- Load dummy language handler -> english only !
+//                 JLoader::import('g11n_dummy', JPATH_COMPONENT_ADMINISTRATOR.'/helpers');
+                throw new Exception('g11n is still required - @todo');
+                //         ecrScript('g11n_dummy');
+                //         ecrScript('php2js');
+            }
+            else
+            {
+                //TEMP@@debug
+                if(0)//ECR_DEV_MODE && ECR_DEBUG_LANG)
+                {
+                    g11n::cleanStorage();//@@DEBUG
+                    g11n::setDebug(1);
+                }
+
+                //-- Get our special language file
+//                 g11n::loadLanguage();
+            }
+        }
+        catch(Exception $e)
+        {
+            JError::raiseWarning(0, $e->getMessage());
+
+            return;
+        }//try
+
     }//function
 
     /**
@@ -102,16 +134,16 @@ class plgSearchKISSKontent extends JPlugin
                 }//foreach
 
                 break;
-        }
+        }//switch
 
         switch ($ordering)
         {
             case 'oldest':
-                $query->order('k.modified ASC');
+                $query->order('k.id ASC');
                 break;
 
             case 'popular':
-                $query->order('k.modified ASC');
+                $query->order('k.id ASC');
                 break;
 
             case 'alpha':
@@ -119,7 +151,7 @@ class plgSearchKISSKontent extends JPlugin
                 break;
 
             case 'category':
-                $query->order('k.modified ASC');
+                $query->order('k.title ASC');
                 break;
 
             case 'newest':
@@ -134,12 +166,18 @@ class plgSearchKISSKontent extends JPlugin
 
         $rows = $db->loadObjectList();
 
-        foreach ($rows as $row)
+        if($rows)
         {
-            $row->href = 'aaa';
-            $row->section = 'Kontent';
-            $row->browsernav = false;
-        }//foreach
+            JLoader::register('KISSKontentHelper', JPATH_ROOT.'/components/com_kisskontent/helpers/kisskontent.php');
+
+            foreach ($rows as $row)
+            {
+                $row->href = KISSKontentHelper::getLink($row->title);
+                $row->text = KISSKontentHelper::preParse($row->text, $row->title);
+                $row->section = 'Kontent';
+                $row->browsernav = false;
+            }//foreach
+        }
 
         return $rows;
     }//function
