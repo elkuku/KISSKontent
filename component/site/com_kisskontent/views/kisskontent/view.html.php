@@ -174,9 +174,6 @@ class KISSKontentViewKISSKontent extends JView
 
         $items = $pathway->getPathway();
 
-//         if( ! $items)
-//         return;// No pathway :(
-
         $parts = explode('/', $this->p);
 
         $combined = '';
