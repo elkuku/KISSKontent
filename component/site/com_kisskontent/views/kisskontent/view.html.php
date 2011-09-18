@@ -194,7 +194,7 @@ class KISSKontentViewKISSKontent extends JView
             $p = new stdClass;
 
             $p->name = $part;
-            $p->link = JRoute::_($baseLink.'&p='.$combined);
+            $p->link = JRoute::_($baseLink.'&task=read&p='.$combined);
 
             $items[] = $p;
         }//foreach
