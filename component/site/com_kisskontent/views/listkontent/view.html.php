@@ -34,6 +34,12 @@ class KISSKontentViewListKontent extends JView
         JHtml::_('stylesheet', 'com_kisskontent/kisskontent.css', array(), true);
         //         JHtml::_('script', 'com_kisskontent/kisskontent.js', array(), true);
 
+        $appParams = JFactory::getApplication()->getParams();
+
+        $this->title = $appParams->get('page_title') ?: jgettext('Kontent list');
+
+        $this->pageclass_sfx = htmlspecialchars($appParams->get('pageclass_sfx'));
+
         $menu = JFactory::getApplication()->getMenu('site')->getActive()->query;
 
         $this->startLevel =(isset($menu['start'])) ? $menu['start'] : '';
