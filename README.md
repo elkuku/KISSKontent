@@ -1,5 +1,8 @@
+# KISSKontent
 * The plugin provides parsing in various markup languages (Markdown. Textile, Wikisyntax...) to Joomla! content articles.
 * The component provides a new way of organizing, creating and editing your content in a KISS way.
+
+They may be used independend of each other, but together they are simply KISS
 
 ## First steps for *alpha testers*
 
