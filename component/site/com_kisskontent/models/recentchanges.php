@@ -21,9 +21,11 @@ class KISSKontentModelRecentChanges extends JModel
         $query = $this->_db->getQuery(true);
 
         $query->from('#__kisskontent_versions AS v');
+        $query->leftJoin($this->_db->nameQuote('#__users').' AS u ON u.id = v.id_user');
         $query->select('v.id, v.title, v.summary, v.modified, u.name, u.username');
         $query->order('v.modified DESC');
-        $query->leftJoin($this->_db->nameQuote('#__users').' AS u ON u.id = v.id_user');
+        //         $query->order('v.title ASC');
+        //         $query->group('v.title');
 
         $this->_db->setQuery($query, 0, $limit);
 

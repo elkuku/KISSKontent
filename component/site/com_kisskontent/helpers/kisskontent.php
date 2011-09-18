@@ -43,10 +43,12 @@ class KISSKontentHelper
         return $result;
     }//function
 
-    public static function preParse($string)
+    public static function preParse($string, $baseTitle = '')
     {
+        self::$p = JRequest::getString('p');
+
         $string = self::doAnchors($string);
-        $string = self::doInternalAnchors($string);
+        $string = self::doInternalAnchors($string, $baseTitle);
 
         return $string;
     }//function
@@ -58,9 +60,8 @@ class KISSKontentHelper
 
     }//function
 
-    protected static function doInternalAnchors($text)
+    protected static function doInternalAnchors($text, $baseTitle = '')
     {
-        self::$p = JRequest::getString('p');
 
         //
         // Inline-style internal links: [[link text]](url "optional title")
@@ -188,7 +189,7 @@ class KISSKontentHelper
         return $text;
     }//function
 
-    public static function getLink($text, $add = '')
+    public static function getLink($text, $add = '', $baseTitle = '')
     {
         static $Itemid;
 
@@ -231,7 +232,8 @@ class KISSKontentHelper
         {
             //-- The text starts with a "/" - This is a relative internal link.
             //-- @todo add support for "../" syntax ¿
-            $raw = self::$p.$text;
+            $raw =($baseTitle) ?: self::$p;
+            $raw .= $text;
         }
 
         $parts = explode('/', $raw);
