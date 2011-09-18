@@ -54,6 +54,10 @@ class KISSKontentViewKISSKontent extends JView
         JHtml::_('stylesheet', 'com_kisskontent/kisskontent.css', array(), true);
         JHtml::_('script', 'com_kisskontent/kisskontent.js', array(), true);
 
+        $appParams = JFactory::getApplication()->getParams();
+
+        $this->pageclass_sfx = htmlspecialchars($appParams->get('pageclass_sfx'));
+
         $this->canDo = KISSKontentHelper::getActions();
 
         $this->setPathway();
@@ -170,14 +174,14 @@ class KISSKontentViewKISSKontent extends JView
 
         $items = $pathway->getPathway();
 
-        if( ! $items)
-        return;// No pathway :(
+//         if( ! $items)
+//         return;// No pathway :(
 
         $parts = explode('/', $this->p);
 
         $combined = '';
 
-        $baseLink = $items[0]->link;
+        $baseLink =(isset($items[0]->link)) ? $items[0]->link : '';
 
         foreach($parts as $part)
         {
