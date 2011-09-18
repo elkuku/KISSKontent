@@ -45,7 +45,7 @@ else
 <textarea id="kisskontentKontent" name="content"
 style="width: 100%; height: 300px;"><?php echo $this->content->text; ?></textarea>
 <p>
-<?php echo jgettext('Summary:'); ?> <input type=text" style="width: 80%" name="summary" />
+<?php echo jgettext('Summary:'); ?> <input type="text" style="width: 80%" name="summary" />
 </p>
 
 <input type="button" value="<?php echo jgettext('Preview'); ?>" onclick="kisskontentPreview('<?php echo JURI::root(); ?>', '<?php echo JRequest::getString('p'); ?>');" />
