@@ -1025,6 +1025,8 @@ class UnifiedDiffFormatter extends DiffFormatter
  */
 class TableDiffFormatter extends DiffFormatter
 {
+    public $lineNumberString = '%d';
+
     function TableDiffFormatter() {
         $this->leading_context_lines = 2;
         $this->trailing_context_lines = 2;
@@ -1037,9 +1039,8 @@ class TableDiffFormatter extends DiffFormatter
     }
 
     function _block_header( $xbeg, $xlen, $ybeg, $ylen ) {
-        global $lang;
-        $l1 = $lang['line'].' '.$xbeg;
-        $l2 = $lang['line'].' '.$ybeg;
+        $l1 = sprintf($this->lineNumberString, $xbeg);
+        $l2 = sprintf($this->lineNumberString, $ybeg);
         $r = '<tr><td class="diff-blockheader" colspan="2">'.$l1.":</td>\n" .
       '<td class="diff-blockheader" colspan="2">'.$l2.":</td></tr>\n";
         return $r;
