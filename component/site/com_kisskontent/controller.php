@@ -56,7 +56,7 @@ class KISSKontentController extends JController
         $raw = JRequest::getVar('kontent', '', 'post', 'none', JREQUEST_ALLOWRAW);
 
         //-- Process internal links
-       $raw = KISSKontentHelper::preParse($raw);
+        $raw = KISSKontentHelper::preParse($raw);
 
         $o = new stdClass;
         $o->text = $raw;
@@ -68,7 +68,8 @@ class KISSKontentController extends JController
         //@todo - move the preview message to a view ¿
         $previewText = '<p class="previewMessage">'
         .jgettext('This is a preview only. The content has not been saved yet !')
-        .'&nbsp;<a href="#" onclick="document.id(\'kisskontentPreview\').set(\'html\', \'\'); return false;">'.jgettext('Close preview').'</a>'
+        .'<br />'
+        .'<a href="#" onclick="document.id(\'kisskontentPreview\').set(\'html\', \'\'); return false;">'.jgettext('Close preview').'</a>'
         .'</p>';
 
         $params = null;
@@ -79,5 +80,65 @@ class KISSKontentController extends JController
         , array('text', &$o, &$params));
 
         echo $previewText.$o->text;
+    }//function
+
+    public function differences()
+    {
+        $p = JRequest::getString('p');
+
+        //@todo clean me up mom =;)
+        $raw = JRequest::getVar('kontent', '', 'post', 'none', JREQUEST_ALLOWRAW);
+        $diffAll =(JRequest::getInt('diffAll')) ? true : false;
+
+        $model = $this->getModel();
+
+        $kontent = $model->getContent();
+        $kontent->text = str_replace("\r", '', $kontent->text);//¿
+
+        $this->diff = KISSKontentHelper::getDiffTable($kontent->text, $raw, $diffAll);
+
+        $html = array();
+
+        $html[] = '<table class="diff">
+       <tr>
+       <th colspan="2" class="diffLeft" style="background-color: #dfd;">'
+        .jgettext('Saved version').'</th>'
+        .'<th colspan="2" class="diffLeft" style="background-color: #ffc;">'
+        .jgettext('Your version').'</th>'
+        .'</tr>';
+
+       	$html[] = $this->diff;
+
+       	$html[] = '</table>';
+
+       	$diff = implode("\n", $html);
+
+        //@todo - move the preview message to a view ¿
+        $previewText = '<p class="previewMessage">'
+        .jgettext('This is a preview only. The content has not been saved yet !')
+        .'<br />'
+        .'<a href="#" onclick="document.id(\'kisskontentPreview\').set(\'html\', \'\'); return false;">'.jgettext('Close preview').'</a>'
+        .'</p>';
+
+        echo $previewText.$diff;
+
+        return;
+
+        //@ todo: display also a preview ¿
+
+        //-- Process internal links
+        $raw = KISSKontentHelper::preParse($raw);
+
+        $o = new stdClass;
+        $o->text = $raw;
+
+        $params = null;
+
+        JPluginHelper::importPlugin('content');
+
+        JDispatcher::getInstance()->trigger('onContentPrepare'
+        , array('text', &$o, &$params));
+
+        echo $o->text;
     }//function
 }//class
