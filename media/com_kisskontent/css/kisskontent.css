@@ -1,5 +1,14 @@
 @CHARSET "UTF-8";
 
+div.kissKontent noscript {
+	border: 2px solid orange;
+	border-radius: 10px;
+	background-color: #ccff99;
+	padding: 0.5em;
+	color: red;
+	font-weight: bold;
+}
+
 a.internal.redlink {
 	color: red;
 }
@@ -13,6 +22,7 @@ a.external {
 p.previewMessage {
 	color: red;
 	background-color: #ffc;
+	text-align: center;
 }
 
 div.kisskuntentPreview {
@@ -24,6 +34,65 @@ a.active {
 	font-weight: bold;
 }
 
+div#kissActionMenu { /* border: 1px solid silver;
+	border-radius: 10px;
+	background-color: #eee; */
+	
+}
+
+div#kissActionMenu div.kissKredits {
+	float: left;
+}
+
+div#kissActionMenu div.kissActions {
+	float: right;
+}
+
+div.kissActions ul li {
+	list-style: none;
+	padding: 0;
+	/* margin: 0 0.4em; */
+	float: left;
+}
+
+div.kissActions ul li a {
+	padding: 0 0.2em;
+	margin: 0 0.1em;
+	display: block;
+}
+
+div#kissEditButtons {
+	
+}
+
+div#kissEditButtons ul {
+	padding-left: 0;
+	margin: 0;
+}
+
+div#kissEditButtons ul.right {
+	float: right;
+}
+
+div#kissEditButtons ul li {
+	list-style: none;
+	float: left;
+}
+
+div.clr {
+	clear: both;
+}
+
 :target {
 	border: 1px solid orange;
+}
+
+div.kissFooter {
+	border: 1px solid silver;
+	background-color: #eee;
+	text-align: center;
+	font-size: 85%;
+	padding: 0.3em;
+	border-radius: 10px;
+	margin-top: 1em;
 }
