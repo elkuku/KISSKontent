@@ -10,9 +10,13 @@
 //-- No direct access
 defined('_JEXEC') || die('=;)');
 
-echo $this->menu();
-
 ?>
+<div class="kissKontent<?php echo $this->pageclass_sfx;?>">
+
+<noscript><?php echo jgettext('You should enable JavaScript'); ?></noscript>
+
+<?php echo $this->menu(); ?>
+
 <h1><?php echo ($this->content->text) ? jgettext('Edit') : jgettext('New'); ?></h1>
 <h2><?php echo $this->content->path; ?></h2>
 
@@ -22,7 +26,7 @@ if($this->content->text)
 {
     if( ! $this->canDo->get('core.edit'))
     {
-        echo '<p>'.jgettext('You are not allowed to edit Kontent pages.');
+        echo '<p>'.jgettext('You are not allowed to edit Kontent pages.').'</p></div>';
 
         return;
     }
@@ -31,33 +35,62 @@ else
 {
     if( ! $this->canDo->get('core.create'))
     {
-        echo '<p>'.jgettext('This page does not exist (yet), and you are not allowed to create pages.');
+        echo '<p>'.jgettext('This page does not exist (yet), and you are not allowed to create pages.').'</p></div>';
 
         return;
     }
 }
 ?>
 
-<div id="kisskontentPreview"></div>
-
 <form method="post">
 
-<textarea id="kisskontentKontent" name="content"
-style="width: 100%; height: 300px;"><?php echo $this->content->text; ?></textarea>
-<p>
-<?php echo jgettext('Summary:'); ?> <input type="text" style="width: 80%" name="summary" />
-</p>
+    <textarea id="kisskontentKontent" name="content"
+    style="width: 100%; height: 300px;"><?php echo $this->content->text; ?></textarea>
 
-<input type="button" value="<?php echo jgettext('Preview'); ?>" onclick="kisskontentPreview('<?php echo JURI::root(); ?>', '<?php echo JRequest::getString('p'); ?>');" />
-<input type="submit" value="<?php echo jgettext('Save'); ?>" />
+    <p>
+        <?php echo jgettext('Summary:'); ?> <input type="text" style="width: 80%" name="summary" />
+    </p>
 
-<?php if($this->content->text) : ?>
-<input type="button" value="<?php echo jgettext('Cancel'); ?>" onClick="document.location.href='<?php echo JURI::current(); ?>';">
-<?php endif; ?>
+	<div id="kissEditButtons">
+		<ul class="right">
+    		<li>
+    	        <input type="submit" value="<?php echo jgettext('Save'); ?>" />
+    		</li>
+
+            <?php if($this->content->text) : ?>
+    		<li>
+    	        <input type="button" value="<?php echo jgettext('Cancel'); ?>" onClick="document.location.href='<?php echo JURI::current(); ?>';">
+    		</li>
+            <?php endif; ?>
+		</ul>
+
+		<ul>
+
+		<li>
+	        <input type="button" value="<?php echo jgettext('Preview'); ?>" onclick="kisskontentPreview('<?php echo JURI::root(); ?>', '<?php echo JRequest::getString('p'); ?>');" />
+		</li>
+
+		<li>
+	        <input type="button" value="<?php echo jgettext('Differences'); ?>" onclick="kisskontentDifferences('<?php echo JURI::root(); ?>', '<?php echo JRequest::getString('p'); ?>');" />
+	        <br />
+	        <input type="checkbox" id="chkDiffAll" />&nbsp;<label for="chkDiffAll"><?php echo jgettext('Complete'); ?></label>
+		</li>
+
+		</ul>
+
+	</div>
+
+	<div class="clr"></div>
 
 
-<input type="hidden" name="id" value="<?php echo $this->content->id; ?>" />
-<input type="hidden" name="task" value="save" />
-<?php echo JHtml::_('form.token'); ?>
+    <input type="hidden" name="id" value="<?php echo $this->content->id; ?>" />
+    <input type="hidden" name="task" value="save" />
+    <?php echo JHtml::_('form.token'); ?>
 
 </form>
+
+<div id="kisskontentPreview"></div>
+
+</div>
+
+<?php echo KISSKontentHelper::footer();

@@ -32,3 +32,5 @@ endif;
     </ul>
 
 </div>
+
+<?php echo KISSKontentHelper::footer();

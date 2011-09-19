@@ -10,34 +10,41 @@
 //-- No direct access
 defined('_JEXEC') || die('=;)');
 
-echo $this->menu();
-
+//-- TRANSLATORS: A date and user name
+$previewTitle =($this->next->link) ? jgettext('Version as of %s by %s') : jgettext('Actual version as of %s by %s');
 ?>
+
+<div class="kissKontent<?php echo $this->pageclass_sfx;?>">
+
+<?php echo $this->menu(); ?>
+
 <h1><?php echo jgettext('Differences');?></h1>
+<?php
+echo($this->diffAll)
+? JHtml::link(JRoute::_('&diffAll=0'), jgettext('Show diferences only'))
+: JHtml::link(JRoute::_('&diffAll=1'), jgettext('Show all'));
+?>
 
 <h2><?php echo $this->p; ?></h2>
 
 <table class="diff">
-    <tr valign="top">
-    	<th colspan="2" width="50%" style="background-color: #dfd; text-align: center;">
-    	    <div style="text-align: left;">
-    	        <?php echo $this->previous->link; ?>
-    	    </div>
+    <tr>
+    	<th colspan="2" class="diffLeft">
     	    <?php echo $this->versionOne->modified.' (#'.$this->versionOne->id.')'; ?>
     	    <br />
     	    <?php echo $this->versionOne->name; ?>
     	    <br />
     		<em><?php echo $this->versionOne->summary; ?> </em>
+    	    <?php echo $this->previous->link; ?>
     	</th>
-    	<th colspan="2" width="50%" style="background-color: #ffc; text-align: center;">
-    	    <div style="text-align: right;">
-    	        <?php echo $this->next->link; ?>
-    	   </div>
+
+    	<th colspan="2" class="diffRight">
     	    <?php echo $this->versionTwo->modified.' (#'.$this->versionTwo->id.')'; ?>
     	    <br />
     	    <?php echo $this->versionTwo->name; ?>
     	    <br />
     		<em><?php echo $this->versionTwo->summary; ?> </em>
+  	        <?php echo $this->next->link; ?>
     	</th>
 	</tr>
 
@@ -46,18 +53,17 @@ echo $this->menu();
 </table>
 
 <br />
-<hr />
-
-<h1>
-<?php
-//-- TRANSLATORS: A date and user name
-$t =($this->next->link) ? jgettext('Version as of %s by %s') : jgettext('Actual version as of %s by %s');
-echo sprintf($t, $this->preview->modified, $this->preview->name); ?>
-</h1>
 
 <hr />
 
-<?php
-echo $this->preview->text;
+<h1><?php echo sprintf($previewTitle, $this->preview->modified, $this->preview->name); ?></h1>
+
+<hr />
+
+<?php echo $this->preview->text; ?>
+
+</div>
+
+<?php echo KISSKontentHelper::footer();
 
 // var_dump($this->preview);

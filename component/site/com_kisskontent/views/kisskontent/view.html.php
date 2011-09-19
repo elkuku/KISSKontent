@@ -99,6 +99,8 @@ class KISSKontentViewKISSKontent extends JView
 
     protected function edit()
     {
+        JHtml::_('stylesheet', 'com_kisskontent/diff.css', array(), true);
+
         $this->content = $this->get('content');
 
         $this->setLayout('edit');
@@ -115,6 +117,8 @@ class KISSKontentViewKISSKontent extends JView
     {
         JHtml::_('stylesheet', 'com_kisskontent/diff.css', array(), true);
 
+        $this->diffAll =(JRequest::getInt('diffAll')) ? true : false;
+
         $model = $this->getModel();
 
         $this->versionOne = $model->findVersion(JRequest::getInt('v1'));
@@ -122,30 +126,28 @@ class KISSKontentViewKISSKontent extends JView
 
 
         $this->previous = $model->getPrevious($this->versionOne->id);
+        $this->previous->link = '';
 
-        if($this->previous)
+        if(isset($this->previous->id))
         {
             $url = KISSKontentHelper::getDiffLink($this->p, $this->previous->id, $this->versionOne->id);
-            $this->previous->link = JHtml::link($url, jgettext('To previous version difference'));
-        }
-        else
-        {
-            $this->previous->link = '';
+
+            $this->previous->link = JHtml::link($url
+            , '&lArr; '.jgettext('To previous version difference'), 'class="diffLink diffPrevLink"');
         }
 
         $this->next = $model->getNext($this->versionTwo->id);
+        $this->next->link = '';
 
-        if($this->next)
+        if(isset($this->next->id))
         {
             $url = KISSKontentHelper::getDiffLink($this->p, $this->versionTwo->id, $this->next->id);
-            $this->next->link = JHtml::link($url, jgettext('To next version difference'));
-        }
-        else
-        {
-            $this->next->link = '';
+
+            $this->next->link =JHtml::link($url
+            , jgettext('To next version difference').' &rArr;', 'class="diffLink diffNextLink"');
         }
 
-        $this->diff = $this->getDiffTable($this->versionOne->text, $this->versionTwo->text);
+        $this->diff = KISSKontentHelper::getDiffTable($this->versionOne->text, $this->versionTwo->text, $this->diffAll);
 
         //-- Process internal links
         $this->preview = $this->versionTwo;
@@ -210,57 +212,39 @@ class KISSKontentViewKISSKontent extends JView
     {
         $task = JRequest::getCmd('task');
 
-        $html = '';
+        $html = array();
 
-        $html .= '<div style="text-align: right">';
+        $html[] = '<div id="kissActionMenu">';
+
+        $html[] = '<div class="kissKredits">';
+        $html[] = '';//hoi<br />boi<br />toi';
+        $html[] = '</div>';
+
+        $html[] = '<div class="kissActions">';
+
+        $html[] = '   <ul>';
 
         $activeS =' class="active"';
 
         $active =('' == $task || in_array($task, array('read', 'save'))) ? $activeS : '';
-        $html .= JHtml::link(JRoute::_('&task=read'), jgettext('Read'), $active);
+        $html[] = '      <li>'.JHtml::link(JRoute::_('&task=read'), jgettext('Read'), $active).'</li>';
 
         $active =('edit' == $task) ? $activeS : '';
 
         if($this->canDo->get('core.edit'))
-        $html .= '&nbsp;&bull;&nbsp;'.JHtml::link(JRoute::_('&task=edit'), jgettext('Edit'), $active);
+        $html[] = '      <li>'.JHtml::link(JRoute::_('&task=edit'), jgettext('Edit'), $active).'</li>';
 
-        $active =('versions' == $task) ? $activeS : '';
-        $html .= '&nbsp;&bull;&nbsp;'.JHtml::link(JRoute::_('&task=versions'), jgettext('Version history'), $active);
+        $active =(in_array($task, array('versions', 'diff'))) ? $activeS : '';
+        $html[] = '      <li>'.JHtml::link(JRoute::_('&task=versions'), jgettext('Version history'), $active).'</li>';
 
-        $html .= '</div>';
+        $html[] = '   </ul>';
 
-        return $html;
-    }//function
+        $html[] = '</div>';
+        $html[] = '<div class="clr"></div>';
 
-    protected function getDiffTable($origCode, $newCode, $showAll = true)
-    {
-        $codeOrig = explode("\n", htmlspecialchars($origCode));
-        $codeNew = explode("\n", htmlspecialchars($newCode));
+        $html[] = '</div>';
 
-        JLoader::register('Diff', JPATH_COMPONENT_SITE.'/helpers/DifferenceEngine.php');
-
-        //--we are adding a blank line to the end.. this is somewhat 'required' by PHPdiff
-        if($codeOrig[count($codeOrig) - 1] != '')
-        {
-            $codeOrig[] = '';
-        }
-
-        if($codeNew[count($codeNew) - 1] != '')
-        {
-            $codeNew[] = '';
-        }
-
-        $dwDiff = new Diff($codeOrig, $codeNew);
-        $dwFormatter = new TableDiffFormatter();
-
-        //-- Small hack to display the whole file - :|
-        if($showAll)
-        {
-            $dwFormatter->leading_context_lines = 99999;
-            $dwFormatter->trailing_context_lines = 99999;
-        }
-
-        return $dwFormatter->format($dwDiff);
+        return implode("\n", $html);
     }//function
 
 }//class

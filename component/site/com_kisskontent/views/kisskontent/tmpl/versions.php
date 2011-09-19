@@ -9,29 +9,31 @@
 
 //-- No direct access
 defined('_JEXEC') || die('=;)');
-
-echo $this->menu();
-
-echo '<h1>'.jgettext('Version history').'</h1>';
-echo '<h2>'.$this->p.'</h2>';
-
-if( ! $this->versions) :
-    echo jgettext('No versions found.');
-
-    return;
-endif;
 ?>
 
+<div class="kissKontent<?php echo $this->pageclass_sfx;?>">
+
+<?php echo $this->menu(); ?>
+
+<h1><?php echo jgettext('Version history'); ?></h1>
+<h2><?php echo $this->p; ?></h2>
+
+<?php if( ! $this->versions) :
+    echo jgettext('No versions found.');
+else :
+?>
+
+
 <ul>
-<?php foreach ($this->versions as $i => $version) : ?>
+    <?php foreach($this->versions as $i => $version) : ?>
 	<li>
 
 	<?php if(count($this->versions) > 1) : ?>
-    	<?php echo ($i)
+    	<?php echo($i)
     	? JHtml::link(KISSKontentHelper::getDiffLink($this->p, $version->id, 0), jgettext('Current'))
     	: jgettext('Current'); ?>
 
-    	<?php echo (isset($this->versions[$i + 1]))
+    	<?php echo(isset($this->versions[$i + 1]))
     	? JHtml::link(KISSKontentHelper::getDiffLink($this->p, $this->versions[$i + 1]->id, $version->id), jgettext('Previous'))
     	: jgettext('Previous'); ?>
     <?php endif; ?>
@@ -45,7 +47,14 @@ endif;
 	?>
 
     </li>
-<?php endforeach; ?>
+    <?php endforeach; ?>
 </ul>
+
+<?php endif; ?>
+</div>
+
 <?php
+
+echo KISSKontentHelper::footer();
+
 //  var_dump($this->versions);

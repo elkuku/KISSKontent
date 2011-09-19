@@ -9,12 +9,14 @@
 
 //-- No direct access
 defined('_JEXEC') || die('=;)');
-
 ?>
 
 <div class="kissKontent<?php echo $this->pageclass_sfx;?>">
+
     <?php echo $this->menu(); ?>
 
     <?php echo $this->content->text; ?>
 
 </div>
+
+<?php echo KISSKontentHelper::footer();

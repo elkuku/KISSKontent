@@ -95,3 +95,6 @@ echo '</ul>';
 // var_dump($this->list);
 ?>
 </div>
+
+<?php echo KISSKontentHelper::footer();
+
