@@ -10,6 +10,8 @@
 //-- No direct access
 defined('_JEXEC') || die('=;)');
 
+defined('NL') || define('NL', "\n");
+
 //-- Import the class JController
 jimport('joomla.application.component.controller');
 
