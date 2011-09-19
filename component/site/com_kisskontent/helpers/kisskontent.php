@@ -218,7 +218,7 @@ class KISSKontentHelper
                     && isset($item->query['view'])
                     && 'kisskontent' == $item->query['view'])
                     {
-                        $Itemid = $item->id;
+                        $Itemid = $item->id;//-- HEUREKA =;)
 
                         break;
                     }
@@ -227,6 +227,7 @@ class KISSKontentHelper
 
             if( ! $Itemid)
             {
+                //-- Get default from active menu
                 $active = $menus->getActive();
 
                 $Itemid =($active) ? $active->id : 1;
@@ -295,9 +296,7 @@ class KISSKontentHelper
 
     public static function getDiffLink($title, $v1, $v2)
     {
-        $add = '&task=diff&amp;v1='.$v1.'&amp;v2='.$v2;
-
-        return self::getLink($title, $add);
+        return self::getLink($title, '&task=diff&amp;v1='.$v1.'&amp;v2='.$v2);
     }//function
 
     /**
@@ -364,5 +363,53 @@ class KISSKontentHelper
         }//for
 
         return number_format($d);
+    }//function
+
+    public static function getDiffTable($origCode, $newCode, $showAll = true)
+    {
+        $codeOrig = explode("\n", htmlspecialchars($origCode));
+        $codeNew = explode("\n", htmlspecialchars($newCode));
+
+        JLoader::register('Diff', JPATH_COMPONENT_SITE.'/helpers/DifferenceEngine.php');
+
+        //--we are adding a blank line to the end.. this is somewhat 'required' by PHPdiff
+        if($codeOrig[count($codeOrig) - 1] != '')
+        {
+            $codeOrig[] = '';
+        }
+
+        if($codeNew[count($codeNew) - 1] != '')
+        {
+            $codeNew[] = '';
+        }
+
+        $dwDiff = new Diff($codeOrig, $codeNew);
+        $dwFormatter = new TableDiffFormatter;
+
+        $dwFormatter->lineNumberString = jgettext('Line: %d');
+
+        //-- Small hack to display the whole file - :|
+        if($showAll)
+        {
+            $dwFormatter->leading_context_lines = 99999;
+            $dwFormatter->trailing_context_lines = 99999;
+        }
+
+        return $dwFormatter->format($dwDiff);
+    }//function
+
+    public static function footer()
+    {
+        $html = array();
+
+        $html[] = '<div class="kissFooter">';
+
+        $html[] = sprintf(jgettext('%s has been made 2011 by %s')
+        , JHtml::link('https://github.com/elkuku/KISSKontent', 'KISSKontent', 'class="external"')
+        , JHtml::link('https://github.com/elkuku', 'El KuKu', 'class="external" title="El KuKu @ GitHub"'));
+
+        $html[] = '</div>';
+
+        return implode("\n", $html);
     }//function
 }//class
