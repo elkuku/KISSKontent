@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com_kukukontent - site 123.456\n"
 "Report-Msgid-Bugs-To: info@nik.it.de\n"
-"POT-Creation-Date: 2011-09-17 16:37-0500\n"
+"POT-Creation-Date: 2011-09-19 16:51-0500\n"
 "PO-Revision-Date: 2011-09-12 15:15-0500\n"
 "Last-Translator: Nikolai Plath <EMAIL@ADDRESS>\n"
 "Language-Team: Language de-DE\n"
@@ -18,7 +18,7 @@ msgstr ""
 
 #: components/com_kisskontent/controller.php:27
 #: components/com_kisskontent/models/kisskontent.php:200
-#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:25
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:29
 msgid "You are not allowed to edit Kontent pages."
 msgstr "Sie sind nicht berechtigt Kontentseiten zu bearbeiten."
 
@@ -31,123 +31,164 @@ msgid "Your Kontent has been saved"
 msgstr "Ihr Kontent wurde gespeichert"
 
 #: components/com_kisskontent/controller.php:70
-msgid "This is a preview only. The content has not been saved yet !"
-msgstr "Dies ist nur eine Vorschau. Der Content wurde noch nicht gespeichert !"
-
-#: components/com_kisskontent/controller.php:71
+#: components/com_kisskontent/controller.php:118
 msgid "Close preview"
 msgstr "Vorschau schliessen"
 
-#: components/com_kisskontent/helpers/kisskontent.php:154
+#: components/com_kisskontent/controller.php:72
+#: components/com_kisskontent/controller.php:120
+msgid "This is a preview only. The content has not been saved yet !"
+msgstr "Dies ist nur eine Vorschau. Der Content wurde noch nicht gespeichert !"
+
+#: components/com_kisskontent/controller.php:105
+msgid "Saved version"
+msgstr "Gespeicherte Version"
+
+#: components/com_kisskontent/controller.php:107
+msgid "Your version"
+msgstr "Ihre Version"
+
+#: components/com_kisskontent/helpers/kisskontent.php:157
 msgid "Click to create this page..."
 msgstr "Klick um diese Seite zu Erstellen..."
+
+#: components/com_kisskontent/helpers/kisskontent.php:389
+#, php-format
+msgid "Line: %d"
+msgstr "Zeile: %d"
+
+#: components/com_kisskontent/helpers/kisskontent.php:407
+#, php-format
+msgid "%s has been made 2011 by %s"
+msgstr "%s wurde von %s im Jahr 2011 gemacht."
 
 #: components/com_kisskontent/models/kisskontent.php:206
 msgid "You are not allowed to create Kontent pages"
 msgstr "Sie sind nicht berechtigt Kontentseiten zu erstellen."
 
-#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:16
-#: components/com_kisskontent/views/recentchanges/tmpl/default.php:59
-#: components/com_kisskontent/views/recentchanges/tmpl/default.php:72
-msgid "Differences"
-msgstr "Unterschiede"
-
-#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:54
+#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:14
 #, php-format
 msgid "Version as of %s by %s"
 msgstr "Version vom %s von %s"
 
-#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:54
+#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:14
 #, php-format
 msgid "Actual version as of %s by %s"
 msgstr "Aktuelle Version vom %s von %s"
 
+#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:21
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:74
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:65
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:79
+msgid "Differences"
+msgstr "Unterschiede"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:24
+msgid "Show diferences only"
+msgstr "Nur die Unterschiede anzeigen"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:25
+msgid "Show all"
+msgstr "Alles anzeigen"
+
 #: components/com_kisskontent/views/kisskontent/tmpl/edit.php:16
-#: components/com_kisskontent/views/kisskontent/view.html.php:224
+msgid "You should enable JavaScript"
+msgstr "Sie sollten JavaScript aktivieren"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:20
+#: components/com_kisskontent/views/kisskontent/view.html.php:235
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:16
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:20
 msgid "New"
 msgstr "Neu"
 
-#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:34
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:38
 msgid "This page does not exist (yet), and you are not allowed to create pages."
 msgstr "Diese Seite existiert (noch) nicht, und Sie sind nicht berechtigt Seiten zu erstellen."
 
-#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:48
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:51
 msgid "Summary:"
 msgstr "Zusammenfassung:"
 
-#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:51
-msgid "Preview"
-msgstr "Vorschau"
-
-#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:52
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:57
 msgid "Save"
 msgstr "Speichern"
 
-#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:55
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:62
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:15
-#: components/com_kisskontent/views/kisskontent/view.html.php:227
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:70
+msgid "Preview"
+msgstr "Vorschau"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:76
+msgid "Complete"
+msgstr "Komplett"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:18
+#: components/com_kisskontent/views/kisskontent/view.html.php:238
 msgid "Version history"
 msgstr "Versionsgeschichte"
 
-#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:19
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:22
 msgid "No versions found."
 msgstr "Keine Versionen gefunden."
 
-#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:31
-#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:32
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:33
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:34
 msgid "Current"
 msgstr "Aktuell"
 
-#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:35
-#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:36
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:37
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:38
 msgid "Previous"
 msgstr "Vorherige"
 
-#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:41
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:43
 #, php-format
 msgid "%s Bytes"
 msgstr "%s Bytes"
 
-#: components/com_kisskontent/views/kisskontent/view.html.php:125
+#: components/com_kisskontent/views/kisskontent/view.html.php:136
 msgid "To previous version difference"
 msgstr "Zum vorherigen Versionsunterschied"
 
-#: components/com_kisskontent/views/kisskontent/view.html.php:137
+#: components/com_kisskontent/views/kisskontent/view.html.php:147
 msgid "To next version difference"
 msgstr "Zum nächsten Versionsunterschied"
 
-#: components/com_kisskontent/views/kisskontent/view.html.php:219
+#: components/com_kisskontent/views/kisskontent/view.html.php:230
 msgid "Read"
 msgstr "Lesen"
 
-#: components/com_kisskontent/views/listkontent/tmpl/default.php:14
+#: components/com_kisskontent/views/listkontent/tmpl/default.php:20
 msgid "No items found"
 msgstr "Keine Einträge gefunden"
 
-#: components/com_kisskontent/views/recentchanges/tmpl/default.php:16
+#: components/com_kisskontent/views/listkontent/view.html.php:39
+msgid "Kontent list"
+msgstr "Kontentliste"
+
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:17
 msgid "Recent changes"
 msgstr "Letzte Änderungen"
 
-#: components/com_kisskontent/views/recentchanges/tmpl/default.php:19
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:20
 msgid "Display options"
 msgstr "Anzeigeoptionen"
 
-#: components/com_kisskontent/views/recentchanges/tmpl/default.php:20
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:22
 #, php-format
 msgid "Show the latest %s | %s | %s | %s | %s changes."
 msgstr "Zeige die letzten %s | %s | %s | %s | %s Änderungen."
 
-#: components/com_kisskontent/views/recentchanges/tmpl/default.php:30
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:33
 msgid "Nothing has changed"
 msgstr "Keine Veränderungen"
 
-#: components/com_kisskontent/views/recentchanges/tmpl/default.php:61
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:67
 msgid "Versions"
 msgstr "Versionen"
