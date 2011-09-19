@@ -106,6 +106,9 @@ class plgSearchKISSKontent extends JPlugin
             }
         }
 
+        if( ! $text)
+        return array();
+
         $limit = $this->params->def('search_limit', 50);
 
         $db = JFactory::getDbo();
