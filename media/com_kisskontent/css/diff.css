@@ -7,13 +7,14 @@
  */
 table.diff {
 	width: 100%;
-	border: 1px solid gray;
+	/* border: 1px solid gray; */
 	background-color: #fff;
-/* 	font-size: 90%;
- */}
+	/* 	font-size: 90%;
+ */
+}
 
-table.diff th {
-	/* font-size: 95%; */
+table.diff th { /* font-size: 95%; */
+	
 }
 
 td.diff-addedline {
@@ -24,17 +25,60 @@ td.diff-deletedline {
 	background-color: #ddffdd;
 }
 
-table.diff td {
-	/* font-family: monospace;
+table.diff td { /* 
+font-family: monospace;
 	font-size: 100%; */
+	border: 0;
+}
+
+table.diff td.diff-blockheader {
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+table.diff td.diff-context {
+	background-color: #eee;
+}
+
+table.diff tr {
+	border: 0;
+	border-bottom: 1px solid #fff;
 }
 
 table.diff td.diff-addedline strong {
 	color: green;
+}
+
+table.diff td.diff-deletedline strong {
+	color: red;
+}
+
+table.diff th {
+	vertical-align: top;
+	width: 50%;
+	text-align: center;
+}
+
+table.diff th.diffLeft { /* background-color: #dfd; */
 	
 }
 
-table.diff td.diff-deletedline strong
-	{
-	color: red;
+table.diff th.diffRight { /* background-color: #ffc; */
+	
+}
+
+table.diff a.diffLink {
+	display: block;
+}
+
+table.diff a.diffLink:hover {
+	background-color: #fff;
+}
+
+table.diff a.diffLink.diffPrevLink {
+	text-align: left;
+}
+
+table.diff a.diffLink.diffNextLink {
+	text-align: right;
 }
