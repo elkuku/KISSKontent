@@ -169,13 +169,13 @@ class KISSKontentHelper
         // Encode text for a double-quoted HTML attribute. This function
         // is *not* suitable for attributes enclosed in single quotes.
         //
-//         $text = self::encodeAmpsAndAngles($text);
+        //         $text = self::encodeAmpsAndAngles($text);
         $text = str_replace('"', '&quot;', $text);
 
         $text = str_replace('+','%20',$text);
         $text = str_replace('_','%5F',$text);
         $text = str_replace('.','_',$text);
-         $text = str_replace('-',':',$text);
+        $text = str_replace('-',':',$text);
 
         return $text;
     }//function
@@ -296,7 +296,9 @@ class KISSKontentHelper
 
     public static function getDiffLink($title, $v1, $v2)
     {
-        return self::getLink($title, '&task=diff&amp;v1='.$v1.'&amp;v2='.$v2);
+        $diffAll =(JRequest::getInt('diffAll')) ? '&diffAll=1' : '';
+
+        return self::getLink($title, '&task=diff&amp;v1='.$v1.'&amp;v2='.$v2.$diffAll);
     }//function
 
     /**
@@ -363,6 +365,65 @@ class KISSKontentHelper
         }//for
 
         return number_format($d);
+    }//function
+
+    public static function getDiffFromRequest()
+    {
+        $diff = new stdClass;
+
+        self::$p =(self::$p) ?: JRequest::getString('p');
+
+        $diff->diffAll =(JRequest::getInt('diffAll')) ? true : false;
+
+        $model = JModel::getInstance('KISSKontent', 'KISSKontentModel');
+
+
+        $diff->versionOne = $model->findVersion(JRequest::getInt('v1'));
+        $diff->versionTwo = $model->findVersion(JRequest::getInt('v2'));
+
+        $diff->previous = $model->getPrevious($diff->versionOne->id);
+        $diff->previous->link = '';
+
+        if(isset($diff->previous->id))
+        {
+            $url = KISSKontentHelper::getDiffLink(self::$p, $diff->previous->id, $diff->versionOne->id);
+
+            $diff->previous->link = JHtml::link($url
+            , '&lArr; '.jgettext('To previous version difference')
+            , array(
+                'class' => 'diffLink diffPrevLink'
+            , 'onclick' => 'loadDiff(this.href); return false;'
+            ));
+        }
+
+        $diff->next = $model->getNext($diff->versionTwo->id);
+        $diff->next->link = '';
+
+        if(isset($diff->next->id))
+        {
+            $url = KISSKontentHelper::getDiffLink(self::$p, $diff->versionTwo->id, $diff->next->id);
+
+            $diff->next->link =JHtml::link($url
+            , jgettext('To next version difference').' &rArr;'
+            , array(
+                'class' => 'diffLink diffNextLink'
+            , 'onclick' => 'loadDiff(this.href); return false;'
+            ));
+        }
+
+        $diff->diff = KISSKontentHelper::getDiffTable($diff->versionOne->text, $diff->versionTwo->text, $diff->diffAll);
+
+        //-- Process internal links
+        $diff->preview = $diff->versionTwo;
+
+        $diff->preview->text = KISSKontentHelper::preParse($diff->preview->text);
+
+        JPluginHelper::importPlugin('content');
+
+        $content = JDispatcher::getInstance()->trigger('onContentPrepare'
+        , array('text', &$diff->preview, &$diff->params));
+
+        return $diff;
     }//function
 
     public static function getDiffTable($origCode, $newCode, $showAll = true)

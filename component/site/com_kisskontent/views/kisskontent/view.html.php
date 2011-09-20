@@ -115,7 +115,18 @@ class KISSKontentViewKISSKontent extends JView
 
     protected function diff()
     {
+        JHtml::_('behavior.framework');
         JHtml::_('stylesheet', 'com_kisskontent/diff.css', array(), true);
+        JHtml::_('script', 'com_kisskontent/diff.js', array(), true);
+
+        $this->diffAll =(JRequest::getInt('diffAll')) ? true : false;
+
+
+        $this->diff = KISSKontentHelper::getDiffFromRequest();
+
+        $this->setLayout('diff');
+
+        return;
 
         $this->diffAll =(JRequest::getInt('diffAll')) ? true : false;
 
@@ -123,7 +134,6 @@ class KISSKontentViewKISSKontent extends JView
 
         $this->versionOne = $model->findVersion(JRequest::getInt('v1'));
         $this->versionTwo = $model->findVersion(JRequest::getInt('v2'));
-
 
         $this->previous = $model->getPrevious($this->versionOne->id);
         $this->previous->link = '';
@@ -133,7 +143,11 @@ class KISSKontentViewKISSKontent extends JView
             $url = KISSKontentHelper::getDiffLink($this->p, $this->previous->id, $this->versionOne->id);
 
             $this->previous->link = JHtml::link($url
-            , '&lArr; '.jgettext('To previous version difference'), 'class="diffLink diffPrevLink"');
+            , '&lArr; '.jgettext('To previous version difference')
+            , array(
+            'class' => 'diffLink diffPrevLink'
+            , 'id' => 'kissPrevLink'
+            ));
         }
 
         $this->next = $model->getNext($this->versionTwo->id);
@@ -144,7 +158,11 @@ class KISSKontentViewKISSKontent extends JView
             $url = KISSKontentHelper::getDiffLink($this->p, $this->versionTwo->id, $this->next->id);
 
             $this->next->link =JHtml::link($url
-            , jgettext('To next version difference').' &rArr;', 'class="diffLink diffNextLink"');
+            , jgettext('To next version difference').' &rArr;'
+            , array(
+                'class' => 'diffLink diffNextLink'
+            ,'id' => 'kissNextLink'
+            ));
         }
 
         $this->diff = KISSKontentHelper::getDiffTable($this->versionOne->text, $this->versionTwo->text, $this->diffAll);
@@ -246,5 +264,4 @@ class KISSKontentViewKISSKontent extends JView
 
         return implode("\n", $html);
     }//function
-
 }//class
