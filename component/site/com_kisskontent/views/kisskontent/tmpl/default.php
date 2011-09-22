@@ -9,11 +9,14 @@
 
 //-- No direct access
 defined('_JEXEC') || die('=;)');
+
+$leftAdd = '';
+$leftAdd .= KISSKontentHelper::drawFlag($this->content->lang);
 ?>
 
 <div class="kissKontent<?php echo $this->pageclass_sfx;?>">
 
-    <?php echo $this->menu(); ?>
+    <?php echo $this->menu($leftAdd); ?>
 
     <?php echo $this->content->text; ?>
 

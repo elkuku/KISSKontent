@@ -30,7 +30,7 @@ class KISSKontentHelper
 
         //         $actions = array('core.admin', 'core.manage', 'core.create'
         //         , 'core.edit', 'core.delete');
-        $actions = array('core.create', 'core.edit', 'core.delete');
+        $actions = array('core.create', 'core.edit', 'core.translate', 'core.delete');
 
         $x =($user->guest) ? false : true;//@todo häck.. all registered user allowed everything
 
@@ -39,6 +39,9 @@ class KISSKontentHelper
             //             $result->set($action, $user->authorise($action, $assetName));
             $result->set($action, $x);
         }//foreach
+
+        $x =('elkuku' == $user->get('username')) ? true : false;
+        $result->set('core.nuke', $x);
 
         return $result;
     }//function
@@ -214,8 +217,7 @@ class KISSKontentHelper
             {
                 foreach($items as $item)
                 {
-                    if(isset($item->query)
-                    && isset($item->query['view'])
+                    if(isset($item->query['view'])
                     && 'kisskontent' == $item->query['view'])
                     {
                         $Itemid = $item->id;//-- HEUREKA =;)
@@ -269,7 +271,10 @@ class KISSKontentHelper
 
     public static function isLink($link)
     {
-        static $query, $db;
+        static $query, $db, $links;
+
+        if(isset($links[$link]))
+        return $links[$link];
 
         if( ! $query)
         {
@@ -287,11 +292,11 @@ class KISSKontentHelper
         $query->clear('where');
         $query->where('title='.$db->quote(urldecode($parsed)));
 
-        $db->setQuery($query);
+        $db->setQuery($query, 0, 1);
 
-        $c = $db->loadResult();
+        $links[$link] =($db->loadResult()) ? true : false;
 
-        return ($c) ? true : false;
+        return $links[$link];
     }//function
 
     public static function getDiffLink($title, $v1, $v2)
@@ -377,7 +382,6 @@ class KISSKontentHelper
 
         $model = JModel::getInstance('KISSKontent', 'KISSKontentModel');
 
-
         $diff->versionOne = $model->findVersion(JRequest::getInt('v1'));
         $diff->versionTwo = $model->findVersion(JRequest::getInt('v2'));
 
@@ -386,7 +390,7 @@ class KISSKontentHelper
 
         if(isset($diff->previous->id))
         {
-            $url = KISSKontentHelper::getDiffLink(self::$p, $diff->previous->id, $diff->versionOne->id);
+            $url = self::getDiffLink(self::$p, $diff->previous->id, $diff->versionOne->id);
 
             $diff->previous->link = JHtml::link($url
             , '&lArr; '.jgettext('To previous version difference')
@@ -401,7 +405,7 @@ class KISSKontentHelper
 
         if(isset($diff->next->id))
         {
-            $url = KISSKontentHelper::getDiffLink(self::$p, $diff->versionTwo->id, $diff->next->id);
+            $url = self::getDiffLink(self::$p, $diff->versionTwo->id, $diff->next->id);
 
             $diff->next->link =JHtml::link($url
             , jgettext('To next version difference').' &rArr;'
@@ -411,12 +415,12 @@ class KISSKontentHelper
             ));
         }
 
-        $diff->diff = KISSKontentHelper::getDiffTable($diff->versionOne->text, $diff->versionTwo->text, $diff->diffAll);
+        $diff->diff = self::getDiffTable($diff->versionOne->text, $diff->versionTwo->text, $diff->diffAll);
 
         //-- Process internal links
         $diff->preview = $diff->versionTwo;
 
-        $diff->preview->text = KISSKontentHelper::preParse($diff->preview->text);
+        $diff->preview->text = self::preParse($diff->preview->text);
 
         JPluginHelper::importPlugin('content');
 
@@ -457,6 +461,17 @@ class KISSKontentHelper
         }
 
         return $dwFormatter->format($dwDiff);
+    }//function
+
+    public static function drawFlag($lang, $title = '')
+    {
+        $tag =('default' == $lang) ? 'xx' : strtolower(substr($lang, 0, 2));
+
+        $path = 'com_kisskontent/flags/'.$tag.'.gif';
+
+        $title =($title) ?: sprintf(jgettext('Language: %s'), $lang);
+
+        return JHtml::image($path, $lang, array('title' => $title), true);
     }//function
 
     public static function footer()

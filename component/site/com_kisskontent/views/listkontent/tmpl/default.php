@@ -15,22 +15,32 @@ defined('_JEXEC') || die('=;)');
 
 	<h1><?php echo $this->title; ?></h1>
 
-<?php
-if( ! $this->list) :
-    echo '<h2>'.jgettext('No items found').'</h2>';
-
-    echo '</div>';
-
-    return;
-endif;
-?>
+<?php if( ! $this->list) : ?>
+    <h2><?php echo jgettext('No items found'); ?></h2>
+<?php else : ?>
 
     <ul>
     <?php foreach ($this->list as $item) : ?>
-        <li><?php echo $item; ?></li>
+        <li><?php
+        echo $item->indentString;
+        echo JHtml::link($item->href, $item->title, array('class' => $item->class));
+
+        foreach ($item->translations as $tag) :
+            echo '&nbsp;'.KISSKontentHelper::drawFlag($tag);
+        endforeach;
+
+        if($item->nukeHref) :
+            echo '&nbsp; &rArr;';
+            echo JHtml::link($item->nukeHref, jgettext('Nuke'), array('style' => 'font-weight: bold; color: red'));
+        endif;
+//         var_dump($item);
+//         echo $item->level;
+        ?></li>
     <?php endforeach; ?>
     </ul>
 
 </div>
 
-<?php echo KISSKontentHelper::footer();
+<?php endif;
+
+echo KISSKontentHelper::footer();

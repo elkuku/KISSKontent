@@ -47,6 +47,10 @@ class KISSKontentViewListKontent extends JView
 
         $list = $this->get('list');
 
+        $this->translationList = $this->get('translationlist');
+
+        $this->canNuke = KISSKontentHelper::getActions()->get('core.nuke');
+// var_dump($this->translationList );
         $this->processItems($list);
 
         parent::display($tpl);
@@ -65,7 +69,7 @@ class KISSKontentViewListKontent extends JView
                     if($name != $this->startLevel)
                     continue;
 
-                    $found == true;
+                    $found == true;//@todo: really found ¿
                 }
             }
 
@@ -75,15 +79,39 @@ class KISSKontentViewListKontent extends JView
                 continue;
             }
 
+            $item = new stdClass;
+
             $cItems[] = $name;
 
             $full = implode('/', $cItems);
 
-            $type = 'internal';
-            $type .= KISSKontentHelper::isLink($full) ? '' : ' redlink';
+            $item->href = KISSKontentHelper::getLink($full);
+            $item->title = $name;
+            $item->indentString = str_repeat('&nbsp;&bull;', $level);
+            $item->level = $level;
+            $item->isLink = KISSKontentHelper::isLink($full);
 
-            $link = '<a class="'.$type.'" href="'.KISSKontentHelper::getLink($full).'">'.$name.'</a>';
-            $list[] = str_repeat('&nbsp;&bull;', $level).'&nbsp;'.$link;
+            $class = 'internal';
+            $class .=($item->isLink) ? '' : ' redlink';
+
+            $item->class = $class;
+
+            $item->nukeHref =($this->canNuke && $item->isLink)
+            ? KISSKontentHelper::getLink($full, '&task=nuke')
+            : '';
+
+            $item->translations = array();
+
+            if(array_key_exists($full, $this->translationList))
+            {
+                $item->translations = explode(',', $this->translationList[$full]->{'GROUP_CONCAT(t.lang)'});
+            }
+
+//             ? '&nbsp; &rArr;'.JHtml::link(KISSKontentHelper::getLink($full, '&task=nuke'), jgettext('Nuke')
+//             , array('style' => 'font-weight: bold; color: red'))
+//             : '';
+
+            $list[] = $item;
 
             if(count($entries))//-- recurse...
             $this->processItems($entries, ++$level);

@@ -32,7 +32,7 @@ $actTitle = '';
 <?php if( ! $this->list) : ?>
 	<h2><?php echo jgettext('Nothing has changed'); ?></h2>
 	<?php
-	echo '</div>';
+	echo '</div>'.NL;
 	return;
 	?>
 <?php endif; ?>
@@ -44,7 +44,7 @@ $actTitle = '';
     {
         echo ($actDate) ? '</ul>' : '';//-- Close previous
 
-        echo '<h2>'.$date.'</h2>';
+        echo '<h2>'.$date.'</h2>'.NL;//@todo format
         echo '<ul>';
 
         $actDate = $date;
@@ -54,7 +54,12 @@ $actTitle = '';
 
     echo $time;
 
-    echo ($item->diffLink) ? '&nbsp;&bull;&nbsp;' : '&nbsp;<b>N</b>&nbsp;';
+    echo ( ! $item->diffLink) ? '&nbsp;<b>N</b>&nbsp;' : '&nbsp;';
+
+    if(1)
+    {
+        echo($item->lang) ? KISSKontentHelper::drawFlag($item->lang).'&nbsp;' : '';// '&nbsp;&bull;&nbsp;';
+    }
 
     if( ! $actTitle || $actTitle != $item->title)
     {
@@ -87,10 +92,10 @@ $actTitle = '';
     if($item->summary)
     echo '&nbsp;(<em>'.$item->summary.'</em>)';
 
-    echo '</li>';
+    echo '</li>'.NL;
 endforeach;
 
-echo '</ul>';
+echo '</ul>'.NL;
 
 // var_dump($this->list);
 ?>

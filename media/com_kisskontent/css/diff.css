@@ -82,3 +82,13 @@ table.diff a.diffLink.diffPrevLink {
 table.diff a.diffLink.diffNextLink {
 	text-align: right;
 }
+
+table.diff th em {
+	background-color: red;
+	padding-left: 1em;
+	padding-right: 1em;
+	border: 1px solid silver;
+	border-radius: 5px;
+	background-color: #b2ccff;
+	font-weight: normal;
+}

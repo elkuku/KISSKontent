@@ -48,6 +48,26 @@ class KISSKontentController extends JController
         parent::display();
     }//function
 
+    public function dotranslate()
+    {
+        var_dump($_REQUEST);
+
+        JRequest::checkToken() || jexit(jgettext('Invalid token'));
+
+        try
+        {
+            $this->getModel()->saveTranslation();
+
+            JFactory::getApplication()->enqueueMessage(jgettext('Your translation has been saved'));
+        }
+        catch(Exception $e)
+        {
+            JError::raiseWarning(1, $e->getMessage());
+        }//try
+
+        parent::display();
+    }//function
+
     public function preview()
     {
         $p = JRequest::getString('p');
@@ -140,5 +160,32 @@ class KISSKontentController extends JController
         , array('text', &$o, &$params));
 
         echo $o->text;
+    }//function
+
+    public function nukeKonfirmed()
+    {
+        $this->nuke(true);
+    }//function
+
+    public function nuke($confirmed = false)
+    {
+        var_dump($_REQUEST);
+
+        try
+        {
+            $model = $this->getModel();
+
+            $model->nuke($confirmed);
+
+            JFactory::getApplication()->enqueueMessage(jgettext('Your Kontent has been nuked'));
+        }
+        catch (Exception $e)
+        {
+            JError::raiseWarning(1, $e->getMessage());
+        }
+
+        JRequest::setVar('view', 'listkontent');
+
+        parent::display();
     }//function
 }//class

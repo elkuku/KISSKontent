@@ -93,17 +93,98 @@ class KISSKontentViewKISSKontent extends JView
 
         JPluginHelper::importPlugin('content');
 
-        $content = JDispatcher::getInstance()->trigger('onContentPrepare'
+        JDispatcher::getInstance()->trigger('onContentPrepare'
         , array('text', &$this->content, &$this->params));
     }//function
 
     protected function edit()
     {
-        JHtml::_('stylesheet', 'com_kisskontent/diff.css', array(), true);
-
         $this->content = $this->get('content');
 
+        if( ! $this->content->id)
+        {
+            JRequest::setVar('task', '');
+            $this->defaultTask();
+
+            return;
+        }
+
+        JHtml::_('stylesheet', 'com_kisskontent/diff.css', array(), true);
+
+
         $this->setLayout('edit');
+    }//function
+
+    protected function translate()
+    {
+        $targetLang =(class_exists('g11n')) ? g11n::getDefault() : 'en-GB';
+
+        $model = $this->getModel();
+
+        $this->content = $model->getContent('default');
+        //         $this->content = $this->get('content');
+
+        if( ! $this->content->id)
+        {
+            JRequest::setVar('task', '');
+            $this->defaultTask();
+
+            return;
+        }
+
+        $parts = explode('/', $this->content->title);
+
+        if(count($parts) > 1)
+        {
+            //             var_dump($parts);
+        }
+
+
+        $this->content->titleName = array_pop($parts);
+        $this->content->path = implode('/', $parts);
+
+        $this->translation = $this->get('translation');
+
+        if('default' == strtolower($this->content->title))
+        {
+            $this->translation->title = 'Default';
+        }
+
+        $parts = explode('/', $this->translation->title);
+
+        if(count($parts) > 1)
+        {
+            //             var_dump($parts);
+        }
+
+
+        $this->translation->titleName = array_pop($parts);
+        $this->translation->path = implode('/', $parts);
+        $this->translation->lang = $targetLang;
+
+
+        $langs = JFactory::getLanguage()->getKnownLanguages();
+
+        $options = array();
+        $options['orig'] = array();
+        $options['trans'] = array();
+
+        foreach ($langs as $lang)
+        {
+            $options['orig'][] = JHtml::_('select.option', $lang['tag']);
+            //            $options['trans'][] = JHtml::_('select.option', $lang['tag']);
+        }//foreach
+
+        array_unshift($options['orig'], JHtml::_('select.option', '', jgettext('Default')));
+
+        $this->lists = array();
+
+
+        $this->lists['origLang'] = JHtml::_('select.options', $options['orig']);
+
+        //        $this->lists['transLang'] = JHtml::_('select.options', $options['trans'], 'value', 'text', $targetLang);
+
+        $this->setLayout('translate');
     }//function
 
     protected function versions()
@@ -121,61 +202,7 @@ class KISSKontentViewKISSKontent extends JView
 
         $this->diffAll =(JRequest::getInt('diffAll')) ? true : false;
 
-
         $this->diff = KISSKontentHelper::getDiffFromRequest();
-
-        $this->setLayout('diff');
-
-        return;
-
-        $this->diffAll =(JRequest::getInt('diffAll')) ? true : false;
-
-        $model = $this->getModel();
-
-        $this->versionOne = $model->findVersion(JRequest::getInt('v1'));
-        $this->versionTwo = $model->findVersion(JRequest::getInt('v2'));
-
-        $this->previous = $model->getPrevious($this->versionOne->id);
-        $this->previous->link = '';
-
-        if(isset($this->previous->id))
-        {
-            $url = KISSKontentHelper::getDiffLink($this->p, $this->previous->id, $this->versionOne->id);
-
-            $this->previous->link = JHtml::link($url
-            , '&lArr; '.jgettext('To previous version difference')
-            , array(
-            'class' => 'diffLink diffPrevLink'
-            , 'id' => 'kissPrevLink'
-            ));
-        }
-
-        $this->next = $model->getNext($this->versionTwo->id);
-        $this->next->link = '';
-
-        if(isset($this->next->id))
-        {
-            $url = KISSKontentHelper::getDiffLink($this->p, $this->versionTwo->id, $this->next->id);
-
-            $this->next->link =JHtml::link($url
-            , jgettext('To next version difference').' &rArr;'
-            , array(
-                'class' => 'diffLink diffNextLink'
-            ,'id' => 'kissNextLink'
-            ));
-        }
-
-        $this->diff = KISSKontentHelper::getDiffTable($this->versionOne->text, $this->versionTwo->text, $this->diffAll);
-
-        //-- Process internal links
-        $this->preview = $this->versionTwo;
-
-        $this->preview->text = KISSKontentHelper::preParse($this->preview->text);
-
-        JPluginHelper::importPlugin('content');
-
-        $content = JDispatcher::getInstance()->trigger('onContentPrepare'
-        , array('text', &$this->preview, &$this->params));
 
         $this->setLayout('diff');
     }//function
@@ -187,14 +214,20 @@ class KISSKontentViewKISSKontent extends JView
      */
     protected function setPathway()
     {
-        if( ! $this->p)//-- No path, no -way...
+        $title =(isset($this->content->title)) ? $this->content->title : $this->p;
+
+        if( ! $title)//-- No path, no -way...
         return;
 
         $pathway = JFactory::getApplication()->getPathway();
 
         $items = $pathway->getPathway();
 
-        $parts = explode('/', $this->p);
+        if($items
+        && ! $this->isDefaultView())
+        array_pop($items);
+
+        $parts = explode('/', $title);
 
         $combined = '';
 
@@ -212,6 +245,7 @@ class KISSKontentViewKISSKontent extends JView
 
             $p->name = $part;
             $p->link = JRoute::_($baseLink.'&task=read&p='.$combined);
+            $p->class = KISSKontentHelper::isLink($combined) ? '' : 'internal redlink';
 
             $items[] = $p;
         }//foreach
@@ -221,12 +255,50 @@ class KISSKontentViewKISSKontent extends JView
         return;
     }//function
 
+    protected function isDefaultView()
+    {
+        $menus = JFactory::getApplication()->getMenu('site');
+
+        //-- Get default from active menu
+        $active = $menus->getActive();
+
+        $activeId =($active) ? $active->id : 1;
+
+        if( ! $activeId)
+        return false;
+
+        $menus = JFactory::getApplication()->getMenu('site');
+
+        $cId = JComponentHelper::getComponent('com_kisskontent')->id;
+
+        $items = $menus->getItems('component_id', $cId);
+
+        if($items)
+        {
+            foreach($items as $item)
+            {
+                if(isset($item->query['view'])
+                && 'kisskontent' == $item->query['view'])
+                {
+                    $Itemid = $item->id;//-- HEUREKA =;)
+
+                    break;
+                }
+            }//foreach
+        }
+
+        if( ! $Itemid)
+        return false;
+
+        return ($Itemid == $activeId);
+    }
+
     /**
      * KISS menu =;)
      *
      * @return string
      */
-    protected function menu()
+    protected function menu($leftAdd = 'huhu')
     {
         $task = JRequest::getCmd('task');
 
@@ -235,7 +307,7 @@ class KISSKontentViewKISSKontent extends JView
         $html[] = '<div id="kissActionMenu">';
 
         $html[] = '<div class="kissKredits">';
-        $html[] = '';//hoi<br />boi<br />toi';
+        $html[] = $leftAdd;
         $html[] = '</div>';
 
         $html[] = '<div class="kissActions">';
@@ -248,9 +320,12 @@ class KISSKontentViewKISSKontent extends JView
         $html[] = '      <li>'.JHtml::link(JRoute::_('&task=read'), jgettext('Read'), $active).'</li>';
 
         $active =('edit' == $task) ? $activeS : '';
-
         if($this->canDo->get('core.edit'))
         $html[] = '      <li>'.JHtml::link(JRoute::_('&task=edit'), jgettext('Edit'), $active).'</li>';
+
+        $active =('translate' == $task) ? $activeS : '';
+        if($this->canDo->get('core.translate'))
+        $html[] = '      <li>'.JHtml::link(JRoute::_('&task=translate'), jgettext('Translate'), $active).'</li>';
 
         $active =(in_array($task, array('versions', 'diff'))) ? $activeS : '';
         $html[] = '      <li>'.JHtml::link(JRoute::_('&task=versions'), jgettext('Version history'), $active).'</li>';
