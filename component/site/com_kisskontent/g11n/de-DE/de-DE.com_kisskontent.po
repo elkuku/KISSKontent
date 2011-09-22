@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com_kukukontent - site 123.456\n"
 "Report-Msgid-Bugs-To: info@nik.it.de\n"
-"POT-Creation-Date: 2011-09-19 16:51-0500\n"
+"POT-Creation-Date: 2011-09-21 00:40-0500\n"
 "PO-Revision-Date: 2011-09-12 15:15-0500\n"
 "Last-Translator: Nikolai Plath <EMAIL@ADDRESS>\n"
 "Language-Team: Language de-DE\n"
@@ -17,12 +17,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: components/com_kisskontent/controller.php:27
-#: components/com_kisskontent/models/kisskontent.php:200
+#: components/com_kisskontent/models/kisskontent.php:239
 #: components/com_kisskontent/views/kisskontent/tmpl/edit.php:29
 msgid "You are not allowed to edit Kontent pages."
 msgstr "Sie sind nicht berechtigt Kontentseiten zu bearbeiten."
 
 #: components/com_kisskontent/controller.php:35
+#: components/com_kisskontent/controller.php:55
 msgid "Invalid token"
 msgstr "Ungültiges Token"
 
@@ -30,21 +31,25 @@ msgstr "Ungültiges Token"
 msgid "Your Kontent has been saved"
 msgstr "Ihr Kontent wurde gespeichert"
 
-#: components/com_kisskontent/controller.php:70
-#: components/com_kisskontent/controller.php:118
-msgid "Close preview"
-msgstr "Vorschau schliessen"
+#: components/com_kisskontent/controller.php:61
+msgid "Your translation has been saved"
+msgstr "Ihre Übersetzung wurde gespeichert"
 
-#: components/com_kisskontent/controller.php:72
-#: components/com_kisskontent/controller.php:120
+#: components/com_kisskontent/controller.php:90
+#: components/com_kisskontent/controller.php:138
 msgid "This is a preview only. The content has not been saved yet !"
 msgstr "Dies ist nur eine Vorschau. Der Content wurde noch nicht gespeichert !"
 
-#: components/com_kisskontent/controller.php:105
+#: components/com_kisskontent/controller.php:92
+#: components/com_kisskontent/controller.php:140
+msgid "Close preview"
+msgstr "Vorschau schliessen"
+
+#: components/com_kisskontent/controller.php:125
 msgid "Saved version"
 msgstr "Gespeicherte Version"
 
-#: components/com_kisskontent/controller.php:107
+#: components/com_kisskontent/controller.php:127
 msgid "Your version"
 msgstr "Ihre Version"
 
@@ -52,51 +57,66 @@ msgstr "Ihre Version"
 msgid "Click to create this page..."
 msgstr "Klick um diese Seite zu Erstellen..."
 
-#: components/com_kisskontent/helpers/kisskontent.php:389
+#: components/com_kisskontent/helpers/kisskontent.php:392
+#: components/com_kisskontent/views/kisskontent/view.html.php:224
+msgid "To previous version difference"
+msgstr "Zum vorherigen Versionsunterschied"
+
+#: components/com_kisskontent/helpers/kisskontent.php:407
+#: components/com_kisskontent/views/kisskontent/view.html.php:239
+msgid "To next version difference"
+msgstr "Zum nächsten Versionsunterschied"
+
+#: components/com_kisskontent/helpers/kisskontent.php:450
 #, php-format
 msgid "Line: %d"
 msgstr "Zeile: %d"
 
-#: components/com_kisskontent/helpers/kisskontent.php:407
+#: components/com_kisskontent/helpers/kisskontent.php:468
 #, php-format
 msgid "%s has been made 2011 by %s"
 msgstr "%s wurde von %s im Jahr 2011 gemacht."
 
-#: components/com_kisskontent/models/kisskontent.php:206
+#: components/com_kisskontent/models/kisskontent.php:245
 msgid "You are not allowed to create Kontent pages"
 msgstr "Sie sind nicht berechtigt Kontentseiten zu erstellen."
 
-#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:14
-#, php-format
-msgid "Version as of %s by %s"
-msgstr "Version vom %s von %s"
+#: components/com_kisskontent/models/kisskontent.php:265
+msgid "You are not allowed to translate Kontent pages"
+msgstr "Sie sind nicht berechtigt Kontentseiten zu übersetzen"
 
-#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:14
-#, php-format
-msgid "Actual version as of %s by %s"
-msgstr "Aktuelle Version vom %s von %s"
-
-#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:21
+#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:18
 #: components/com_kisskontent/views/kisskontent/tmpl/edit.php:74
 #: components/com_kisskontent/views/recentchanges/tmpl/default.php:65
 #: components/com_kisskontent/views/recentchanges/tmpl/default.php:79
 msgid "Differences"
 msgstr "Unterschiede"
 
-#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:24
+#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:21
 msgid "Show diferences only"
 msgstr "Nur die Unterschiede anzeigen"
 
-#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:25
+#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:22
 msgid "Show all"
 msgstr "Alles anzeigen"
 
+#: components/com_kisskontent/views/kisskontent/tmpl/diff_diff.php:14
+#, php-format
+msgid "Version as of %s by %s"
+msgstr "Version vom %s von %s"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/diff_diff.php:14
+#, php-format
+msgid "Actual version as of %s by %s"
+msgstr "Aktuelle Version vom %s von %s"
+
 #: components/com_kisskontent/views/kisskontent/tmpl/edit.php:16
+#: components/com_kisskontent/views/kisskontent/tmpl/translate.php:16
 msgid "You should enable JavaScript"
 msgstr "Sie sollten JavaScript aktivieren"
 
 #: components/com_kisskontent/views/kisskontent/tmpl/edit.php:20
-#: components/com_kisskontent/views/kisskontent/view.html.php:235
+#: components/com_kisskontent/views/kisskontent/view.html.php:332
 msgid "Edit"
 msgstr "Bearbeiten"
 
@@ -128,8 +148,22 @@ msgstr "Vorschau"
 msgid "Complete"
 msgstr "Komplett"
 
+#: components/com_kisskontent/views/kisskontent/tmpl/translate.php:22
+#: components/com_kisskontent/views/kisskontent/tmpl/translate.php:72
+#: components/com_kisskontent/views/kisskontent/view.html.php:336
+msgid "Translate"
+msgstr "Übersetzen"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/translate.php:62
+msgid "Copy title"
+msgstr "Titel kopieren"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/translate.php:66
+msgid "Copy text"
+msgstr "Text kopieren"
+
 #: components/com_kisskontent/views/kisskontent/tmpl/versions.php:18
-#: components/com_kisskontent/views/kisskontent/view.html.php:238
+#: components/com_kisskontent/views/kisskontent/view.html.php:339
 msgid "Version history"
 msgstr "Versionsgeschichte"
 
@@ -152,15 +186,11 @@ msgstr "Vorherige"
 msgid "%s Bytes"
 msgstr "%s Bytes"
 
-#: components/com_kisskontent/views/kisskontent/view.html.php:136
-msgid "To previous version difference"
-msgstr "Zum vorherigen Versionsunterschied"
+#: components/com_kisskontent/views/kisskontent/view.html.php:170
+msgid "Default"
+msgstr "Standard"
 
-#: components/com_kisskontent/views/kisskontent/view.html.php:147
-msgid "To next version difference"
-msgstr "Zum nächsten Versionsunterschied"
-
-#: components/com_kisskontent/views/kisskontent/view.html.php:230
+#: components/com_kisskontent/views/kisskontent/view.html.php:328
 msgid "Read"
 msgstr "Lesen"
 

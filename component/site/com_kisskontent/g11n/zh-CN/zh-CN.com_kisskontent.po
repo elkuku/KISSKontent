@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com_kukukontent - site 123.456\n"
 "Report-Msgid-Bugs-To: info@nik.it.de\n"
-"POT-Creation-Date: 2011-09-19 16:51-0500\n"
+"POT-Creation-Date: 2011-09-21 00:40-0500\n"
 "PO-Revision-Date: 2011-09-17 15:55-0500\n"
 "Last-Translator: Nikolai Plath <EMAIL@ADDRESS>\n"
 "Language-Team: Language zh-CN\n"
@@ -17,12 +17,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: components/com_kisskontent/controller.php:27
-#: components/com_kisskontent/models/kisskontent.php:200
+#: components/com_kisskontent/models/kisskontent.php:239
 #: components/com_kisskontent/views/kisskontent/tmpl/edit.php:29
 msgid "You are not allowed to edit Kontent pages."
 msgstr "您不得以编辑Kontent页面"
 
 #: components/com_kisskontent/controller.php:35
+#: components/com_kisskontent/controller.php:55
 msgid "Invalid token"
 msgstr "无效的令牌"
 
@@ -30,21 +31,25 @@ msgstr "无效的令牌"
 msgid "Your Kontent has been saved"
 msgstr "您的Kontent已保存"
 
-#: components/com_kisskontent/controller.php:70
-#: components/com_kisskontent/controller.php:118
-msgid "Close preview"
-msgstr "关闭预览"
+#: components/com_kisskontent/controller.php:61
+msgid "Your translation has been saved"
+msgstr "您的翻译已保存"
 
-#: components/com_kisskontent/controller.php:72
-#: components/com_kisskontent/controller.php:120
+#: components/com_kisskontent/controller.php:90
+#: components/com_kisskontent/controller.php:138
 msgid "This is a preview only. The content has not been saved yet !"
 msgstr "这只是一个预览。内容尚未保存！"
 
-#: components/com_kisskontent/controller.php:105
+#: components/com_kisskontent/controller.php:92
+#: components/com_kisskontent/controller.php:140
+msgid "Close preview"
+msgstr "关闭预览"
+
+#: components/com_kisskontent/controller.php:125
 msgid "Saved version"
 msgstr "不得以编"
 
-#: components/com_kisskontent/controller.php:107
+#: components/com_kisskontent/controller.php:127
 msgid "Your version"
 msgstr "击创建此页面"
 
@@ -52,51 +57,66 @@ msgstr "击创建此页面"
 msgid "Click to create this page..."
 msgstr "点击创建此页面......"
 
-#: components/com_kisskontent/helpers/kisskontent.php:389
+#: components/com_kisskontent/helpers/kisskontent.php:392
+#: components/com_kisskontent/views/kisskontent/view.html.php:224
+msgid "To previous version difference"
+msgstr "以前的版本不同"
+
+#: components/com_kisskontent/helpers/kisskontent.php:407
+#: components/com_kisskontent/views/kisskontent/view.html.php:239
+msgid "To next version difference"
+msgstr "下一版本的区别"
+
+#: components/com_kisskontent/helpers/kisskontent.php:450
 #, php-format
 msgid "Line: %d"
 msgstr "击创建此: %d"
 
-#: components/com_kisskontent/helpers/kisskontent.php:407
+#: components/com_kisskontent/helpers/kisskontent.php:468
 #, php-format
 msgid "%s has been made 2011 by %s"
 msgstr "%s级2011已经取得了由%s"
 
-#: components/com_kisskontent/models/kisskontent.php:206
+#: components/com_kisskontent/models/kisskontent.php:245
 msgid "You are not allowed to create Kontent pages"
 msgstr "您不得以创建Kontent网页"
 
-#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:14
-#, php-format
-msgid "Version as of %s by %s"
-msgstr "由%s%s的版本"
+#: components/com_kisskontent/models/kisskontent.php:265
+msgid "You are not allowed to translate Kontent pages"
+msgstr "您不得翻译Kontent页面"
 
-#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:14
-#, php-format
-msgid "Actual version as of %s by %s"
-msgstr "由%s的%s实际版本"
-
-#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:21
+#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:18
 #: components/com_kisskontent/views/kisskontent/tmpl/edit.php:74
 #: components/com_kisskontent/views/recentchanges/tmpl/default.php:65
 #: components/com_kisskontent/views/recentchanges/tmpl/default.php:79
 msgid "Differences"
 msgstr "差异"
 
-#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:24
+#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:21
 msgid "Show diferences only"
 msgstr "已经取得了"
 
-#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:25
+#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:22
 msgid "Show all"
 msgstr "已经取得"
 
+#: components/com_kisskontent/views/kisskontent/tmpl/diff_diff.php:14
+#, php-format
+msgid "Version as of %s by %s"
+msgstr "由%s%s的版本"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/diff_diff.php:14
+#, php-format
+msgid "Actual version as of %s by %s"
+msgstr "由%s的%s实际版本"
+
 #: components/com_kisskontent/views/kisskontent/tmpl/edit.php:16
+#: components/com_kisskontent/views/kisskontent/tmpl/translate.php:16
 msgid "You should enable JavaScript"
 msgstr "您应该启用JavaScript"
 
 #: components/com_kisskontent/views/kisskontent/tmpl/edit.php:20
-#: components/com_kisskontent/views/kisskontent/view.html.php:235
+#: components/com_kisskontent/views/kisskontent/view.html.php:332
 msgid "Edit"
 msgstr "编辑"
 
@@ -128,8 +148,22 @@ msgstr "预览"
 msgid "Complete"
 msgstr "页不存"
 
+#: components/com_kisskontent/views/kisskontent/tmpl/translate.php:22
+#: components/com_kisskontent/views/kisskontent/tmpl/translate.php:72
+#: components/com_kisskontent/views/kisskontent/view.html.php:336
+msgid "Translate"
+msgstr "翻译"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/translate.php:62
+msgid "Copy title"
+msgstr "复制标题"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/translate.php:66
+msgid "Copy text"
+msgstr "复制文本"
+
 #: components/com_kisskontent/views/kisskontent/tmpl/versions.php:18
-#: components/com_kisskontent/views/kisskontent/view.html.php:238
+#: components/com_kisskontent/views/kisskontent/view.html.php:339
 msgid "Version history"
 msgstr "版本历史"
 
@@ -152,17 +186,13 @@ msgstr "上一页"
 msgid "%s Bytes"
 msgstr "%s 字节"
 
-#: components/com_kisskontent/views/kisskontent/view.html.php:136
-msgid "To previous version difference"
-msgstr "以前的版本不同"
+#: components/com_kisskontent/views/kisskontent/view.html.php:170
+msgid "Default"
+msgstr "默认"
 
-#: components/com_kisskontent/views/kisskontent/view.html.php:147
-msgid "To next version difference"
-msgstr "下一版本的区别"
-
-#: components/com_kisskontent/views/kisskontent/view.html.php:230
+#: components/com_kisskontent/views/kisskontent/view.html.php:328
 msgid "Read"
-msgstr "看"
+msgstr "阅读"
 
 #: components/com_kisskontent/views/listkontent/tmpl/default.php:20
 msgid "No items found"
