@@ -3,4 +3,15 @@
 	<layout title="Default view">
 		<message>The default Kontent view</message>
 	</layout>
+
+	<fields name="request">
+		<fieldset name="request">
+
+			<field name="p" type="text" label="Start page"
+				description="The start page. If left empty the default page will be displayed"
+				size="15" />
+
+		</fieldset>
+	</fields>
+
 </metadata>
