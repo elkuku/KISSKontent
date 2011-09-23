@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com_kisskontent - site 123.456\n"
 "Report-Msgid-Bugs-To: info@nik.it.de\n"
-"POT-Creation-Date: 2011-09-21 00:40-0500\n"
+"POT-Creation-Date: 2011-09-23 12:40-0500\n"
 "PO-Revision-Date: 2011-09-21 00:40-0500\n"
 "Last-Translator: Nikolai Plath <EMAIL@ADDRESS>\n"
 "Language-Team: Language es-ES\n"
@@ -17,8 +17,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: components/com_kisskontent/controller.php:27
-#: components/com_kisskontent/models/kisskontent.php:239
-#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:29
+#: components/com_kisskontent/models/kisskontent.php:324
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:35
 msgid "You are not allowed to edit Kontent pages."
 msgstr ""
 
@@ -53,42 +53,110 @@ msgstr ""
 msgid "Your version"
 msgstr ""
 
-#: components/com_kisskontent/helpers/kisskontent.php:157
+#: components/com_kisskontent/controller.php:186
+msgid "Do you really want to..."
+msgstr ""
+
+#: components/com_kisskontent/controller.php:188
+#, php-format
+msgid "Delete the Kontent item: %s"
+msgstr ""
+
+#: components/com_kisskontent/controller.php:190
+#, php-format
+msgid "Delete %d version (ID: %s)"
+msgid_plural "Delete %d versions (IDs: %s)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: components/com_kisskontent/controller.php:193
+#, php-format
+msgid "Delete %d translation (ID: %s)"
+msgid_plural "Delete %d translations (IDs: %s)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: components/com_kisskontent/controller.php:197
+msgid "Yes I really want to nuke this Kontent"
+msgstr ""
+
+#: components/com_kisskontent/controller.php:205
+msgid "Your Kontent has been nuked"
+msgstr ""
+
+#: components/com_kisskontent/helpers/kisskontent.php:160
 msgid "Click to create this page..."
 msgstr ""
 
-#: components/com_kisskontent/helpers/kisskontent.php:392
-#: components/com_kisskontent/views/kisskontent/view.html.php:224
+#: components/com_kisskontent/helpers/kisskontent.php:317
+#, php-format
+msgid "Show languages: %s"
+msgstr ""
+
+#: components/com_kisskontent/helpers/kisskontent.php:323
+msgid "No language"
+msgstr ""
+
+#: components/com_kisskontent/helpers/kisskontent.php:323
+msgid "All languages"
+msgstr ""
+
+#: components/com_kisskontent/helpers/kisskontent.php:330
+msgid "Click to show all translations"
+msgstr ""
+
+#: components/com_kisskontent/helpers/kisskontent.php:330
+#: components/com_kisskontent/views/listkontent/view.html.php:77
+msgid "Click to hide translations"
+msgstr ""
+
+#: components/com_kisskontent/helpers/kisskontent.php:434
 msgid "To previous version difference"
 msgstr ""
 
-#: components/com_kisskontent/helpers/kisskontent.php:407
-#: components/com_kisskontent/views/kisskontent/view.html.php:239
+#: components/com_kisskontent/helpers/kisskontent.php:449
 msgid "To next version difference"
 msgstr ""
 
-#: components/com_kisskontent/helpers/kisskontent.php:450
+#: components/com_kisskontent/helpers/kisskontent.php:492
 #, php-format
 msgid "Line: %d"
 msgstr ""
 
-#: components/com_kisskontent/helpers/kisskontent.php:468
+#: components/com_kisskontent/helpers/kisskontent.php:510
+#, php-format
+msgid "Language: %s"
+msgstr ""
+
+#: components/com_kisskontent/helpers/kisskontent.php:521
 #, php-format
 msgid "%s has been made 2011 by %s"
 msgstr ""
 
-#: components/com_kisskontent/models/kisskontent.php:245
+#: components/com_kisskontent/models/kisskontent.php:330
 msgid "You are not allowed to create Kontent pages"
 msgstr ""
 
-#: components/com_kisskontent/models/kisskontent.php:265
+#: components/com_kisskontent/models/kisskontent.php:359
 msgid "You are not allowed to translate Kontent pages"
 msgstr ""
 
+#: components/com_kisskontent/models/kisskontent.php:396
+msgid "You are not allowed to nuke Kontent pages"
+msgstr ""
+
+#: components/com_kisskontent/models/kisskontent.php:428
+msgid "Unable to nuke your Kontent item"
+msgstr ""
+
+#: components/com_kisskontent/models/kisskontent.php:494
+msgid "Unable to nuke your Kontent"
+msgstr ""
+
 #: components/com_kisskontent/views/kisskontent/tmpl/diff.php:18
-#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:74
-#: components/com_kisskontent/views/recentchanges/tmpl/default.php:65
-#: components/com_kisskontent/views/recentchanges/tmpl/default.php:79
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:79
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:75
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:89
 msgid "Differences"
 msgstr ""
 
@@ -100,14 +168,16 @@ msgstr ""
 msgid "Show all"
 msgstr ""
 
-#: components/com_kisskontent/views/kisskontent/tmpl/diff_diff.php:14
+#. TRANSLATORS: 1 - the date, 2 - The user
+#: components/com_kisskontent/views/kisskontent/tmpl/diff_diff.php:15
 #, php-format
-msgid "Version as of %s by %s"
+msgid "Version as of %1s by %2s"
 msgstr ""
 
-#: components/com_kisskontent/views/kisskontent/tmpl/diff_diff.php:14
+#. TRANSLATORS: 1 - the date, 2 - The user
+#: components/com_kisskontent/views/kisskontent/tmpl/diff_diff.php:17
 #, php-format
-msgid "Actual version as of %s by %s"
+msgid "Actual version as of %1s by %2s"
 msgstr ""
 
 #: components/com_kisskontent/views/kisskontent/tmpl/edit.php:16
@@ -116,7 +186,7 @@ msgid "You should enable JavaScript"
 msgstr ""
 
 #: components/com_kisskontent/views/kisskontent/tmpl/edit.php:20
-#: components/com_kisskontent/views/kisskontent/view.html.php:332
+#: components/com_kisskontent/views/kisskontent/view.html.php:343
 msgid "Edit"
 msgstr ""
 
@@ -124,101 +194,131 @@ msgstr ""
 msgid "New"
 msgstr ""
 
-#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:38
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:44
 msgid "This page does not exist (yet), and you are not allowed to create pages."
 msgstr ""
 
-#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:51
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:57
+#: components/com_kisskontent/views/kisskontent/tmpl/translate.php:101
 msgid "Summary:"
 msgstr ""
 
-#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:57
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:63
 msgid "Save"
 msgstr ""
 
-#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:62
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:68
 msgid "Cancel"
 msgstr ""
 
-#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:70
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:75
 msgid "Preview"
 msgstr ""
 
-#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:76
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:81
 msgid "Complete"
 msgstr ""
 
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:87
+msgid "Help !"
+msgstr ""
+
 #: components/com_kisskontent/views/kisskontent/tmpl/translate.php:22
-#: components/com_kisskontent/views/kisskontent/tmpl/translate.php:72
-#: components/com_kisskontent/views/kisskontent/view.html.php:336
+#: components/com_kisskontent/views/kisskontent/tmpl/translate.php:104
+#: components/com_kisskontent/views/kisskontent/view.html.php:347
 msgid "Translate"
 msgstr ""
 
-#: components/com_kisskontent/views/kisskontent/tmpl/translate.php:62
+#: components/com_kisskontent/views/kisskontent/tmpl/translate.php:25
+msgid "You have to translate the following Kontent items first"
+msgstr ""
+
+#: components/com_kisskontent/views/kisskontent/tmpl/translate.php:90
 msgid "Copy title"
 msgstr ""
 
-#: components/com_kisskontent/views/kisskontent/tmpl/translate.php:66
+#: components/com_kisskontent/views/kisskontent/tmpl/translate.php:94
 msgid "Copy text"
 msgstr ""
 
 #: components/com_kisskontent/views/kisskontent/tmpl/versions.php:18
-#: components/com_kisskontent/views/kisskontent/view.html.php:339
+#: components/com_kisskontent/views/kisskontent/view.html.php:350
 msgid "Version history"
 msgstr "Historial"
 
-#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:22
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:23
 msgid "No versions found."
 msgstr ""
 
-#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:33
-#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:34
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:28
+#: components/com_kisskontent/views/listkontent/tmpl/default.php:18
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:20
+msgid "Display options"
+msgstr ""
+
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:39
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:40
 msgid "Current"
 msgstr "Actuál"
 
-#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:37
-#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:38
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:43
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:44
 msgid "Previous"
 msgstr "Anterior"
 
-#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:43
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:49
 #, php-format
 msgid "%s Bytes"
 msgstr ""
 
-#: components/com_kisskontent/views/kisskontent/view.html.php:170
+#: components/com_kisskontent/views/kisskontent/view.html.php:195
 msgid "Default"
 msgstr ""
 
-#: components/com_kisskontent/views/kisskontent/view.html.php:328
+#: components/com_kisskontent/views/kisskontent/view.html.php:339
 msgid "Read"
 msgstr "Leer"
 
-#: components/com_kisskontent/views/listkontent/tmpl/default.php:20
+#. TRANSLATORS: A list of letters
+#: components/com_kisskontent/views/listkontent/tmpl/default.php:21
+#, php-format
+msgid "Display: %s"
+msgstr ""
+
+#: components/com_kisskontent/views/listkontent/tmpl/default.php:26
 msgid "No items found"
+msgstr ""
+
+#: components/com_kisskontent/views/listkontent/tmpl/default.php:41
+msgid "Nuke"
 msgstr ""
 
 #: components/com_kisskontent/views/listkontent/view.html.php:39
 msgid "Kontent list"
 msgstr ""
 
+#: components/com_kisskontent/views/listkontent/view.html.php:77
+msgid "Click to show all items"
+msgstr ""
+
+#: components/com_kisskontent/views/listkontent/view.html.php:79
+msgid "All items"
+msgstr ""
+
 #: components/com_kisskontent/views/recentchanges/tmpl/default.php:17
 msgid "Recent changes"
 msgstr "Cambios recientes"
 
-#: components/com_kisskontent/views/recentchanges/tmpl/default.php:20
-msgid "Display options"
-msgstr ""
-
-#: components/com_kisskontent/views/recentchanges/tmpl/default.php:22
+#. TRANSLATORS: Numbers
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:24
 #, php-format
-msgid "Show the latest %s | %s | %s | %s | %s changes."
+msgid "Show the latest %1s | %2s | %3s | %4s | %5s changes."
 msgstr ""
 
-#: components/com_kisskontent/views/recentchanges/tmpl/default.php:33
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:38
 msgid "Nothing has changed"
 msgstr ""
 
-#: components/com_kisskontent/views/recentchanges/tmpl/default.php:67
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:77
 msgid "Versions"
 msgstr ""
