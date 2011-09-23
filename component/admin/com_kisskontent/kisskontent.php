@@ -10,9 +10,16 @@
 //-- No direct access
 defined('_JEXEC') || die('=;)');
 
+JToolBarHelper::title('KISSKontent');
+
+JToolBarHelper::preferences('com_kisskontent');
+
 ?>
-<h1>I am just a dummy :~|</h1>
+<h1>KISSKontent</h1>
 
 <p>
-    Please visit the <a href="../index.php?option=com_kisskontent">frontpage view of KISSKontent</a>.
+    Please create a menu link to the KISSKontent default view in your front end.
+    <!--
+     <a href="../index.php?option=com_kisskontent&view=kisskontent">KISSKontent</a>.
+     -->
 </p>
