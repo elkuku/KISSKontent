@@ -1,0 +1,15 @@
+@CHARSET "UTF-8";
+
+/* Colors for SQL queries */
+
+b.dbgOperator {
+	color: orange;
+}
+
+span.dbgCommand {
+	color: blue;
+}
+
+span.dbgTable {
+	color: green;
+}
