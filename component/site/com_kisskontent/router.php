@@ -29,9 +29,7 @@ function KISSKontentParseRoute($segments)
     $vars = array();
 
     if(count($segments))
-    {
-        $vars['p'] = implode('/', $segments);
-    }
+    $vars['p'] = implode('/', $segments);
 
     return $vars;
 }//function
