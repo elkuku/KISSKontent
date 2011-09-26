@@ -12,7 +12,7 @@
 defined('_JEXEC') || die('=;)');
 
 /**
- * Script file for KISSKontent component.
+ * Script file for the KISSKontent component.
  */
 class com_kisskontentInstallerScript
 {
@@ -61,6 +61,22 @@ class com_kisskontentInstallerScript
         // $parent is the class calling this method
         // $type is the type of change (install, update or discover_install)
         echo '<p>'.JText::_('COM_KISSKONTENT_POSTFLIGHT_'.$type.'_TEXT').'</p>';
+
+        $comId = JComponentHelper::getComponent('com_kisskontent')->id;
+
+        $userId = JFactory::getUser()->id;
+
+        $table = JTable::getInstance('extension');
+
+        $table->load($comId);
+
+        $params = new JRegistry($table->params);
+
+        $params->set('id_superuser', $userId);
+
+        $table->params = $params->toString();
+
+        $table->store();
     }//function
 
     /**
