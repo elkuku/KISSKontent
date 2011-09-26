@@ -14,11 +14,20 @@ class KISSKontentModelListKontent extends JModel
 {
     public function getList()
     {
+        $filterAlpha = JRequest::getCmd('filterAlpha');
+        $filterAlpha =('all' == $filterAlpha) ? '' : $filterAlpha;
+
         $query = $this->_db->getQuery(true);
 
-        $query->from('#__kisskontent');
-        $query->select('title');
-        $query->order('title');
+        $query->from('#__kisskontent AS k');
+        $query->select('k.title');
+        $query->order('k.title');
+
+            if($filterAlpha)
+        {
+            $filterAlpha = substr($filterAlpha, 0, 1);
+            $query->where('k.title LIKE '.$this->_db->quote($filterAlpha.'%'));
+        }
 
         $this->_db->setQuery($query);
 
@@ -26,28 +35,55 @@ class KISSKontentModelListKontent extends JModel
 
         $tree = array();
 
+        if( ! $items)
+        return $tree;
+
         foreach($items as $item)
         {
             //-- eval is evil :P
             eval('$tree[\''.implode("']['", explode('/', $item)).'\']=array();');
         }//foreach
-// var_dump($tree);
+
         return $tree;
+    }//function
+
+    public function getAlphas()
+    {
+        $query = $this->_db->getQuery(true);
+
+        $query->from('#__kisskontent');
+        $query->select('distinct(UPPER(LEFT(title, 1)))');
+        $query->order('title');
+
+KuKuUtility::logQuery($query);
+        $this->_db->setQuery($query);
+
+        return $this->_db->loadResultArray();
     }//function
 
     public function getTranslationList()
     {
+        $filterLang = JRequest::getCmd('filterLang');
+
+        $filterLang =('all' == $filterLang) ? '' : $filterLang;
+
         $query = $this->_db->getQuery(true);
 
         $query->from('#__kisskontent AS k, #__kiss_translations AS t');
 
         $query->select('k.id, k.title');
-        $query->select('GROUP_CONCAT(t.lang)');
+        $query->select('t.lang');
+        $query->select('GROUP_CONCAT(t.lang) AS langs');
 
         $query->where('k.id = t.id_kiss');
 
-        $query->group('k.id');
+        if($filterLang)
+        $query->where('t.lang='.$this->_db->quote($filterLang));
 
+        $query->group('k.id');
+//         $query->order('t.lang');
+
+KuKuUtility::logQuery($query);
         $this->_db->setQuery($query);
 
         $items = $this->_db->loadObjectList();
@@ -61,7 +97,7 @@ class KISSKontentModelListKontent extends JModel
                 $result[$item->title] = $item;
             }//foreach
         }
-
+        // var_dump($result);
         return $result;
     }//function
 }//class
