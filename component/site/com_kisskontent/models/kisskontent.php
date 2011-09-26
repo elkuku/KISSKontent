@@ -12,6 +12,15 @@ defined('_JEXEC') || die('=;)');
 
 class KISSKontentModelKISSKontent extends JModel
 {
+    private $nukeResult = null;
+
+    public function __construct($config = array())
+    {
+        $this->nukeResult = new stdClass;
+
+        parent::__construct($config);
+    }//function
+
     /**
      *
      * Enter description here ...
@@ -20,16 +29,32 @@ class KISSKontentModelKISSKontent extends JModel
      */
     public function getContent($lang = '', $title = '')
     {
+        //-- Force the language from request
+        //-- .. forcing is only needed if we have a translated title and want to get the same item in another language.
+        $forceLang = JRequest::getCmd('lang');
+        $forceId = 0;
+
         if('default' != $lang)
         {
             $translation = $this->getTranslation($lang);
 
             if($translation->id)
-            return $translation;
-            //            && 'default' != strtolower($translation->title))
+            {
+                if($forceLang
+                && $translation->lang != $forceLang)
+                {
+                    $translation = $this->getTranslation($forceLang, '', $translation->id_kiss);
+                    $forceId = $translation->id_kiss;
+                }
+                else
+                {
+                    return $this->splitTitle($translation);
+                }
+            }
         }
 
         $p =($title) ?: JRequest::getString('p', 'default');
+        $p =($p) ?: 'default';
 
         $table = $this->getTable();
 
@@ -55,7 +80,16 @@ class KISSKontentModelKISSKontent extends JModel
             try
             {
                 //-- Try to load the page from database
-                $table->load(array('title' => $p));
+                if($forceId)
+                {
+                    $table->load($forceId);
+
+                    return $this->splitTitle($translation);
+                }
+                else
+                {
+                    $table->load(array('title' => $p));
+                }
             }
             catch(Exception $e)
             {
@@ -64,21 +98,33 @@ class KISSKontentModelKISSKontent extends JModel
             }//try
         }
 
-        $table->path = $table->title;//@todo remove ?
         $table->lang = 'default';
+        $table->id_kiss = 0;
+
+        return $this->splitTitle($table);
+    }//function
+
+    protected function splitTitle($table)
+    {
+        $parts = explode('/', $table->title);
+
+        $table->fullPath = $table->title;
+        $table->xtitle = array_pop($parts);//@todo rrremove... - change to title
+        $table->path = implode('/', $parts);
 
         return $table;
     }//function
 
-    public function getTranslation($lang = '')
+    public function getTranslation($lang = '', $title = '', $id = 0)
     {
-        $p = JRequest::getString('p', 'default');
+        $p =($title) ?: JRequest::getString('p', 'default');
+        $p =($p) ?: 'default';
 
-        if( ! $lang
+        if( ! $lang //-- Get the language from g11n
         && class_exists('g11n'))
         $lang = g11n::getDefault();
 
-        if( ! $lang)
+        if( ! $lang)//-- Do you speak english ¿
         $lang = 'en-GB';//@TODO: todo, to do...
 
         $tableOrig = $this->getTable();
@@ -87,12 +133,45 @@ class KISSKontentModelKISSKontent extends JModel
 
         try
         {
+            if($id)
+            {
+                //-- Loading by id is prefered !
+                $tableOrig->load($id);
+            }
+            else
+            {
+                //-- Load by title
+                $tableOrig->load(array('title' => $p));
+            }
+
+            //-- Title exists - look for a translation by title id
+            $tableTrans->load(array('id_kiss' => $tableOrig->id, 'lang' => $lang));
+
+            return $this->splitTitle($tableTrans);
+
+
+            /*
+            //-- Title exists - look for a translation by title id
+            $tableTrans->load(array('id_kiss' => $tableOrig->id, 'lang' => $lang));
+
+            return $this->splitTitle($tableTrans);
+             *             if($id)
+            {
+            $tableOrig->load($id);
+            //-- Title exists - look for a translation by title id
+            $tableTrans->load(array('id_kiss' => $tableOrig->id, 'lang' => $lang));
+
+            return $this->splitTitle($tableTrans);
+            }
+
             $tableOrig->load(array('title' => $p));
 
             //-- Title exists - look for a translation by title id
             $tableTrans->load(array('id_kiss' => $tableOrig->id, 'lang' => $lang));
 
-            return $tableTrans;
+            return $this->splitTitle($tableTrans);
+
+            */
         }//try
         catch (Exception $e)
         {
@@ -108,7 +187,7 @@ class KISSKontentModelKISSKontent extends JModel
             //-- A title with the name does not exist - look for a translation by name and the current language
             $tableTrans->load(array('title' => $p, 'lang' => $lang));
 
-            return $tableTrans;
+            return $this->splitTitle($tableTrans);
         }//try
         catch (Exception $e)
         {
@@ -118,46 +197,131 @@ class KISSKontentModelKISSKontent extends JModel
         try
         {
             //-- A title with the name does not exist - look for a translation by name and any language
-            $tableTrans->load(array('title' => $p));
+            if($p && 'default' != strtolower($p))
+            {
+                $tableTrans->load(array('title' => $p));
 
-            return $tableTrans;
+                return $this->splitTitle($tableTrans);
+            }
         }//try
         catch (Exception $e)
         {
             //foo
         }//catch
 
-        return $tableTrans;
+        return $this->splitTitle($tableTrans);
     }//function
 
-    public function getVersions($title = '')
+    public function getTranslations($id)
+    {
+        $db = $this->_db;
+
+        $query = $db->getQuery(true);
+
+        $query->from($db->nameQuote('#__kiss_translations').' AS t');
+
+        //         $query->select('k.id, t.title');
+        //         $query->select('t.lang');
+        $query->select('GROUP_CONCAT(DISTINCT(t.lang)) AS langs');
+        $query->select('GROUP_CONCAT(DISTINCT(t.title)) AS titles');
+
+        $query->where('t.id_kiss = '.(int)$id);
+
+        //         $query->group('k.id');
+
+        KuKuUtility::logQuery($query);
+        $db->setQuery($query);
+
+        $result = $this->_db->loadObject();
+
+        if( ! isset($result->langs))
+        return array();
+
+                if('default' == strtolower($result->titles))
+                return array();
+//         return explode(',', $result->langs);
+
+        return array_combine(explode(',', $result->langs), explode(',', $result->titles));
+    }//function
+
+    public function getVersions($title = '', $lang = '')
     {
         static $versions;
 
-        $p =($title) ?: JRequest::getString('p', 'default');
+        $db = $this->_db;
 
-        if(isset($versions[$p]))
-        return $versions[$p];
+        if(KISS_ML)
+        {
+            if('all' == $lang
+            || ! $lang)
+            {
+                $lang = '';
+            }
+            else
+            {
+                $lang =($lang) ?: g11n::getDefault();
+            }
+        }
 
-        $query = $this->_db->getQuery(true);
+        $title ='';//($title) ?: JRequest::getString('p', 'default');
 
-        $content = $this->getContent('default', $title);
+        $key = serialize($lang.$title);
 
-        $query->from($this->_db->nameQuote('#__kisskontent_versions').' AS k');
-        $query->select('k.id, k.text, k.summary, k.modified, u.name, u.username');
+        if(isset($versions[$key]))
+        return $versions[$key];
+
+        $query = $db->getQuery(true);
+
+        $content = $this->getContent($lang, $title);
+
+        if( ! $content->id)
+        {
+            $versions[$key] = array();
+
+            return $versions[$key];
+        }
+
+        $ids = array($content->id);
+
+        if(KISS_ML)
+        {
+            $query->from($this->_db->nameQuote('#__kiss_translations').' AS t');
+            $query->select('t.id');
+            $query->where('t.id_kiss='.(int)$content->id);
+            KuKuUtility::logQuery($query);
+
+            $db->setQuery($query);
+
+            $is = $db->loadResultArray();
+
+            $ids = array_merge($ids, $is);
+
+            $query->clear('where');
+        }
+
+        $query = $db->getQuery(true);
+
+        $query->from($this->_db->nameQuote('#__kisskontent_versions').' AS t');
+        $query->where('t.id_kiss IN ('.implode(',', $ids).')');
+
+        $query->select('t.id, t.id_user, t.text, t.summary, t.modified, t.lang, u.name, u.username');
 
         if($title)
-        $query->where('k.title='.$this->_db->quote($p));
+        $query->where('t.title='.$this->_db->quote($title));
 
-        $query->where('k.id_kiss='.(int)$content->id);
-        $query->leftJoin($this->_db->nameQuote('#__users').' AS u ON u.id = k.id_user');
-        $query->order('k.modified DESC');
+        if($lang)
+        $query->where('t.lang='.$this->_db->quote($lang));
+
+        $query->leftJoin($this->_db->nameQuote('#__users').' AS u ON u.id = t.id_user');
+        $query->order('t.modified DESC');
+
+        KuKuUtility::logQuery($query);
 
         $this->_db->setQuery($query);
 
-        $versions[$p] = $this->_db->loadObjectList();
+        $versions[$key] = $this->_db->loadObjectList();
 
-        return $versions[$p];
+        return $versions[$key];
     }//function
 
     public function getPrevious($id, $title = '')
@@ -217,7 +381,7 @@ class KISSKontentModelKISSKontent extends JModel
         if(0 == $id)
         return(isset($versions[0])) ? $versions[0] : false;
 
-        foreach ($this->getVersions() as $version)
+        foreach ($versions as $version)
         {
             if($id == $version->id)
             return $version;
@@ -260,6 +424,13 @@ class KISSKontentModelKISSKontent extends JModel
      */
     public function save()
     {
+        $lang = JRequest::getCmd('kissLang');
+
+        //-- If 'kissLang' is set, we save a translation.
+        if($lang
+        && ('default' != $lang))
+        return $this->saveTranslation();
+
         $src = new stdClass;
 
         $src->id = JRequest::getInt('id', 0);
@@ -269,6 +440,7 @@ class KISSKontentModelKISSKontent extends JModel
         $src->text = JRequest::getVar('content', '', 'post', 'none'
         , JREQUEST_ALLOWRAW);//@todo clean me up mom =;)
 
+        //-- ACL check
         if($src->id)
         {
             //-- Existing Kontent
@@ -284,21 +456,24 @@ class KISSKontentModelKISSKontent extends JModel
 
         try
         {
+            //-- Save the Kontent
             $this->getTable()
             ->bind($src)->check()->store();
 
+            //-- Save a version
             if( ! $src->id)
             {
-                $src->id_kiss = $this->_db->getLastInsertId();
+                //-- New Kontent
+                $src->id_kiss = $this->_db->insertId();
             }
             else
             {
                 $src->id_kiss = $src->id;
+                $src->id = 0;//always a new version
             }
 
             $this->getTable('KISSKontentVersions')
             ->bind($src)->check()->store();
-
         }
         catch(Exception $e)
         {
@@ -316,23 +491,32 @@ class KISSKontentModelKISSKontent extends JModel
         $src->id = JRequest::getInt('id', 0);
         $src->id_kiss = JRequest::getInt('id_kiss');
 
-        $title = JRequest::getString('transPath');
+        $path = JRequest::getString('transPath');
         $tTitle = JRequest::getString('transTitle');
 
-        $src->title =($title) ? $title.'/'.$tTitle : $tTitle;
+        $src->title =($path) ? $path.'/'.$tTitle : $tTitle;
 
-        //         $src->title = JRequest::getString('p', 'Default');
-
-        $src->text = JRequest::getVar('text', '', 'post', 'none'
+        $src->text = JRequest::getVar('content', '', 'post', 'none'
         , JREQUEST_ALLOWRAW);//@todo clean me up mom =;)
 
         $src->summary = JRequest::getString('summary', 'No comment');
-        $src->lang = JRequest::getCmd('lang');
+        $src->lang = JRequest::getCmd('kissLang');
 
         try
         {
             $this->getTable('KISSTranslations')
             ->bind($src)->check()->store();
+
+            if( ! $src->id)
+            {
+                //-- New kiss
+                $src->id_kiss = $this->_db->insertId();
+            }
+            else
+            {
+                $src->id_kiss = $src->id;
+                $src->id = 0;//always a new version
+            }
 
             $this->getTable('KISSKontentVersions')
             ->bind($src)->check()->store();
@@ -341,6 +525,127 @@ class KISSKontentModelKISSKontent extends JModel
         {
             throw new Exception($e->getMessage());
         }//try
+    }//function
+
+    protected function deleteKISS($p, $confirmed)
+    {
+        if( ! KISSKontentHelper::getActions()->get('core.delete'))
+        throw new Exception(jgettext('You are not allowed to nuke Kontent pages'));
+
+        $db = $this->_db;
+
+        try
+        {
+            //-- Delete the main KISS
+            $table = $this->getTable();
+
+            $table->load(array('title' => $p));
+
+            if( ! $confirmed)
+            {
+                $this->nukeResult->kiss = JArrayHelper::toObject($table->getProperties());
+            }
+            else
+            {
+                //-- NUKE
+                $query = $db->getQuery(true);
+                $query->from('#__kisskontent');
+                $query->delete();
+                $query->where('id='.(int)$table->id);
+
+                $db->setQuery($query);
+
+                if( ! $db->query())
+                throw new Exception(jgettext('Unable to nuke your Kontent item'));
+            }
+
+        }//try
+        catch(Exception $e)
+        {
+            throw new Exception($e->getMessage());
+        }//catch
+
+        return $table->id;
+    }//function
+
+    protected function deleteVersions($kissId, $confirmed)
+    {
+        //-- Delete versions
+        if( ! KISSKontentHelper::getActions()->get('core.delete'))
+        throw new Exception(jgettext('You are not allowed to nuke Kontent pages'));
+
+        $db = $this->_db;
+
+        $query = $db->getQuery(true);
+
+        $query->from('#__kisskontent_versions');
+        $query->select('id');
+        $query->where('id_kiss='.(int)$kissId);
+
+        $db->setQuery($query);
+
+        $ids = $db->loadResultArray();
+
+        $this->nukeResult->versions = $ids;
+
+        if($ids
+        && $confirmed)
+        {
+            $ids = implode(',', $ids);
+
+            $query->clear('select');
+            $query->clear('where');
+
+            $query->delete();
+            $query->where('id IN ('.$ids.')');
+
+            $db->setQuery($query);
+
+            if( ! $db->query())
+            throw new Exception('Unable to delete the versions - '.$db->getError());
+        }
+    }//function
+
+
+    protected function deleteTranslations($kissId, $confirmed)
+    {
+        //-- Delete translations
+        if( ! KISSKontentHelper::getActions()->get('core.delete'))
+        throw new Exception(jgettext('You are not allowed to nuke Kontent pages'));
+
+        $db = $this->_db;
+
+        $query = $db->getQuery(true);
+
+        $query->from('#__kiss_translations');
+        $query->select('id');
+        $query->where('id_kiss='.(int)$kissId);
+
+        $db->setQuery($query);
+
+        $ids = $db->loadResultArray();
+
+        $this->nukeResult->translations = $ids;
+
+
+        if($ids
+        && $confirmed)
+        {
+            $ids = implode(',', $ids);
+
+            $query->clear('select');
+            $query->clear('where');
+
+            $query->delete();
+            $query->where('id IN ('.$ids.')');
+
+            echo $query.'<br />';
+
+            $db->setQuery($query);
+
+            if( ! $db->query())
+            throw new Exception('Unable to delete the translations - '.$db->getError());
+        }
     }//function
 
     public function nuke($confirmed = false)
@@ -352,79 +657,12 @@ class KISSKontentModelKISSKontent extends JModel
 
         try
         {
-            //-- Delete the main KISS
+            $kissId = $this->deleteKISS($p, $confirmed);
 
-            $table = $this->getTable();
-            $table->load(array('title' => $p));
+            $this->deleteVersions($kissId, $confirmed);
+            $this->deleteTranslations($kissId, $confirmed);
 
-            $kissId = $table->id;
-
-            if( ! $confirmed)
-            {
-                echo 'Found Id: '.$kissId.'<br />';
-            }
-            else
-            {
-                //-- NUKE
-            }
-
-        }//try
-        catch(Exception $e)
-        {
-            throw new Exception($e->getMessage());
-        }//catch
-
-        try
-        {
-            //-- Delete versions
-
-            $db = JFactory::getDbo();
-
-            $query = $db->getQuery(true);
-
-            $query->from('#__kisskontent_versions');
-            $query->select('id');
-            $query->where('id_kiss='.(int)$kissId);
-
-            echo $query.'<br />';
-
-            $db->setQuery($query);
-
-            $ids = $db->loadResultArray();
-
-            var_dump($ids);
-
-            if($ids)
-            {
-                $ids = implode(',', $ids);
-
-            }
-
-            //-- Delete translations
-
-            $query->clear('from');
-            $query->from('#__kiss_translations');
-
-            echo $query.'<br />';
-
-            $db->setQuery($query);
-
-            $ids = $db->loadResultArray();
-
-            var_dump($ids);
-
-            if($ids)
-            {
-                $ids = implode(',', $ids);
-
-
-                $table = $this->getTable('KISSKontentVersions');
-                $table->load(array('id_kiss' => $kissId));
-            }
-
-            $kissId = $table->id;
-
-            return true;
+            return $this->nukeResult;
         }//try
         catch(Exception $e)
         {
