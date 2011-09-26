@@ -10,11 +10,20 @@
 //-- No direct access
 defined('_JEXEC') || die('=;)');
 
+JHtml::_('stylesheet'//@todo debug
+, 'com_kisskontent/debug.css', array(), true);
+
+jimport('kuku.util');//@todo debug
+
+define('KISS_DBG', 1);
+
 defined('NL') || define('NL', "\n");
 
-//-- Import the class JController
 jimport('joomla.application.component.controller');
 
+$params = JFactory::getApplication('site')->getParams('com_kisskontent');
+
+//-- Handle multilanguage functionality
 try
 {
     //-- Load the special Language
@@ -30,7 +39,7 @@ try
     else
     {
         //TEMP@@debug
-        if(0)//ECR_DEV_MODE && ECR_DEBUG_LANG)
+        if(0)
         {
             g11n::cleanStorage();//@@DEBUG
             g11n::setDebug(1);
@@ -39,13 +48,33 @@ try
         //-- Get our special language file
         g11n::loadLanguage();
     }
+
 }
 catch(Exception $e)
 {
     JError::raiseWarning(0, $e->getMessage());
-
-    return;
 }//try
+
+if( ! $params->get('kiss_ml', 0))
+{
+    define('KISS_ML', 0);
+}
+else
+{
+    if( ! class_exists('g11n'))
+    {
+        echo 'Please install the <a href="...">g11n language library</a> to use the multilanguage functionality.';
+
+        define('KISS_ML', 0);
+    }
+    else
+    {
+        /**
+         * @var integer Multilanguage flag
+         */
+        define('KISS_ML', 1);
+    }
+}//if multilanguage
 
 JLoader::register('KISSKontentHelper', JPATH_COMPONENT_SITE.'/helpers/kisskontent.php');
 
@@ -58,4 +87,5 @@ $controller->execute(JRequest::getCmd('task'));
 //-- Redirect if set by the controller
 $controller->redirect();
 
-//g11n::debugPrintTranslateds(true);
+// g11n::debugPrintTranslateds();
+echo KuKuUtility::dump();
