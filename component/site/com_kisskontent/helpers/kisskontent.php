@@ -12,6 +12,8 @@ class KISSKontentHelper
      */
     protected static $p = '';
 
+    protected static $lang = '';
+
     public static function getActions($kontentId = 0)
     {
         //--- @TODO implement "real" ACL
@@ -49,6 +51,12 @@ class KISSKontentHelper
     public static function preParse($string, $baseTitle = '')
     {
         self::$p = JRequest::getString('p');
+
+        if(KISS_ML)
+        {
+            if(class_exists('g11n'))
+            self::$lang = g11n::getDefault();
+        }
 
         $string = self::doAnchors($string);
         $string = self::doInternalAnchors($string, $baseTitle);
@@ -271,39 +279,89 @@ class KISSKontentHelper
 
     public static function isLink($link)
     {
-        static $query, $db, $links;
-
-        if(isset($links[$link]))
-        return $links[$link];
+        static $query, $queryLang, $db;
 
         if( ! $query)
         {
             $db = JFactory::getDbo();
 
             $query = $db->getQuery(true);
-
-            $query->from('#__kisskontent');
+            $query->from($db->nameQuote('#__kisskontent').' AS t');
             $query->select('count(*)');
+
+            $queryLang = $db->getQuery(true);
+            $queryLang->from($db->nameQuote('#__kiss_translations').' AS t');
+            $queryLang->select('count(*)');
         }
+
+        //@todo lang
 
         //-- If the link has a leading slash, it is relative
         $parsed =(0 === strpos($link, '/')) ? self::$p.$link : $link;
 
         $query->clear('where');
         $query->where('title='.$db->quote(urldecode($parsed)));
-
+        if(KISS_DBG) KuKuUtility::logQuery($query);
         $db->setQuery($query, 0, 1);
 
-        $links[$link] =($db->loadResult()) ? true : false;
+        $isLink = $db->loadResult();
 
-        return $links[$link];
+        if( ! $isLink && self::$lang)
+        {
+            $queryLang->clear('where');
+            $queryLang->where('title='.$db->quote(urldecode($parsed)));
+            $queryLang->where('t.lang='.$db->quote(self::$lang));
+
+            if(KISS_DBG) KuKuUtility::logQuery($queryLang);
+            $db->setQuery($queryLang, 0, 1);
+
+            $isLink = $db->loadResult();
+        }
+
+        return $isLink;
     }//function
 
-    public static function getDiffLink($title, $v1, $v2)
+    public static function getDiffLink($title, $v1, $v2, $add = '')
     {
         $diffAll =(JRequest::getInt('diffAll')) ? '&diffAll=1' : '';
 
-        return self::getLink($title, '&task=diff&amp;v1='.$v1.'&amp;v2='.$v2.$diffAll);
+        return self::getLink($title, '&task=diff&amp;v1='.$v1.'&amp;v2='.$v2.$diffAll.$add);
+    }//function
+
+    public static function drawLangChooser($title = '', $selected = '')
+    {
+        $selected =($selected) ?: JRequest::getCmd('filterLang');
+
+        $selected =($selected) ?: 'all';
+
+        $title =($title) ?: jgettext('Show languages: %s');
+
+        $items = array();
+
+        $allLink =('all' == $selected) ? 'none' : 'all';
+
+
+        $attribs = array();
+
+        $attribs['class'] =('all' == $selected) ? 'active' : '';
+        $attribs['title'] = jgettext('Click to show all translations');
+        $items[] = JHtml::link(JRoute::_('&filterLang=all'), jgettext('All languages'), $attribs);
+
+        $attribs['class'] =('none' == $selected) ? 'active' : '';
+        $attribs['title'] = jgettext('Click to hide translations');
+        $items[] = JHtml::link(JRoute::_('&filterLang=none'), jgettext('No language'), $attribs);
+
+        foreach(JFactory::getLanguage()->getKnownLanguages() as $lang)
+        {
+            $attribs =($selected == $lang['tag']) ? 'class="active"' : '';
+
+            $items[] = JHtml::link(JRoute::_('&filterLang='.$lang['tag']), $lang['tag'], $attribs);
+        }//foreach
+
+        //@todo if rtl
+        //         $ii = implode(' | ', $items);
+        //         var_dump($ii);
+        return sprintf($title, implode(' | ', $items));
     }//function
 
     /**
@@ -469,6 +527,7 @@ class KISSKontentHelper
 
         $path = 'com_kisskontent/flags/'.$tag.'.gif';
 
+        // TRANSLATORS: A language tag (e.g. "en-GB")
         $title =($title) ?: sprintf(jgettext('Language: %s'), $lang);
 
         return JHtml::image($path, $lang, array('title' => $title), true);
