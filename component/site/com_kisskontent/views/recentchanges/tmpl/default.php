@@ -19,23 +19,29 @@ $actTitle = '';
     <fieldset>
     <legend><?php echo jgettext('Display options'); ?></legend>
 
-<?php echo sprintf(jgettext('Show the latest %s | %s | %s | %s | %s changes.')
+<?php
+// TRANSLATORS: Numbers
+echo sprintf(jgettext('Show the latest %1s | %2s | %3s | %4s | %5s changes.')
 , $this->getLink('10')
 , $this->getLink('50')
 , $this->getLink('100')
 , $this->getLink('250')
 , $this->getLink('500')
-);?>
+);
+
+echo (KISS_ML) ? '<p>'.KISSKontentHelper::drawLangChooser().'</p>' : '';
+?>
 
 	</fieldset>
 
-<?php if( ! $this->list) : ?>
-	<h2><?php echo jgettext('Nothing has changed'); ?></h2>
-	<?php
-	echo '</div>'.NL;
-	return;
-	?>
-<?php endif; ?>
+<?php
+if( ! $this->list) :
+    echo '<h2>'.jgettext('Nothing has changed').'</h2>';
+    echo '</div>'.NL;
+
+    return;
+endif;
+?>
 
 <?php foreach($this->list as $item) :
     list($date, $time) = explode(' ', $item->modified);
@@ -58,7 +64,7 @@ $actTitle = '';
 
     if(1)
     {
-        echo($item->lang) ? KISSKontentHelper::drawFlag($item->lang).'&nbsp;' : '';// '&nbsp;&bull;&nbsp;';
+        echo ($item->lang) ? KISSKontentHelper::drawFlag($item->lang).'&nbsp;' : '';
     }
 
     if( ! $actTitle || $actTitle != $item->title)
@@ -102,4 +108,3 @@ echo '</ul>'.NL;
 </div>
 
 <?php echo KISSKontentHelper::footer();
-
