@@ -12,12 +12,19 @@ defined('_JEXEC') || die('=;)');
 
 ?>
 <div class="kissKontent<?php echo $this->pageclass_sfx;?>">
-
 	<h1><?php echo $this->title; ?></h1>
 
-<?php if( ! $this->list) : ?>
-    <h2><?php echo jgettext('No items found'); ?></h2>
-<?php else : ?>
+    <fieldset>
+	    <legend><?php echo jgettext('Display options'); ?></legend>
+        <?php
+        // TRANSLATORS: A list of letters
+        echo sprintf(jgettext('Display: %s'), implode(' | ', $this->alphaLinks)); ?>
+        <p><?php echo (KISS_ML) ? KISSKontentHelper::drawLangChooser() : ''; ?></p>
+    </fieldset>
+
+    <?php if( ! $this->list) : ?>
+    	<h2><?php echo jgettext('No items found'); ?></h2>
+    <?php else : ?>
 
     <ul>
     <?php foreach ($this->list as $item) : ?>

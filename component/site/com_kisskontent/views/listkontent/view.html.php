@@ -50,10 +50,39 @@ class KISSKontentViewListKontent extends JView
         $this->translationList = $this->get('translationlist');
 
         $this->canNuke = KISSKontentHelper::getActions()->get('core.nuke');
-// var_dump($this->translationList );
+
         $this->processItems($list);
 
+        $this->alphaLinks = $this->processAlphaLinks($this->get('alphas'));
+
         parent::display($tpl);
+    }//function
+
+    protected function processAlphaLinks($alphas)
+    {
+        $links = array();
+
+        if( ! $alphas)
+        return $links;
+
+        $filterAlpha = JRequest::getCmd('filterAlpha', 'all');
+
+        $attribs = array();
+
+        if('all' == $filterAlpha)
+        $attribs['class'] = 'active';
+
+        $attribs['title'] =('none' == $filterAlpha) ? jgettext('Click to show all items') : jgettext('Click to hide translations');
+
+        $links[] = JHtml::link(JRoute::_('&filterAlpha=all'), jgettext('All items'), $attribs);
+
+        foreach($alphas as $alpha)
+        {
+            $selected =($filterAlpha == $alpha) ? 'class="active"' : '';
+            $links[] = JHtml::link(JRoute::_('&filterAlpha='.$alpha), $alpha, $selected);
+        }//foreach
+
+        return $links;
     }//function
 
     protected function processItems($items, $level = 0)
@@ -100,16 +129,11 @@ class KISSKontentViewListKontent extends JView
             ? KISSKontentHelper::getLink($full, '&task=nuke')
             : '';
 
-            $item->translations = array();
+            $item->translations =(array_key_exists($full, $this->translationList))
+            ? explode(',', $this->translationList[$full]->langs)
+            : array();
 
-            if(array_key_exists($full, $this->translationList))
-            {
-                $item->translations = explode(',', $this->translationList[$full]->{'GROUP_CONCAT(t.lang)'});
-            }
-
-//             ? '&nbsp; &rArr;'.JHtml::link(KISSKontentHelper::getLink($full, '&task=nuke'), jgettext('Nuke')
-//             , array('style' => 'font-weight: bold; color: red'))
-//             : '';
+            sort($item->translations);
 
             $list[] = $item;
 
