@@ -17,7 +17,7 @@ CREATE TABLE `#__kisskontent_versions` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `#__kiss__translations` (
+CREATE TABLE `#__kiss_translations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary key',
   `id_kiss` tinyint(3) unsigned NOT NULL COMMENT 'KISSKontent ID',
   `title` varchar(500) NOT NULL COMMENT 'Translation title',
