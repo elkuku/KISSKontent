@@ -58,5 +58,5 @@ class KISSKontentViewKISSKontent extends JView
     protected function defaultTask()
     {
         $this->setLayout('raw');
-    }
+    }//function
 }//class

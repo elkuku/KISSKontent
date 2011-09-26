@@ -10,8 +10,29 @@
 //-- No direct access
 defined('_JEXEC') || die('=;)');
 
-$leftAdd = '';
-$leftAdd .= KISSKontentHelper::drawFlag($this->content->lang);
+$leftAdd = array();
+$leftAdd[] = KISSKontentHelper::drawFlag($this->content->lang);
+
+foreach ($this->translations as $tag => $p)
+{
+//     if(is_int($tag))
+//     {
+//         $langTag = $translation;
+//         $p = 'Default';
+//     }
+//     else
+//     {
+//         $langTag = $tag;
+//         $p = $translation;
+//     }
+
+    $class=($tag == $this->content->lang) ? 'class="active"' : '';
+
+    $leftAdd[] = JHtml::link(JRoute::_('&lang=&p='.$p), $tag, $class);
+}
+
+$leftAdd = implode("\n", $leftAdd);
+
 ?>
 
 <div class="kissKontent<?php echo $this->pageclass_sfx;?>">

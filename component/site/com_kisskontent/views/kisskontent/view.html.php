@@ -77,6 +77,11 @@ class KISSKontentViewKISSKontent extends JView
         $this->defaultTask();
     }//function
 
+    protected function dotranslate()
+    {
+        $this->defaultTask();
+    }//function
+
     protected function defaultTask()
     {
         $this->content = $this->get('content');
@@ -95,6 +100,10 @@ class KISSKontentViewKISSKontent extends JView
 
         JDispatcher::getInstance()->trigger('onContentPrepare'
         , array('text', &$this->content, &$this->params));
+
+        $id =($this->content->id_kiss) ?: $this->content->id;
+
+        $this->translations = $this->getModel()->getTranslations($id);
     }//function
 
     protected function edit()
@@ -104,6 +113,7 @@ class KISSKontentViewKISSKontent extends JView
         if( ! $this->content->id)
         {
             JRequest::setVar('task', '');
+
             $this->defaultTask();
 
             return;
@@ -111,22 +121,25 @@ class KISSKontentViewKISSKontent extends JView
 
         JHtml::_('stylesheet', 'com_kisskontent/diff.css', array(), true);
 
-
         $this->setLayout('edit');
     }//function
 
     protected function translate()
     {
+        JHtml::_('behavior.framework', true);
+
+        JHtml::_('script', 'com_kisskontent/translate.js', array(), true);
+
         $targetLang =(class_exists('g11n')) ? g11n::getDefault() : 'en-GB';
 
         $model = $this->getModel();
 
         $this->content = $model->getContent('default');
-        //         $this->content = $this->get('content');
 
         if( ! $this->content->id)
         {
             JRequest::setVar('task', '');
+
             $this->defaultTask();
 
             return;
@@ -134,62 +147,78 @@ class KISSKontentViewKISSKontent extends JView
 
         $parts = explode('/', $this->content->title);
 
-        if(count($parts) > 1)
-        {
-            //             var_dump($parts);
-        }
+        $this->content->titleName = $this->content->xtitle;
+        //array_pop($parts);
+//         $this->content->path = implode('/', $parts);
 
-
-        $this->content->titleName = array_pop($parts);
-        $this->content->path = implode('/', $parts);
 
         $this->translation = $this->get('translation');
+
+        $this->translation->titleName = array_pop($parts);
+
+        $this->translation->path =($this->translation->path)
+        ?: $model->getTranslation($targetLang, $this->content->path)->fullPath;
+
+        $this->translation->lang = $targetLang;
+
+        $this->missingTranslations = array();
 
         if('default' == strtolower($this->content->title))
         {
             $this->translation->title = 'Default';
         }
-
-        $parts = explode('/', $this->translation->title);
-
-        if(count($parts) > 1)
+        else
         {
-            //             var_dump($parts);
+            $parts = explode('/', $this->content->title);
+
+            array_pop($parts);
+
+            if(count($parts))
+            {
+                $complete = '';
+
+                foreach($parts as $part)
+                {
+                    $complete .=($complete) ? '/'.$part : $part;
+
+                    $tr = $model->getTranslation($targetLang, $complete);
+
+                    if( ! $tr->id)
+                    $this->missingTranslations[] = $complete;
+                }//foreach
+            }
         }
-
-
-        $this->translation->titleName = array_pop($parts);
-        $this->translation->path = implode('/', $parts);
-        $this->translation->lang = $targetLang;
-
 
         $langs = JFactory::getLanguage()->getKnownLanguages();
 
         $options = array();
         $options['orig'] = array();
-        $options['trans'] = array();
 
-        foreach ($langs as $lang)
+        $translations = $model->getTranslations($this->content->id);
+
+        if(isset($translations[$this->translation->lang]))
+        unset($translations[$this->translation->lang]);
+
+// var_dump($translations);
+        foreach($translations as $tag => $title)
         {
-            $options['orig'][] = JHtml::_('select.option', $lang['tag']);
-            //            $options['trans'][] = JHtml::_('select.option', $lang['tag']);
+            $options['orig'][] = JHtml::_('select.option', $title, $tag.' - '.$title);
         }//foreach
 
         array_unshift($options['orig'], JHtml::_('select.option', '', jgettext('Default')));
 
         $this->lists = array();
 
-
         $this->lists['origLang'] = JHtml::_('select.options', $options['orig']);
-
-        //        $this->lists['transLang'] = JHtml::_('select.options', $options['trans'], 'value', 'text', $targetLang);
 
         $this->setLayout('translate');
     }//function
 
     protected function versions()
     {
-        $this->versions = $this->get('versions');
+        //@todo lang filter
+
+        $this->versions = $this->getModel()->getVersions('', 'all');
 
         $this->setLayout('versions');
     }//function
@@ -291,14 +320,14 @@ class KISSKontentViewKISSKontent extends JView
         return false;
 
         return ($Itemid == $activeId);
-    }
+    }//function
 
     /**
      * KISS menu =;)
      *
      * @return string
      */
-    protected function menu($leftAdd = 'huhu')
+    protected function menu($leftAdd = '')
     {
         $task = JRequest::getCmd('task');
 
@@ -314,7 +343,7 @@ class KISSKontentViewKISSKontent extends JView
 
         $html[] = '   <ul>';
 
-        $activeS =' class="active"';
+        $activeS = ' class="active"';
 
         $active =('' == $task || in_array($task, array('read', 'save'))) ? $activeS : '';
         $html[] = '      <li>'.JHtml::link(JRoute::_('&task=read'), jgettext('Read'), $active).'</li>';
@@ -324,7 +353,7 @@ class KISSKontentViewKISSKontent extends JView
         $html[] = '      <li>'.JHtml::link(JRoute::_('&task=edit'), jgettext('Edit'), $active).'</li>';
 
         $active =('translate' == $task) ? $activeS : '';
-        if($this->canDo->get('core.translate'))
+        if(KISS_ML && $this->canDo->get('core.translate'))
         $html[] = '      <li>'.JHtml::link(JRoute::_('&task=translate'), jgettext('Translate'), $active).'</li>';
 
         $active =(in_array($task, array('versions', 'diff'))) ? $activeS : '';
@@ -333,6 +362,7 @@ class KISSKontentViewKISSKontent extends JView
         $html[] = '   </ul>';
 
         $html[] = '</div>';
+
         $html[] = '<div class="clr"></div>';
 
         $html[] = '</div>';

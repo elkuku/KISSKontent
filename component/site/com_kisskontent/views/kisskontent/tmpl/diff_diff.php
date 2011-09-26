@@ -10,8 +10,11 @@
 //-- No direct access
 defined('_JEXEC') || die('=;)');
 
-//-- TRANSLATORS: A date and user name
-$previewTitle =($this->diff->next->link) ? jgettext('Version as of %s by %s') : jgettext('Actual version as of %s by %s');
+$previewTitle =($this->diff->next->link)
+// TRANSLATORS: 1 - the date, 2 - The user
+? jgettext('Version as of %1s by %2s')
+// TRANSLATORS: 1 - the date, 2 - The user
+: jgettext('Actual version as of %1s by %2s');
 ?>
 
 <table class="diff">
@@ -21,6 +24,7 @@ $previewTitle =($this->diff->next->link) ? jgettext('Version as of %s by %s') : 
     	    <br />
     	    <?php echo $this->diff->versionOne->name; ?>
     	    <br />
+    	    <?php echo(KISS_ML) ? KISSKontentHelper::drawFlag($this->diff->versionOne->lang) : ''; ?>
     		<em><?php echo $this->diff->versionOne->summary; ?> </em>
     	</th>
 
@@ -29,7 +33,8 @@ $previewTitle =($this->diff->next->link) ? jgettext('Version as of %s by %s') : 
     	    <br />
     	    <?php echo $this->diff->versionTwo->name; ?>
     	    <br />
-    		<em><?php echo $this->diff->versionTwo->summary; ?> </em>
+    	    <?php echo(KISS_ML) ? KISSKontentHelper::drawFlag($this->diff->versionTwo->lang) : ''; ?>
+    	    <em><?php echo $this->diff->versionTwo->summary; ?> </em>
     	</th>
     </tr>
 
