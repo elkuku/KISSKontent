@@ -49,3 +49,26 @@ function kisskontentDifferences(baseUri, p)
 	}).send();
 }//function
 
+function kissHelp(div)
+{
+	var container = document.id(div);
+	
+	container.set('html', '');
+
+    new Request({
+    	url: 'index.php?option=com_kisskontent'
+    	+ '&tmpl=component&format=raw'
+    	+ '&task=help',
+
+		method: 'post',
+//		data: 'kontent=' + kontent.value,
+		
+		//onRequest..
+		
+		onSuccess: function(response) 
+		{
+			container.set('html', response);
+			container.set('class', 'kisskuntentPreview');
+		}
+	}).send();
+}
