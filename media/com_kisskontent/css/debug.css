@@ -7,9 +7,23 @@ b.dbgOperator {
 }
 
 span.dbgCommand {
-	color: blue;
+	color: yellow;
 }
 
 span.dbgTable {
-	color: green;
+	color: orange;
+}
+
+div.dbgQuery {
+	background-color: #000;
+	color: #fff;
+	font-family: monospace;
+	font-weight: bold;
+	font-size: 12px;
+	padding: 0.5em;
+	border-bottom: 1px solid gray;
+}
+
+div.dbgDump {
+	padding-bottom: 3em;
 }
