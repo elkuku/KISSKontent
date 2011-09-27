@@ -110,7 +110,8 @@ class KISSKontentViewKISSKontent extends JView
     {
         $this->content = $this->get('content');
 
-        if( ! $this->content->id)
+        if( ! $this->content->id
+        && 'default' != strtolower($this->content->title))
         {
             JRequest::setVar('task', '');
 
@@ -148,9 +149,6 @@ class KISSKontentViewKISSKontent extends JView
         $parts = explode('/', $this->content->title);
 
         $this->content->titleName = $this->content->xtitle;
-        //array_pop($parts);
-//         $this->content->path = implode('/', $parts);
-
 
         $this->translation = $this->get('translation');
 
@@ -199,7 +197,6 @@ class KISSKontentViewKISSKontent extends JView
         if(isset($translations[$this->translation->lang]))
         unset($translations[$this->translation->lang]);
 
-// var_dump($translations);
         foreach($translations as $tag => $title)
         {
             $options['orig'][] = JHtml::_('select.option', $title, $tag.' - '.$title);
@@ -301,6 +298,8 @@ class KISSKontentViewKISSKontent extends JView
         $cId = JComponentHelper::getComponent('com_kisskontent')->id;
 
         $items = $menus->getItems('component_id', $cId);
+
+        $Itemid = false;
 
         if($items)
         {
