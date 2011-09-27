@@ -32,8 +32,9 @@ defined('_JEXEC') || die('=;)');
         echo $item->indentString;
         echo JHtml::link($item->href, $item->title, array('class' => $item->class));
 
-        foreach ($item->translations as $tag) :
+        foreach ($item->translations as $tag => $title) :
             echo '&nbsp;'.KISSKontentHelper::drawFlag($tag);
+            echo '&nbsp;'.JHtml::link(KISSKontentHelper::getLink($title), $title);
         endforeach;
 
         if($item->nukeHref) :
@@ -51,3 +52,5 @@ defined('_JEXEC') || die('=;)');
 <?php endif;
 
 echo KISSKontentHelper::footer();
+
+// var_dump($this->list);

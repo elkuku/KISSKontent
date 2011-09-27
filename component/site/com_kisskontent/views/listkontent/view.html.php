@@ -130,10 +130,8 @@ class KISSKontentViewListKontent extends JView
             : '';
 
             $item->translations =(array_key_exists($full, $this->translationList))
-            ? explode(',', $this->translationList[$full]->langs)
+            ? $this->translationList[$full]
             : array();
-
-            sort($item->translations);
 
             $list[] = $item;
 
