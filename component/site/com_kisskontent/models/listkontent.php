@@ -23,7 +23,7 @@ class KISSKontentModelListKontent extends JModel
         $query->select('k.title');
         $query->order('k.title');
 
-            if($filterAlpha)
+        if($filterAlpha)
         {
             $filterAlpha = substr($filterAlpha, 0, 1);
             $query->where('k.title LIKE '.$this->_db->quote($filterAlpha.'%'));
@@ -55,7 +55,8 @@ class KISSKontentModelListKontent extends JModel
         $query->select('distinct(UPPER(LEFT(title, 1)))');
         $query->order('title');
 
-KuKuUtility::logQuery($query);
+        if(KISS_DBG) KuKuUtility::logQuery($query);
+
         $this->_db->setQuery($query);
 
         return $this->_db->loadResultArray();
@@ -72,8 +73,9 @@ KuKuUtility::logQuery($query);
         $query->from('#__kisskontent AS k, #__kiss_translations AS t');
 
         $query->select('k.id, k.title');
-        $query->select('t.lang');
+//         $query->select('t.lang');
         $query->select('GROUP_CONCAT(t.lang) AS langs');
+        $query->select('GROUP_CONCAT(t.title) AS titles');
 
         $query->where('k.id = t.id_kiss');
 
@@ -81,9 +83,12 @@ KuKuUtility::logQuery($query);
         $query->where('t.lang='.$this->_db->quote($filterLang));
 
         $query->group('k.id');
-//         $query->order('t.lang');
+        //         $query->order('t.lang');
 
-KuKuUtility::logQuery($query);
+        $query->order('t.lang');
+
+        if(KISS_DBG) KuKuUtility::logQuery($query);
+
         $this->_db->setQuery($query);
 
         $items = $this->_db->loadObjectList();
@@ -94,10 +99,14 @@ KuKuUtility::logQuery($query);
         {
             foreach ($items as $item)
             {
-                $result[$item->title] = $item;
+                $list = array_combine(explode(',', $item->langs), explode(',', $item->titles));
+
+                ksort($list);
+
+                $result[$item->title] = $list;
             }//foreach
         }
-        // var_dump($result);
+
         return $result;
     }//function
 }//class

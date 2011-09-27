@@ -41,11 +41,12 @@ class KISSKontentModelRecentChanges extends JModel
                 $query->where('v.lang='.$this->_db->quote($filterLang));
             break;
         }//switch
-KuKuUtility::logQuery($query);
+
+        if(KISS_DBG) KuKuUtility::logQuery($query);
         //         $query->where('v.lang='.$this->_db->quote('en-GB'));
         //         $query->order('v.title ASC');
         //         $query->group('v.title');
-//                 echo $query;
+        //                 echo $query;
         $this->_db->setQuery($query, 0, $limit);
 
         $list = $this->_db->loadObjectList();
