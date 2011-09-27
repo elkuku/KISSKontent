@@ -185,7 +185,7 @@ class KISSKontentHelper
 
         $text = str_replace('+','%20',$text);
         $text = str_replace('_','%5F',$text);
-        $text = str_replace('.','_',$text);
+//         $text = str_replace('.','_',$text);
         $text = str_replace('-',':',$text);
 
         return $text;
