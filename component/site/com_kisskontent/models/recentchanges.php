@@ -10,6 +10,9 @@
 //-- No direct access
 defined('_JEXEC') || die('=;)');
 
+/**
+ * KISSKontent model.
+ */
 class KISSKontentModelRecentChanges extends JModel
 {
     public function getList()
@@ -27,7 +30,7 @@ class KISSKontentModelRecentChanges extends JModel
         $query->select('v.id, v.title, v.summary, v.modified, v.lang, u.name, u.username');
         $query->order('v.modified DESC');
 
-        switch ($filterLang)
+        switch($filterLang)
         {
             case 'none':
                 $query->where('v.lang='.$this->_db->quote(''));
@@ -58,13 +61,15 @@ class KISSKontentModelRecentChanges extends JModel
 
         $langFilter = '&filterLang='.$filterLang;
 
-        foreach ($list as $item)
+        foreach($list as $item)
         {
             $previous = $model->getPrevious($item->id, $item->title);
 
             $item->link = KISSKontentHelper::getLink($item->title);
 
-            $item->diffLink =($previous) ? KISSKontentHelper::getDiffLink($item->title, $previous->id, $item->id, $langFilter) : '';
+            $item->diffLink =($previous)
+            ? KISSKontentHelper::getDiffLink($item->title, $previous->id, $item->id, $langFilter)
+            : '';
 
             $item->versionsLink = KISSKontentHelper::getLink($item->title, '&task=versions'.$langFilter);
 

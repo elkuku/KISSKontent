@@ -2,10 +2,16 @@
 // No direct access allowed to this file
 defined('_JEXEC') || die('=;)');
 
+/**
+ * KISSKontent helper.
+ */
 class KISSKontentHelper
 {
-    const NESTED_BRACKETS_REGEX = '(?>[^\[\]]+|\[(?>[^\[\]]+|\[(?>[^\[\]]+|\[(?>[^\[\]]+|\[(?>[^\[\]]+|\[(?>[^\[\]]+|\[\])*\])*\])*\])*\])*\])*';
-    const NESTED_URL_PARENTHESIS_REGEX = '(?>[^()\s]+|\((?>[^()\s]+|\((?>[^()\s]+|\((?>[^()\s]+|\((?>\)))*(?>\)))*(?>\)))*(?>\)))*';
+    const NESTED_BRACKETS_REGEX =
+    '(?>[^\[\]]+|\[(?>[^\[\]]+|\[(?>[^\[\]]+|\[(?>[^\[\]]+|\[(?>[^\[\]]+|\[(?>[^\[\]]+|\[\])*\])*\])*\])*\])*\])*';
+
+    const NESTED_URL_PARENTHESIS_REGEX =
+    '(?>[^()\s]+|\((?>[^()\s]+|\((?>[^()\s]+|\((?>[^()\s]+|\((?>\)))*(?>\)))*(?>\)))*(?>\)))*';
 
     /**
      * @var string Our path.
@@ -68,12 +74,10 @@ class KISSKontentHelper
     {
         return preg_replace_callback('@\s(https?://([-\w\.]+)+(:\d+)?(/([\w/_\.\-]*(\?\S+)?)?)?)\s@'
         , 'KISSKontentHelper::doAnchorsCallback', $text);
-
     }//function
 
     protected static function doInternalAnchors($text, $baseTitle = '')
     {
-
         //
         // Inline-style internal links: [[link text]](url "optional title")
         // @add KuKu
@@ -183,10 +187,10 @@ class KISSKontentHelper
         //         $text = self::encodeAmpsAndAngles($text);
         $text = str_replace('"', '&quot;', $text);
 
-        $text = str_replace('+','%20',$text);
-        $text = str_replace('_','%5F',$text);
+        $text = str_replace('+', '%20', $text);
+        $text = str_replace('_', '%5F', $text);
 //         $text = str_replace('.','_',$text);
-        $text = str_replace('-',':',$text);
+        $text = str_replace('-', ':', $text);
 
         return $text;
     }//function
@@ -242,7 +246,9 @@ class KISSKontentHelper
 
                 $Itemid =($active) ? $active->id : 1;
             }
-        }//-- end get Itemid...
+        }
+
+        //-- end get Itemid...
 
         $raw = $text;
 
@@ -340,7 +346,6 @@ class KISSKontentHelper
 
         $allLink =('all' == $selected) ? 'none' : 'all';
 
-
         $attribs = array();
 
         $attribs['class'] =('all' == $selected) ? 'active' : '';
@@ -400,30 +405,30 @@ class KISSKontentHelper
             {
                 case(($ord_var_c >= 0x20) && ($ord_var_c <= 0x7F)):
                     // characters U-00000000 - U-0000007F (same as ASCII)
-                    $d++;
+                    $d ++;
                     break;
                 case(($ord_var_c & 0xE0) == 0xC0):
                     // characters U-00000080 - U-000007FF, mask 110XXXXX
-                    $d+=2;
+                    $d += 2;
                     break;
                 case(($ord_var_c & 0xF0) == 0xE0):
                     // characters U-00000800 - U-0000FFFF, mask 1110XXXX
-                    $d+=3;
+                    $d += 3;
                     break;
                 case(($ord_var_c & 0xF8) == 0xF0):
                     // characters U-00010000 - U-001FFFFF, mask 11110XXX
-                    $d+=4;
+                    $d += 4;
                     break;
                 case(($ord_var_c & 0xFC) == 0xF8):
                     // characters U-00200000 - U-03FFFFFF, mask 111110XX
-                    $d+=5;
+                    $d += 5;
                     break;
                 case(($ord_var_c & 0xFE) == 0xFC):
                     // characters U-04000000 - U-7FFFFFFF, mask 1111110X
-                    $d+=6;
+                    $d += 6;
                     break;
                 default:
-                    $d++;
+                    $d ++;
             }//switch
         }//for
 
@@ -465,7 +470,7 @@ class KISSKontentHelper
         {
             $url = self::getDiffLink(self::$p, $diff->versionTwo->id, $diff->next->id);
 
-            $diff->next->link =JHtml::link($url
+            $diff->next->link = JHtml::link($url
             , jgettext('To next version difference').' &rArr;'
             , array(
                 'class' => 'diffLink diffNextLink'

@@ -10,6 +10,9 @@
 //-- No direct access
 defined('_JEXEC') || die('=;)');
 
+/**
+ * KISSKontent model.
+ */
 class KISSKontentModelKISSKontent extends JModel
 {
     private $nukeResult = null;
@@ -149,7 +152,6 @@ class KISSKontentModelKISSKontent extends JModel
 
             return $this->splitTitle($tableTrans);
 
-
             /*
              //-- Title exists - look for a translation by title id
             $tableTrans->load(array('id_kiss' => $tableOrig->id, 'lang' => $lang));
@@ -173,14 +175,15 @@ class KISSKontentModelKISSKontent extends JModel
 
             */
         }//try
-        catch (Exception $e)
+        catch(Exception $e)
         {
+            $foo = '';
             //-- @todo ignore only database exceptions (empty row)
             //             JError::raiseWarning(1, $e->getMessage());
             //foo
             //             if($tableTrans->id)
             //             $tableTrans->load(array('title' => $p));
-        }//catch
+        }//try
 
         try
         {
@@ -189,10 +192,11 @@ class KISSKontentModelKISSKontent extends JModel
 
             return $this->splitTitle($tableTrans);
         }//try
-        catch (Exception $e)
+        catch(Exception $e)
         {
+            $foo = '';
             //foo
-        }//catch
+        }//try
 
         try
         {
@@ -204,10 +208,11 @@ class KISSKontentModelKISSKontent extends JModel
                 return $this->splitTitle($tableTrans);
             }
         }//try
-        catch (Exception $e)
+        catch(Exception $e)
         {
+            $foo = '';
             //foo
-        }//catch
+        }//try
 
         return $this->splitTitle($tableTrans);
     }//function
@@ -258,7 +263,7 @@ class KISSKontentModelKISSKontent extends JModel
         if(KISS_ML)
         $lang =($lang) ?: g11n::getDefault();
 
-        $title ='';//($title) ?: JRequest::getString('p', 'default');
+        $title = '';//($title) ?: JRequest::getString('p', 'default');
 
         $key = serialize($lang.$title);
 
@@ -375,9 +380,9 @@ class KISSKontentModelKISSKontent extends JModel
         $versions = $this->getVersions();
 
         if(0 == $id)
-        return(isset($versions[0])) ? $versions[0] : false;
+        return (isset($versions[0])) ? $versions[0] : false;
 
-        foreach ($versions as $version)
+        foreach($versions as $version)
         {
             if($id == $version->id)
             return $version;
@@ -554,12 +559,11 @@ class KISSKontentModelKISSKontent extends JModel
                 if( ! $db->query())
                 throw new Exception(jgettext('Unable to nuke your Kontent item'));
             }
-
         }//try
         catch(Exception $e)
         {
             throw new Exception($e->getMessage());
-        }//catch
+        }//try
 
         return $table->id;
     }//function
@@ -601,7 +605,6 @@ class KISSKontentModelKISSKontent extends JModel
             throw new Exception('Unable to delete the versions - '.$db->getError());
         }
     }//function
-
 
     protected function deleteTranslations($kissId, $confirmed)
     {
@@ -662,7 +665,7 @@ class KISSKontentModelKISSKontent extends JModel
         catch(Exception $e)
         {
             throw new Exception($e->getMessage());
-        }//catch
+        }//try
 
         throw new Exception(jgettext('Unable to nuke your Kontent'));
     }//function

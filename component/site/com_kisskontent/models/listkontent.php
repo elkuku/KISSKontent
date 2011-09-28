@@ -10,6 +10,9 @@
 //-- No direct access
 defined('_JEXEC') || die('=;)');
 
+/**
+ * KISSKontent model.
+ */
 class KISSKontentModelListKontent extends JModel
 {
     public function getList()
@@ -97,7 +100,7 @@ class KISSKontentModelListKontent extends JModel
 
         if($items)
         {
-            foreach ($items as $item)
+            foreach($items as $item)
             {
                 $list = array_combine(explode(',', $item->langs), explode(',', $item->titles));
 

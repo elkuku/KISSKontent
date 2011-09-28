@@ -1,7 +1,12 @@
 <?php
+//-- No direct access
+defined('_JEXEC') || die('=;)');
 
 JLoader::register('KISSTableException', dirname(__FILE__).'/exception.php');
 
+/**
+ * KISSKontent table.
+ */
 class TableKISSKontent extends JTable
 {
     /**

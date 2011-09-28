@@ -63,7 +63,6 @@ class plgSearchKISSKontent extends JPlugin
 
             return;
         }//try
-
     }//function
 
     /**
@@ -115,7 +114,7 @@ class plgSearchKISSKontent extends JPlugin
 
         $query = $db->getQuery(true);
 
-        switch ($phrase)
+        switch($phrase)
         {
             case 'exact':
                 $text = $db->Quote('%'.$db->getEscaped($text, true).'%', false);
@@ -129,7 +128,7 @@ class plgSearchKISSKontent extends JPlugin
             default:
                 $words	= explode(' ', $text);
 
-                foreach ($words as $word)
+                foreach($words as $word)
                 {
                     $word = $db->Quote('%'.$db->getEscaped($word, true).'%', false);
 
@@ -139,7 +138,7 @@ class plgSearchKISSKontent extends JPlugin
                 break;
         }//switch
 
-        switch ($ordering)
+        switch($ordering)
         {
             case 'oldest':
                 $query->order('k.id ASC');
@@ -173,7 +172,7 @@ class plgSearchKISSKontent extends JPlugin
         {
             JLoader::register('KISSKontentHelper', JPATH_ROOT.'/components/com_kisskontent/helpers/kisskontent.php');
 
-            foreach ($rows as $row)
+            foreach($rows as $row)
             {
                 $row->href = KISSKontentHelper::getLink($row->title);
                 $row->text = KISSKontentHelper::preParse($row->text, $row->title);

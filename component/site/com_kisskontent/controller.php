@@ -130,50 +130,50 @@ class KISSKontentController extends JController
         $html[] = '<table class="diff">
        <tr>
        <th colspan="2" class="diffLeft" style="background-color: #dfd;">'
-        .jgettext('Saved version').'</th>'
-        .'<th colspan="2" class="diffLeft" style="background-color: #ffc;">'
-        .jgettext('Your version').'</th>'
-        .'</tr>';
+       .jgettext('Saved version').'</th>'
+       .'<th colspan="2" class="diffLeft" style="background-color: #ffc;">'
+       .jgettext('Your version').'</th>'
+       .'</tr>';
 
-       	$html[] = $this->diff;
+       $html[] = $this->diff;
 
-       	$html[] = '</table>';
+       $html[] = '</table>';
 
-       	$diff = implode("\n", $html);
+       $diff = implode("\n", $html);
 
-        //@todo - move the preview message to a view ¿
-        $previewText = '<p class="previewMessage">'
-        .jgettext('This is a preview only. The content has not been saved yet !')
-        .'<br />'
-        .'<a href="#" onclick="document.id(\'kisskontentPreview\').set(\'html\', \'\'); return false;">'.jgettext('Close preview').'</a>'
-        .'</p>';
+       //@todo - move the preview message to a view ¿
+       $previewText = '<p class="previewMessage">'
+       .jgettext('This is a preview only. The content has not been saved yet !')
+       .'<br />'
+       .'<a href="#" onclick="document.id(\'kisskontentPreview\').set(\'html\', \'\'); return false;">'.jgettext('Close preview').'</a>'
+       .'</p>';
 
-        echo $previewText.$diff;
+       echo $previewText.$diff;
 
-        return;
+       return;
 
-        //@ todo: display also a preview ¿
+       //@ todo: display also a preview ¿
 
-        //-- Process internal links
-        $raw = KISSKontentHelper::preParse($raw);
+       //-- Process internal links
+       $raw = KISSKontentHelper::preParse($raw);
 
-        $o = new stdClass;
-        $o->text = $raw;
+       $o = new stdClass;
+       $o->text = $raw;
 
-        $params = null;
+       $params = null;
 
-        JPluginHelper::importPlugin('content');
+       JPluginHelper::importPlugin('content');
 
-        JDispatcher::getInstance()->trigger('onContentPrepare'
-        , array('text', &$o, &$params));
+       JDispatcher::getInstance()->trigger('onContentPrepare'
+       , array('text', &$o, &$params));
 
-        echo $o->text;
+       echo $o->text;
     }//function
 
     public function listkontent()
     {
-        ;
-    }
+        //foo;
+    }//function
 
     public function nukeKonfirmed()
     {
@@ -182,7 +182,6 @@ class KISSKontentController extends JController
 
     public function nuke($konfirmed = false)
     {
-
         try
         {
             $model = $this->getModel();
@@ -195,11 +194,15 @@ class KISSKontentController extends JController
 
                 echo sprintf(jgettext('Delete the Kontent item: %s'), $toNuke->kiss->title).'<br />';
 
-                echo sprintf(jngettext('Delete %d version (ID: %s)', 'Delete %d versions (IDs: %s)', count($toNuke->versions))
-                ,count($toNuke->versions), implode(', ', $toNuke->versions)).'<br />';
+                echo sprintf(jngettext('Delete %d version (ID: %s)'
+                , 'Delete %d versions (IDs: %s)'
+                , count($toNuke->versions))
+                , count($toNuke->versions), implode(', ', $toNuke->versions)).'<br />';
 
-                echo sprintf(jngettext('Delete %d translation (ID: %s)', 'Delete %d translations (IDs: %s)', count($toNuke->translations))
-                ,count($toNuke->translations), implode(', ', $toNuke->translations)).'<br />';
+                echo sprintf(jngettext('Delete %d translation (ID: %s)'
+                , 'Delete %d translations (IDs: %s)'
+                , count($toNuke->translations))
+                , count($toNuke->translations), implode(', ', $toNuke->translations)).'<br />';
 
                 echo JHtml::link(JRoute::_('&task=nukeKonfirmed')
                 , jgettext('Yes I really want to nuke this Kontent')
@@ -213,10 +216,10 @@ class KISSKontentController extends JController
                 JFactory::getApplication()->enqueueMessage(jgettext('Your Kontent has been nuked'));
             }
         }
-        catch (Exception $e)
+        catch(Exception $e)
         {
             JError::raiseWarning(1, $e->getMessage());
-        }
+        }//try
 
         JRequest::setVar('view', 'listkontent');
 
@@ -239,7 +242,6 @@ class KISSKontentController extends JController
 
         if( ! JFile::exists($file))
         {
-
             $lang = $defaultLang;
 
             $file = JPATH_COMPONENT_SITE.'/demo/help_'.$defaultLang.'.md';
@@ -262,7 +264,7 @@ class KISSKontentController extends JController
 
         $t = '';
 
-        foreach ($parts as $part)
+        foreach($parts as $part)
         {
             if(preg_match('/^# (\w+)/', $part, $matches))
             {
@@ -286,14 +288,14 @@ class KISSKontentController extends JController
 
         $html = array();
 
-        foreach ($chapters as $title => $chapter)
+        foreach($chapters as $title => $chapter)
         {
             $html[] = '<h1>'.$title.'</h1>';
 
             $html[] = '<table border="1">';
             $html[] = '<tr><th>a</th><th>b</th><th>c</th></tr>';
 
-            foreach ($chapter as $line)
+            foreach($chapter as $line)
             {
                 $html[] = '<tr>';
 
@@ -315,7 +317,8 @@ class KISSKontentController extends JController
                 $html[] = '</td>';
 
                 $html[] = '</tr>';
-            }
+            }//foreach
+
             $html[] = '</table>';
         }//foreach
 

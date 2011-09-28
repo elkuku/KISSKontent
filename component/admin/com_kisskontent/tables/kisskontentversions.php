@@ -1,4 +1,10 @@
 <?php
+//-- No direct access
+defined('_JEXEC') || die('=;)');
+
+/**
+ * KISSKontent table.
+ */
 class TableKISSKontentVersions extends JTable
 {
     /**

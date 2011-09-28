@@ -11,15 +11,11 @@
 defined('_JEXEC') || die('=;)');
 
 /**
- * PHP dummy function
- */
-
-/**
  * PHP dummy function.
  *
  * @param string $string The string
  *
- * @return string
+ * @return string The same string..
  */
 function jgettext($string)
 {
@@ -30,10 +26,10 @@ function jgettext($string)
  * PHP dummy function.
  *
  * @param string $singular Singular string
- * @param string $pluralPlural string
+ * @param string $plural Plural string
  * @param integer $count Count
  *
- * @return string
+ * @return string The plural string if $count != 1
  */
 function jngettext($singular, $plural, $count)
 {

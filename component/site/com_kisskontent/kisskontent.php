@@ -53,7 +53,6 @@ else
             //-- Get our special language file
             g11n::loadLanguage();
         }
-
     }
     catch(Exception $e)
     {
@@ -62,7 +61,9 @@ else
 
     if( ! class_exists('g11n'))
     {
-        echo 'Please install the <a href="...">g11n language library</a> to use the multilanguage functionality.';
+        echo 'Please install the '
+        .'<a href="...">g11n language library</a>'
+        .' to use the multilanguage functionality.';
 
         define('KISS_ML', 0);
     }

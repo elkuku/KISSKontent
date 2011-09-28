@@ -6,6 +6,9 @@ defined('_JEXEC') || die('=;)');
 // Import Joomla! Plugin library file
 jimport('joomla.plugin.plugin');
 
+/**
+ * Content plugin for the KISSKomponent component.
+ */
 class plgContentKISSKontent extends JPlugin
 {
     /**
