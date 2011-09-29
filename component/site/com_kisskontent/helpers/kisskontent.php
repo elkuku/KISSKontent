@@ -292,7 +292,7 @@ class KISSKontentHelper
             $db = JFactory::getDbo();
 
             $query = $db->getQuery(true);
-            $query->from($db->nameQuote('#__kisskontent').' AS t');
+            $query->from($db->nameQuote('#__kisskontent').' AS k');
             $query->select('count(*)');
 
             $queryLang = $db->getQuery(true);
@@ -306,8 +306,10 @@ class KISSKontentHelper
         $parsed =(0 === strpos($link, '/')) ? self::$p.$link : $link;
 
         $query->clear('where');
-        $query->where('title='.$db->quote(urldecode($parsed)));
+        $query->where('k.title='.$db->quote(urldecode($parsed)));
+
         if(KISS_DBG) KuKuUtility::logQuery($query);
+
         $db->setQuery($query, 0, 1);
 
         $isLink = $db->loadResult();
@@ -315,7 +317,7 @@ class KISSKontentHelper
         if( ! $isLink && self::$lang)
         {
             $queryLang->clear('where');
-            $queryLang->where('title='.$db->quote(urldecode($parsed)));
+            $queryLang->where('t.title='.$db->quote(urldecode($parsed)));
             $queryLang->where('t.lang='.$db->quote(self::$lang));
 
             if(KISS_DBG) KuKuUtility::logQuery($queryLang);
@@ -528,6 +530,9 @@ class KISSKontentHelper
 
     public static function drawFlag($lang, $title = '')
     {
+        if( ! KISS_ML)
+        return '';
+
         $tag =('default' == $lang) ? 'xx' : strtolower(substr($lang, 0, 2));
 
         $path = 'com_kisskontent/flags/'.$tag.'.gif';
