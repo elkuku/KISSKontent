@@ -34,7 +34,7 @@ defined('_JEXEC') || die('=;)');
 
         foreach ($item->translations as $tag => $title) :
             echo '&nbsp;'.KISSKontentHelper::drawFlag($tag);
-            echo '&nbsp;'.JHtml::link(KISSKontentHelper::getLink($title), $title);
+            echo '&nbsp;'.JHtml::link(KISSKontentHelper::getLink($title), $tag, array('title' => $title));
         endforeach;
 
         if($item->nukeHref) :
