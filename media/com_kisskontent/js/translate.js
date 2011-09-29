@@ -74,6 +74,27 @@ var KISSTranslator = new Class({
     loadTranslation : function(p, target, lang)
     {
     	console.log(p, target, lang);
+    	
+    	var destination = document.id(target);
+    	var destination2 = document.id(target+'Esc');
+    console.log(destination);
+    console.log(destination2);
+    	new Request({
+    		url : 'index.php?option=com_kisskontent&task=translator.load' 
+    			+ '&tmpl=component&format=raw',
+
+    		method : 'post',
+    		data: 'p=' + p,
+
+    		// onRequest..
+
+    		onSuccess : function(response) {
+//    			alert(response);
+    			destination.set('html', response);
+    			destination2.set('html', response);
+    		}
+    	}).send();
+
     }//function
 
     
