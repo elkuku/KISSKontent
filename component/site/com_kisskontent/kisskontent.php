@@ -10,7 +10,7 @@
 //-- No direct access
 defined('_JEXEC') || die('=;)');
 
-define('KISS_DBG', 0);//@@DEBUG
+define('KISS_DBG', 1);//@@DEBUG
 
 defined('NL') || define('NL', "\n");
 
@@ -87,5 +87,8 @@ $controller->execute(JRequest::getCmd('task'));
 //-- Redirect if set by the controller
 $controller->redirect();
 
-// g11n::debugPrintTranslateds();
-if(KISS_DBG) echo KuKuUtility::dump();
+if('raw' != JRequest::getCmd('format'))
+{
+    // g11n::debugPrintTranslateds();
+    if(KISS_DBG) echo KuKuUtility::dump();
+}

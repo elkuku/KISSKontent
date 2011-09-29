@@ -229,6 +229,7 @@ class KISSKontentController extends JController
     public function help()
     {
         $defaultLang = 'en-GB';
+        $lang = '';
 
         if(KISS_ML)
         {
@@ -303,8 +304,8 @@ class KISSKontentController extends JController
                 $html[] = $line;
                 $html[] = '</td>';
 
-                $o->text = $line;
-                $o->text = KISSKontentHelper::preParse($o->text);
+                $o->text = KISSKontentHelper::preParse($line);
+
                 $dispatcher->trigger('onContentPrepare'
                 , array('text', &$o, &$p));
 

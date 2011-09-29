@@ -36,7 +36,6 @@ class KISSKontentControllerTranslator extends JController
     {
         JLoader::register('googleTranslator', JPATH_COMPONENT_SITE.'/helpers/googletranslator.php');
 
-        //     var_dump($_REQUEST);
         $text = JRequest::getVar('text');
 
         if( ! $text)
@@ -46,13 +45,10 @@ class KISSKontentControllerTranslator extends JController
             return;
         }
 
-
-        //     $source = implode($argv, ' ');
-
         $translator = new googleTranslator;
-        $result = $translator->translate($text, "en", "zh-TW");
 
-        //     echo "Translate from: $source" . PHP_EOL;
+        $result = $translator->translate($text, 'en', 'zh-TW');
+
         echo $result;
     }//function
 }//class
