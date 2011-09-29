@@ -87,7 +87,10 @@ class KISSKontentModelKISSKontent extends JModel
                 {
                     $table->load($forceId);
 
-                    return $this->splitTitle($translation);
+                    $table->id_kiss = 0;
+                    $table->lang = 'default';
+
+                    return $this->splitTitle($table);
                 }
                 else
                 {
@@ -112,7 +115,8 @@ class KISSKontentModelKISSKontent extends JModel
         $parts = explode('/', $table->title);
 
         $table->fullPath = $table->title;
-        $table->xtitle = array_pop($parts);//@todo rrremove... - change to title
+
+        $table->page = array_pop($parts);
         $table->path = implode('/', $parts);
 
         return $table;
@@ -151,29 +155,6 @@ class KISSKontentModelKISSKontent extends JModel
             $tableTrans->load(array('id_kiss' => $tableOrig->id, 'lang' => $lang));
 
             return $this->splitTitle($tableTrans);
-
-            /*
-             //-- Title exists - look for a translation by title id
-            $tableTrans->load(array('id_kiss' => $tableOrig->id, 'lang' => $lang));
-
-            return $this->splitTitle($tableTrans);
-            *             if($id)
-            {
-            $tableOrig->load($id);
-            //-- Title exists - look for a translation by title id
-            $tableTrans->load(array('id_kiss' => $tableOrig->id, 'lang' => $lang));
-
-            return $this->splitTitle($tableTrans);
-            }
-
-            $tableOrig->load(array('title' => $p));
-
-            //-- Title exists - look for a translation by title id
-            $tableTrans->load(array('id_kiss' => $tableOrig->id, 'lang' => $lang));
-
-            return $this->splitTitle($tableTrans);
-
-            */
         }//try
         catch(Exception $e)
         {
@@ -195,7 +176,6 @@ class KISSKontentModelKISSKontent extends JModel
         catch(Exception $e)
         {
             $foo = '';
-            //foo
         }//try
 
         try
@@ -211,7 +191,6 @@ class KISSKontentModelKISSKontent extends JModel
         catch(Exception $e)
         {
             $foo = '';
-            //foo
         }//try
 
         return $this->splitTitle($tableTrans);
@@ -225,14 +204,10 @@ class KISSKontentModelKISSKontent extends JModel
 
         $query->from($db->nameQuote('#__kiss_translations').' AS t');
 
-        //         $query->select('k.id, t.title');
-        //         $query->select('t.lang');
         $query->select('GROUP_CONCAT(DISTINCT(t.lang)) AS langs');
         $query->select('GROUP_CONCAT(DISTINCT(t.title)) AS titles');
 
         $query->where('t.id_kiss = '.(int)$id);
-
-        //         $query->group('k.id');
 
         if(KISS_DBG) KuKuUtility::logQuery($query);
 
@@ -245,25 +220,33 @@ class KISSKontentModelKISSKontent extends JModel
 
         if('default' == strtolower($result->titles))
         return array();
-        //         return explode(',', $result->langs);
 
         return array_combine(explode(',', $result->langs), explode(',', $result->titles));
     }//function
 
-    public function getVersions($title = '', $lang = '')
+    public function getVersions($title = '')
     {
         static $versions;
 
         $db = $this->_db;
 
-        if('all' == $lang
-        || ! $lang)
         $lang = '';
 
         if(KISS_ML)
-        $lang =($lang) ?: g11n::getDefault();
+        {
+            $filterLang = JRequest::getCmd('filterLang');
 
-        $title = '';//($title) ?: JRequest::getString('p', 'default');
+            if($filterLang)
+            {
+                $lang = $filterLang;
+
+                $lang =('all' == $lang) ? '' : $lang;
+            }
+            else
+            {
+                $lang =($lang) ?: g11n::getDefault();
+            }
+        }
 
         $key = serialize($lang.$title);
 
@@ -302,19 +285,22 @@ class KISSKontentModelKISSKontent extends JModel
 
         $query = $db->getQuery(true);
 
-        $query->from($this->_db->nameQuote('#__kisskontent_versions').' AS t');
-        $query->where('t.id_kiss IN ('.implode(',', $ids).')');
+        $query->from($this->_db->nameQuote('#__kisskontent_versions').' AS v');
+        $query->where('v.id_kiss IN ('.implode(',', $ids).')');
 
-        $query->select('t.id, t.id_user, t.text, t.summary, t.modified, t.lang, u.name, u.username');
+        $query->select('v.id, v.id_user, v.text, v.summary, v.modified, v.lang, u.name, u.username');
 
         if($title)
-        $query->where('t.title='.$this->_db->quote($title));
+        $query->where('v.title='.$this->_db->quote($title));
 
         if($lang)
-        $query->where('t.lang='.$this->_db->quote($lang));
+        {
+            $l =('none' == $lang) ? '' : $lang;
+            $query->where('v.lang='.$this->_db->quote($l));
+        }
 
-        $query->leftJoin($this->_db->nameQuote('#__users').' AS u ON u.id = t.id_user');
-        $query->order('t.modified DESC');
+        $query->leftJoin($this->_db->nameQuote('#__users').' AS u ON u.id = v.id_user');
+        $query->order('v.modified DESC');
 
         if(KISS_DBG) KuKuUtility::logQuery($query);
 
