@@ -148,14 +148,12 @@ class KISSKontentViewKISSKontent extends JView
 
         $parts = explode('/', $this->content->title);
 
-        $this->content->titleName = $this->content->xtitle;
-
         $this->translation = $this->get('translation');
 
-        $this->translation->titleName = array_pop($parts);
-
-        $this->translation->path =($this->translation->path)
-        ?: $model->getTranslation($targetLang, $this->content->path)->fullPath;
+        if( ! $this->translation->id)
+        {
+            $this->translation->path = $model->getTranslation($targetLang, $this->content->path)->fullPath;
+        }
 
         $this->translation->lang = $targetLang;
 
@@ -202,7 +200,7 @@ class KISSKontentViewKISSKontent extends JView
             $options['orig'][] = JHtml::_('select.option', $title, $tag.' - '.$title);
         }//foreach
 
-        array_unshift($options['orig'], JHtml::_('select.option', '', jgettext('Default')));
+        array_unshift($options['orig'], JHtml::_('select.option', $this->content->title.'&forcelang=default', jgettext('Default').' - '.$this->content->title));
 
         $this->lists = array();
 
@@ -215,7 +213,7 @@ class KISSKontentViewKISSKontent extends JView
     {
         //@todo lang filter
 
-        $this->versions = $this->getModel()->getVersions('', 'all');
+        $this->versions = $this->getModel()->getVersions();
 
         $this->setLayout('versions');
     }//function

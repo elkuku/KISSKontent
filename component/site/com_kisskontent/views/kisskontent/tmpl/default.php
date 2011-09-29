@@ -15,17 +15,6 @@ $leftAdd[] = KISSKontentHelper::drawFlag($this->content->lang);
 
 foreach ($this->translations as $tag => $p)
 {
-//     if(is_int($tag))
-//     {
-//         $langTag = $translation;
-//         $p = 'Default';
-//     }
-//     else
-//     {
-//         $langTag = $tag;
-//         $p = $translation;
-//     }
-
     $class=($tag == $this->content->lang) ? 'class="active"' : '';
 
     $leftAdd[] = JHtml::link(JRoute::_('&lang=&p='.$p), $tag, $class);
@@ -44,3 +33,5 @@ $leftAdd = implode("\n", $leftAdd);
 </div>
 
 <?php echo KISSKontentHelper::footer();
+
+// var_dump($this->content);

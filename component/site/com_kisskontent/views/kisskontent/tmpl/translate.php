@@ -43,8 +43,11 @@ JFactory::getDocument()->addScript('http://www.google.com/jsapi');
 <form method="post">
 
     <h1><?php echo jgettext('Translate');?></h1>
+
+    <!-- Original  -->
+
     <?php echo $this->content->path; ?>
-    <h2><?php echo $this->content->titleName; ?></h2>
+    <h2><?php echo $this->content->page; ?></h2>
 
     <?php
     //-- ACL check
@@ -81,14 +84,13 @@ JFactory::getDocument()->addScript('http://www.google.com/jsapi');
     <?php endif; ?>
 
     <?php echo KISSKontentHelper::drawFlag($this->content->lang); ?>
-    <select name="origLang" onchange="KISSTranslator.loadTranslation(this.value);">
+    <select name="origLang" onchange="KISSTranslator.loadTranslation(this.value, 'origText');">
         <?php echo $this->lists['origLang']; ?>
     </select>
 
     <br />
 
-    <input id="origTitle" type="hidden" value="<?php echo $this->content->titleName; ?>" />
-
+    <input id="origTitle" type="hidden" value="<?php echo $this->content->page; ?>" />
 
     <!-- Unescaped used to fetch it with js - @todo look for a better solution.. -->
     <div id="origText" style="display: none"><?php echo $this->content->text; ?></div>
@@ -98,25 +100,28 @@ JFactory::getDocument()->addScript('http://www.google.com/jsapi');
         <?php echo nl2br(htmlspecialchars($this->content->text)); ?>
     </div>
 
-<br />
+    <!-- Translation  -->
+
+    <br />
     <hr />
 
     <?php echo KISSKontentHelper::drawFlag($this->translation->lang); ?>
 
     <?php echo $this->translation->path; ?>
+
     <input type="hidden" name="transPath" value="<?php echo $this->translation->path; ?>" />
 
-    <?php if($this->translation->title) : ?>
-        <h2><?php echo $this->translation->title; ?></h2>
-        <input name="transTitle" type="hidden" value="<?php echo $this->translation->title; ?>" />
+    <?php if($this->translation->page) : ?>
+        <h2><?php echo $this->translation->page; ?></h2>
+        <input name="transTitle" type="hidden" value="<?php echo $this->translation->page; ?>" />
     <?php else :?>
         <br />
         <input name="transTitle" id="transTitle" type="text" style="font-size: 1.3em;"
-        value="<?php echo $this->translation->title; ?>" />
+        value="<?php echo $this->translation->page; ?>" />
     <?php endif; ?>
 
     <?php if( ! $this->translation->id) : ?>
-        <?php if('default' != strtolower($this->content->titleName)) : ?>
+        <?php if('default' != strtolower($this->content->page)) : ?>
             <input type="button" onclick="document.id('transTitle').value = document.id('origTitle').value;"
             value="<?php echo jgettext('Copy title'); ?>" />
         <?php endif; ?>
@@ -172,3 +177,6 @@ JFactory::getDocument()->addScript('http://www.google.com/jsapi');
 </div>
 
 <?php echo KISSKontentHelper::footer();
+var_dump($this->translation);
+
+echo str_repeat('<br />', 5);

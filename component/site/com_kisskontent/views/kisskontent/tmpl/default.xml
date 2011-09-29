@@ -9,9 +9,8 @@
 
 			<field name="p" type="text" label="Start page"
 				description="The start page. If left empty the default page will be displayed"
-				size="15" />
+				size="25" />
 
 		</fieldset>
 	</fields>
-
 </metadata>

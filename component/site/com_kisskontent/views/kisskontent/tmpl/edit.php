@@ -23,7 +23,7 @@ defined('_JEXEC') || die('=;)');
 
 <h2>
     <?php echo KISSKontentHelper::drawFlag($this->content->lang); ?>
-    <?php echo $this->content->xtitle; ?>
+    <?php echo $this->content->page; ?>
 </h2>
 
 <?php
