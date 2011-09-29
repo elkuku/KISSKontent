@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-    <fieldset
-        name="component"
-        label="General settings"
-        description="">
- 
-        <field
-            name="kiss_ml"
-            type="radio"
-            label="Multi language"
-            description="Use the multi language functionality."
-            default="0">
- 
-            <option value="0">JNO</option>
-            <option value="1">JYES</option>
-        </field>
-    </fieldset>
+	<fieldset name="component" label="General settings"
+		description="">
+
+		<field name="kiss_ml" type="radio" label="Multi language"
+			description="Use the multi language functionality." default="0">
+
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+	</fieldset>
 </config>
