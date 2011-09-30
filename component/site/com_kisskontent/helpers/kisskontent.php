@@ -64,7 +64,7 @@ class KISSKontentHelper
             self::$lang = g11n::getDefault();
         }
 
-        $string = self::doAnchors($string);
+//         $string = self::doAnchors($string);
         $string = self::doInternalAnchors($string, $baseTitle);
 
         return $string;
@@ -72,8 +72,10 @@ class KISSKontentHelper
 
     protected static function doAnchors($text)
     {
-        return preg_replace_callback('@\s(https?://([-\w\.]+)+(:\d+)?(/([\w/_\.\-]*(\?\S+)?)?)?)\s@'
+        $text = preg_replace_callback('@\s(https?://([-\w\.]+)+(:\d+)?(/([\w/_\.\-]*(\?\S+)?)?)?)\s@'
         , 'KISSKontentHelper::doAnchorsCallback', $text);
+        
+        return $text;
     }//function
 
     protected static function doInternalAnchors($text, $baseTitle = '')
