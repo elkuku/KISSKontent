@@ -2068,9 +2068,9 @@ class ElephantMarkdown
             $node_id = $this->encodeAttribute($node_id);
 
             return
-            "<sup id=\"fnref:$node_id\">" .
-            "<a href=\"#fn:$node_id\"$attr>$num</a>" .
-            "</sup>";
+            '<sup id="fnref:'.$node_id.'">'
+			.'<a href="'.$GLOBALS['_SERVER']['REQUEST_URI'].'#fn:'.$node_id.'"'.$attr.'>'.$num.'</a>'
+            .'</sup>';
         }
 
         return "[^" . $matches[1] . "]";
