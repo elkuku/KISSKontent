@@ -22,7 +22,7 @@ defined('_JEXEC') || die('=;)');
     <fieldset>
         <legend><?php echo jgettext('Display options'); ?></legend>
         <?php //echo sprintf(jgettext('Display: %s'), implode(' | ', $this->alphaLinks)); ?>
-        <?php echo (KISS_ML) ? KISSKontentHelper::drawLangChooser() : ''; ?>
+        <?php echo KISSKontentHelper::drawLangChooser(); ?>
     </fieldset>
 
 <?php if( ! $this->versions) :

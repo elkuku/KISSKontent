@@ -53,7 +53,8 @@ JFactory::getDocument()->addScript('http://www.google.com/jsapi');
     //-- ACL check
     if( ! $this->canDo->get('core.translate'))
     {
-        echo '<p>'.jgettext('You are not allowed to translate Kontent pages.').'</p></div>';
+        echo '<p>'.jgettext('You are not allowed to translate Kontent pages.').'</p>';
+        echo '</div>';
 
         return;
     }

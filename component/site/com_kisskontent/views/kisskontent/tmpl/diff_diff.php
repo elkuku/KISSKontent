@@ -19,31 +19,31 @@ $previewTitle =($this->diff->next->link)
 
 <table class="diff">
     <tr>
-    	<th colspan="2" class="diffLeft">
-    	    <?php echo $this->diff->versionOne->modified.' (#'.$this->diff->versionOne->id.')'; ?>
-    	    <br />
-    	    <?php echo $this->diff->versionOne->name; ?>
-    	    <br />
-    	    <?php echo(KISS_ML) ? KISSKontentHelper::drawFlag($this->diff->versionOne->lang) : ''; ?>
-    		<em><?php echo $this->diff->versionOne->summary; ?> </em>
-    	</th>
+        <th colspan="2" class="diffLeft">
+            <?php echo $this->diff->versionOne->modified.' (#'.$this->diff->versionOne->id.')'; ?>
+            <br />
+            <?php echo $this->diff->versionOne->name; ?>
+            <br />
+            <?php echo KISSKontentHelper::drawFlag($this->diff->versionOne->lang); ?>
+            <em><?php echo $this->diff->versionOne->summary; ?> </em>
+        </th>
 
-    	<th colspan="2" class="diffRight">
-    	    <?php echo $this->diff->versionTwo->modified.' (#'.$this->diff->versionTwo->id.')'; ?>
-    	    <br />
-    	    <?php echo $this->diff->versionTwo->name; ?>
-    	    <br />
-    	    <?php echo(KISS_ML) ? KISSKontentHelper::drawFlag($this->diff->versionTwo->lang) : ''; ?>
-    	    <em><?php echo $this->diff->versionTwo->summary; ?> </em>
-    	</th>
+        <th colspan="2" class="diffRight">
+            <?php echo $this->diff->versionTwo->modified.' (#'.$this->diff->versionTwo->id.')'; ?>
+            <br />
+            <?php echo $this->diff->versionTwo->name; ?>
+            <br />
+            <?php echo KISSKontentHelper::drawFlag($this->diff->versionTwo->lang); ?>
+            <em><?php echo $this->diff->versionTwo->summary; ?> </em>
+        </th>
     </tr>
 
     <tr>
-    	<th colspan="2"><?php echo $this->diff->previous->link; ?></th>
-    	<th colspan="2"><?php echo $this->diff->next->link; ?></th>
-	</tr>
+        <th colspan="2"><?php echo $this->diff->previous->link; ?></th>
+        <th colspan="2"><?php echo $this->diff->next->link; ?></th>
+    </tr>
 
-	<?php echo $this->diff->diff; ?>
+    <?php echo $this->diff->diff; ?>
 
 </table>
 
@@ -56,3 +56,5 @@ $previewTitle =($this->diff->next->link)
 <hr />
 
 <?php echo $this->diff->preview->text; ?>
+
+<?php

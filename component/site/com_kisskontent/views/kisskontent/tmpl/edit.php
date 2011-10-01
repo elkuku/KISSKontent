@@ -57,40 +57,43 @@ else
         <?php echo jgettext('Summary:'); ?> <input type="text" style="width: 80%" name="summary" />
     </p>
 
-	<div id="kissEditButtons">
-		<ul class="right">
-    		<li>
-    	        <input type="submit" value="<?php echo jgettext('Save'); ?>" />
-    		</li>
+    <div id="kissEditButtons">
+        <ul class="right">
+            <li>
+                <input type="submit" value="<?php echo jgettext('Save'); ?>" />
+            </li>
 
             <?php if($this->content->text) : ?>
-    		<li>
-    	        <input type="button" value="<?php echo jgettext('Cancel'); ?>" onClick="document.location.href='<?php echo JURI::current(); ?>';">
-    		</li>
+            <li>
+                <input type="button" value="<?php echo jgettext('Cancel'); ?>"
+                onClick="document.location.href='<?php echo JURI::current(); ?>';">
+            </li>
             <?php endif; ?>
-		</ul>
+        </ul>
 
-		<ul>
-    		<li>
-    	        <input type="button" value="<?php echo jgettext('Preview'); ?>" onclick="kisskontentPreview('<?php echo JURI::root(); ?>', '<?php echo JRequest::getString('p'); ?>');" />
-    		</li>
+        <ul>
+            <li>
+                <input type="button" value="<?php echo jgettext('Preview'); ?>"
+                onclick="kisskontentPreview('<?php echo JURI::root(); ?>', '<?php echo JRequest::getString('p'); ?>');" />
+            </li>
 
-    		<li>
-    	        <input type="button" value="<?php echo jgettext('Differences'); ?>" onclick="kisskontentDifferences('<?php echo JURI::root(); ?>', '<?php echo JRequest::getString('p'); ?>');" />
-    	        <br />
-    	        <input type="checkbox" id="chkDiffAll" />&nbsp;<label for="chkDiffAll"><?php echo jgettext('Complete'); ?></label>
-    		</li>
-		</ul>
+            <li>
+                <input type="button" value="<?php echo jgettext('Differences'); ?>"
+                onclick="kisskontentDifferences('<?php echo JURI::root(); ?>', '<?php echo JRequest::getString('p'); ?>');" />
+                <br />
+                <input type="checkbox" id="chkDiffAll" />&nbsp;<label for="chkDiffAll"><?php echo jgettext('Complete'); ?></label>
+            </li>
+        </ul>
 
-		<ul class="center">
-			<li>
-		        <input type="button" value="<?php echo jgettext('Help !'); ?>" onclick="kissHelp('kisskontentPreview');" />
-			</li>
-		</ul>
+        <ul class="center">
+            <li>
+                <input type="button" value="<?php echo jgettext('Help !'); ?>" onclick="kissHelp('kisskontentPreview');" />
+            </li>
+        </ul>
 
-	</div>
+    </div>
 
-	<div class="clr"></div>
+    <div class="clr"></div>
 
     <input type="hidden" name="kissLang" value="<?php echo $this->content->lang; ?>" />
     <input type="hidden" name="transTitle" value="<?php echo $this->content->title; ?>" />
