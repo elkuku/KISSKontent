@@ -308,7 +308,7 @@ class KISSKontentHelper
         $parsed =(0 === strpos($link, '/')) ? self::$p.$link : $link;
 
         $query->clear('where');
-        $query->where('k.title='.$db->quote(urldecode($parsed)));
+        $query->where('k.title = '.$db->quote(urldecode($parsed)));
 
         if(KISS_DBG) KuKuUtilityQuery::log($query);
 
@@ -319,8 +319,8 @@ class KISSKontentHelper
         if( ! $isLink && self::$lang)
         {
             $queryLang->clear('where');
-            $queryLang->where('t.title='.$db->quote(urldecode($parsed)));
-            $queryLang->where('t.lang='.$db->quote(self::$lang));
+            $queryLang->where('t.title = '.$db->quote(urldecode($parsed)));
+            $queryLang->where('t.lang = '.$db->quote(self::$lang));
 
             if(KISS_DBG) KuKuUtilityQuery::log($queryLang);
             $db->setQuery($queryLang, 0, 1);
@@ -340,6 +340,9 @@ class KISSKontentHelper
 
     public static function drawLangChooser($title = '', $selected = '')
     {
+        if( ! KISS_ML)
+        return '';
+
         $selected =($selected) ?: JRequest::getCmd('filterLang');
 
         $selected =($selected) ?: 'all';

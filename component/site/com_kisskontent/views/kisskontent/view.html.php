@@ -84,7 +84,11 @@ class KISSKontentViewKISSKontent extends JView
 
     protected function defaultTask()
     {
+        if(KISS_DBG) KuKuUtilityLog::log('Start get Kontent');
+
         $this->content = $this->get('content');
+
+        if(KISS_DBG) KuKuUtilityLog::log('End get Kontent');
 
         if( ! $this->content->text)
         {
@@ -165,6 +169,8 @@ class KISSKontentViewKISSKontent extends JView
         }
         else
         {
+            //-- Look for missing translations
+
             $parts = explode('/', $this->content->title);
 
             array_pop($parts);
@@ -200,7 +206,9 @@ class KISSKontentViewKISSKontent extends JView
             $options['orig'][] = JHtml::_('select.option', $title, $tag.' - '.$title);
         }//foreach
 
-        array_unshift($options['orig'], JHtml::_('select.option', $this->content->title.'&forcelang=default', jgettext('Default').' - '.$this->content->title));
+        array_unshift($options['orig'], JHtml::_('select.option'
+        , $this->content->title.'&forcelang=default'
+        , jgettext('Default').' - '.$this->content->title));
 
         $this->lists = array();
 

@@ -46,11 +46,15 @@ class KISSKontentModelKISSKontent extends JModel
                 if($forceLang
                 && $translation->lang != $forceLang)
                 {
+                    if(KISS_DBG) KuKuUtilityLog::log('Force lang is on and translation language is different');
+
                     $translation = $this->getTranslation($forceLang, '', $translation->id_kiss);
                     $forceId = $translation->id_kiss;
                 }
                 else
                 {
+                    if(KISS_DBG) KuKuUtilityLog::log('Force lang is off or translation language is the same');
+
                     return $this->splitTitle($translation);
                 }
             }
@@ -69,12 +73,16 @@ class KISSKontentModelKISSKontent extends JModel
             {
                 //-- Retrieve default page from database
                 $table->load(array('title' => 'default'));
+
+                if(KISS_DBG) KuKuUtilityLog::log('Default page retrieved from database');
             }
             catch(Exception $e)
             {
                 //-- No default page found in database
                 $table->title = 'Default';
                 $table->text = self::getDefault();
+
+                if(KISS_DBG) KuKuUtilityLog::log('No default page found in database');
             }//try
         }
         else
@@ -85,22 +93,31 @@ class KISSKontentModelKISSKontent extends JModel
                 //-- Try to load the page from database
                 if($forceId)
                 {
+                    if(KISS_DBG) KuKuUtilityLog::log('Try to load the page with forceId');
                     $table->load($forceId);
 
                     $table->id_kiss = 0;
                     $table->lang = 'default';
 
+                    if(KISS_DBG) KuKuUtilityLog::log('Page has been loaded with forceId');
+
                     return $this->splitTitle($table);
                 }
                 else
                 {
+                    if(KISS_DBG) KuKuUtilityLog::log('Try to load the page by title: '.$p);
+
                     $table->load(array('title' => $p));
+
+                    if(KISS_DBG) KuKuUtilityLog::log('Success :)');
                 }
             }
             catch(Exception $e)
             {
                 //-- Must be a new page
                 $table->title = $p;
+
+                if(KISS_DBG) KuKuUtilityLog::log('Must be a new page: '.$p);
             }//try
         }
 
@@ -154,11 +171,15 @@ class KISSKontentModelKISSKontent extends JModel
             //-- Title exists - look for a translation by title id
             $tableTrans->load(array('id_kiss' => $tableOrig->id, 'lang' => $lang));
 
+            if(KISS_DBG) KuKuUtilityLog::log('Translation has been loaded for orig kontent');
+
             return $this->splitTitle($tableTrans);
         }//try
         catch(Exception $e)
         {
-            $foo = '';
+            if(KISS_DBG) KuKuUtilityLog::log('Failed...');
+
+
             //-- @todo ignore only database exceptions (empty row)
             //             JError::raiseWarning(1, $e->getMessage());
             //foo
@@ -180,6 +201,8 @@ class KISSKontentModelKISSKontent extends JModel
 
         try
         {
+            if(KISS_DBG) KuKuUtilityLog::log('Failed...');
+
             //-- A title with the name does not exist - look for a translation by name and any language
             if($p && 'default' != strtolower($p))
             {
@@ -190,7 +213,7 @@ class KISSKontentModelKISSKontent extends JModel
         }//try
         catch(Exception $e)
         {
-            $foo = '';
+            if(KISS_DBG) KuKuUtilityLog::log('Failed...');
         }//try
 
         return $this->splitTitle($tableTrans);

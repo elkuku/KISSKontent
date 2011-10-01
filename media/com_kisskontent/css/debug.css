@@ -1,9 +1,8 @@
 @CHARSET "UTF-8";
 
 /* Colors for SQL queries */
-
 b.dbgOperator {
-	color: orange;
+	color: lime;
 }
 
 span.dbgCommand {
@@ -26,4 +25,21 @@ div.dbgQuery {
 
 div.dbgDump {
 	padding-bottom: 3em;
+}
+
+ul.kukuLog {
+	padding: 0.5em;
+	background-color: black;
+	color: white;
+	font-family: monospace;
+	font-size: 12px;
+}
+
+ul.kukuLog li {
+	list-style: none;
+	border-bottom: 1px solid silver;
+}
+
+ul.kukuLog b {
+	color: yellow;
 }
