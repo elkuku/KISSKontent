@@ -45,7 +45,7 @@ class KISSKontentModelRecentChanges extends JModel
             break;
         }//switch
 
-        if(KISS_DBG) KuKuUtility::logQuery($query);
+        if(KISS_DBG) KuKuUtilityQuery::log($query);
         //         $query->where('v.lang='.$this->_db->quote('en-GB'));
         //         $query->order('v.title ASC');
         //         $query->group('v.title');

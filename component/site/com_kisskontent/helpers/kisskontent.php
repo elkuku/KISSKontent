@@ -74,7 +74,7 @@ class KISSKontentHelper
     {
         $text = preg_replace_callback('@\s(https?://([-\w\.]+)+(:\d+)?(/([\w/_\.\-]*(\?\S+)?)?)?)\s@'
         , 'KISSKontentHelper::doAnchorsCallback', $text);
-        
+
         return $text;
     }//function
 
@@ -310,7 +310,7 @@ class KISSKontentHelper
         $query->clear('where');
         $query->where('k.title='.$db->quote(urldecode($parsed)));
 
-        if(KISS_DBG) KuKuUtility::logQuery($query);
+        if(KISS_DBG) KuKuUtilityQuery::log($query);
 
         $db->setQuery($query, 0, 1);
 
@@ -322,7 +322,7 @@ class KISSKontentHelper
             $queryLang->where('t.title='.$db->quote(urldecode($parsed)));
             $queryLang->where('t.lang='.$db->quote(self::$lang));
 
-            if(KISS_DBG) KuKuUtility::logQuery($queryLang);
+            if(KISS_DBG) KuKuUtilityQuery::log($queryLang);
             $db->setQuery($queryLang, 0, 1);
 
             $isLink = $db->loadResult();

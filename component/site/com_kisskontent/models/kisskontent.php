@@ -209,7 +209,7 @@ class KISSKontentModelKISSKontent extends JModel
 
         $query->where('t.id_kiss = '.(int)$id);
 
-        if(KISS_DBG) KuKuUtility::logQuery($query);
+        if(KISS_DBG) KuKuUtilityQuery::log($query);
 
         $db->setQuery($query);
 
@@ -272,7 +272,7 @@ class KISSKontentModelKISSKontent extends JModel
             $query->select('t.id');
             $query->where('t.id_kiss='.(int)$content->id);
 
-            if(KISS_DBG) KuKuUtility::logQuery($query);
+            if(KISS_DBG) KuKuUtilityQuery::log($query);
 
             $db->setQuery($query);
 
@@ -302,7 +302,7 @@ class KISSKontentModelKISSKontent extends JModel
         $query->leftJoin($this->_db->nameQuote('#__users').' AS u ON u.id = v.id_user');
         $query->order('v.modified DESC');
 
-        if(KISS_DBG) KuKuUtility::logQuery($query);
+        if(KISS_DBG) KuKuUtilityQuery::log($query);
 
         $this->_db->setQuery($query);
 

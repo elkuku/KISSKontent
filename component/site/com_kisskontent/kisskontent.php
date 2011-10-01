@@ -10,14 +10,18 @@
 //-- No direct access
 defined('_JEXEC') || die('=;)');
 
-define('KISS_DBG', 1);//@@DEBUG
-
 defined('NL') || define('NL', "\n");
 
-if(KISS_DBG) JHtml::_('stylesheet'//@@DEBUG
-, 'com_kisskontent/debug.css', array(), true);
+define('KISS_DBG', 1);//@@DEBUG
 
-if(KISS_DBG) jimport('kuku.util');//@@DEBUG
+if(KISS_DBG)
+{
+    jimport('kuku.utility.query');//@@DEBUG
+    jimport('kuku.utility.log');//@@DEBUG
+
+    JHtml::_('stylesheet'//@@DEBUG
+, 'com_kisskontent/debug.css', array(), true);
+}
 
 jimport('joomla.application.component.controller');
 
@@ -89,6 +93,7 @@ $controller->redirect();
 
 if('raw' != JRequest::getCmd('format'))
 {
+    if(KISS_DBG) KuKuUtilityLog::dump();
     // g11n::debugPrintTranslateds();
-    if(KISS_DBG) echo KuKuUtility::dump();
+    if(KISS_DBG) echo KuKuUtilityQuery::dump();
 }

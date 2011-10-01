@@ -58,7 +58,7 @@ class KISSKontentModelListKontent extends JModel
         $query->select('distinct(UPPER(LEFT(title, 1)))');
         $query->order('title');
 
-        if(KISS_DBG) KuKuUtility::logQuery($query);
+        if(KISS_DBG) KuKuUtilityQuery::log($query);
 
         $this->_db->setQuery($query);
 
@@ -90,7 +90,7 @@ class KISSKontentModelListKontent extends JModel
 
         $query->order('t.lang');
 
-        if(KISS_DBG) KuKuUtility::logQuery($query);
+        if(KISS_DBG) KuKuUtilityQuery::log($query);
 
         $this->_db->setQuery($query);
 
