@@ -19,6 +19,8 @@ class TableKISSKontent extends JTable
 
     public function load($keys = null, $reset = true)
     {
+        if(KISS_DBG) KuKuUtilityLog::log(__CLASS__.' - Try to load: '.print_r($keys, 1));
+
         if( ! parent::load($keys, $reset))
         throw new KISSTableException($this->getError());
 
