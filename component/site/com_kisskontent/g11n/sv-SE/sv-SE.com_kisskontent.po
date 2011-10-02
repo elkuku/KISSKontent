@@ -1,0 +1,355 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR NiK(C)
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+#   <webmaster@jokrsolutions.se>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: KISSKontent\n"
+"Report-Msgid-Bugs-To: info@nik.it.de\n"
+"POT-Creation-Date: 2011-09-24 20:23-0500\n"
+"PO-Revision-Date: 2011-10-02 16:44+0000\n"
+"Last-Translator: elkuku <test1@nik-it.de>\n"
+"Language-Team: Swedish (Sweden) (http://www.transifex.net/projects/p/opentranslators/team/sv_SE/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sv_SE\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+#: components/com_kisskontent/controller.php:27
+#: components/com_kisskontent/models/kisskontent.php:333
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:35
+msgid "You are not allowed to edit Kontent pages."
+msgstr "Du får inte redigera Kontent sidor."
+
+#: components/com_kisskontent/controller.php:37
+#: components/com_kisskontent/views/kisskontent/tmpl/translate.php:53
+msgid "You are not allowed to translate Kontent pages."
+msgstr ""
+
+#: components/com_kisskontent/controller.php:45
+#: components/com_kisskontent/controller.php:63
+msgid "Invalid token"
+msgstr "Ogiltig token"
+
+#: components/com_kisskontent/controller.php:51
+msgid "Your Kontent has been saved"
+msgstr ""
+
+#: components/com_kisskontent/controller.php:69
+msgid "Your translation has been saved"
+msgstr ""
+
+#: components/com_kisskontent/controller.php:98
+#: components/com_kisskontent/controller.php:146
+msgid "This is a preview only. The content has not been saved yet !"
+msgstr "Detta är en förhandsgranskning. Innehållet har inte sparats än!"
+
+#: components/com_kisskontent/controller.php:100
+#: components/com_kisskontent/controller.php:148
+msgid "Close preview"
+msgstr "Stäng förhandsgranskning"
+
+#: components/com_kisskontent/controller.php:133
+msgid "Saved version"
+msgstr ""
+
+#: components/com_kisskontent/controller.php:135
+msgid "Your version"
+msgstr ""
+
+#: components/com_kisskontent/controller.php:194
+msgid "Do you really want to..."
+msgstr ""
+
+#: components/com_kisskontent/controller.php:196
+#, php-format
+msgid "Delete the Kontent item: %s"
+msgstr ""
+
+#: components/com_kisskontent/controller.php:198
+#, php-format
+msgid "Delete %d version (ID: %s)"
+msgid_plural "Delete %d versions (IDs: %s)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: components/com_kisskontent/controller.php:201
+#, php-format
+msgid "Delete %d translation (ID: %s)"
+msgid_plural "Delete %d translations (IDs: %s)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: components/com_kisskontent/controller.php:205
+msgid "Yes I really want to nuke this Kontent"
+msgstr ""
+
+#: components/com_kisskontent/controller.php:213
+msgid "Your Kontent has been nuked"
+msgstr ""
+
+#: components/com_kisskontent/controllers/translator.raw.php:32
+msgid "Nothing to translate"
+msgstr ""
+
+#: components/com_kisskontent/helpers/kisskontent.php:160
+msgid "Click to create this page..."
+msgstr "Klicka för att skapa denna sida ..."
+
+#: components/com_kisskontent/helpers/kisskontent.php:317
+#, php-format
+msgid "Show languages: %s"
+msgstr ""
+
+#: components/com_kisskontent/helpers/kisskontent.php:323
+msgid "No language"
+msgstr ""
+
+#: components/com_kisskontent/helpers/kisskontent.php:323
+msgid "All languages"
+msgstr ""
+
+#: components/com_kisskontent/helpers/kisskontent.php:330
+msgid "Click to show all translations"
+msgstr ""
+
+#: components/com_kisskontent/helpers/kisskontent.php:330
+#: components/com_kisskontent/views/listkontent/view.html.php:75
+msgid "Click to hide translations"
+msgstr ""
+
+#: components/com_kisskontent/helpers/kisskontent.php:434
+msgid "To previous version difference"
+msgstr ""
+
+#: components/com_kisskontent/helpers/kisskontent.php:449
+msgid "To next version difference"
+msgstr ""
+
+#: components/com_kisskontent/helpers/kisskontent.php:492
+#, php-format
+msgid "Line: %d"
+msgstr ""
+
+#. TRANSLATORS: A language tag (e.g. "en-GB")
+#: components/com_kisskontent/helpers/kisskontent.php:511
+#, php-format
+msgid "Language: %s"
+msgstr ""
+
+#: components/com_kisskontent/helpers/kisskontent.php:522
+#, php-format
+msgid "%s has been made 2011 by %s"
+msgstr ""
+
+#: components/com_kisskontent/models/kisskontent.php:339
+msgid "You are not allowed to create Kontent pages"
+msgstr "Du får inte skapa Kontent sidor"
+
+#: components/com_kisskontent/models/kisskontent.php:370
+msgid "You are not allowed to translate Kontent pages"
+msgstr ""
+
+#: components/com_kisskontent/models/kisskontent.php:416
+#: components/com_kisskontent/models/kisskontent.php:458
+#: components/com_kisskontent/models/kisskontent.php:497
+#: components/com_kisskontent/models/kisskontent.php:537
+msgid "You are not allowed to nuke Kontent pages"
+msgstr ""
+
+#: components/com_kisskontent/models/kisskontent.php:442
+msgid "Unable to nuke your Kontent item"
+msgstr ""
+
+#: components/com_kisskontent/models/kisskontent.php:555
+msgid "Unable to nuke your Kontent"
+msgstr ""
+
+#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:18
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:79
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:76
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:90
+msgid "Differences"
+msgstr ""
+
+#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:21
+msgid "Show diferences only"
+msgstr ""
+
+#: components/com_kisskontent/views/kisskontent/tmpl/diff.php:22
+msgid "Show all"
+msgstr ""
+
+#. TRANSLATORS: 1 - the date, 2 - The user
+#: components/com_kisskontent/views/kisskontent/tmpl/diff_diff.php:15
+#, php-format
+msgid "Version as of %1s by %2s"
+msgstr ""
+
+#. TRANSLATORS: 1 - the date, 2 - The user
+#: components/com_kisskontent/views/kisskontent/tmpl/diff_diff.php:17
+#, php-format
+msgid "Actual version as of %1s by %2s"
+msgstr ""
+
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:16
+#: components/com_kisskontent/views/kisskontent/tmpl/translate.php:18
+msgid "You should enable JavaScript"
+msgstr ""
+
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:20
+#: components/com_kisskontent/views/kisskontent/view.html.php:345
+msgid "Edit"
+msgstr "Ändra"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:20
+msgid "New"
+msgstr "Ny"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:44
+msgid ""
+"This page does not exist (yet), and you are not allowed to create pages."
+msgstr "Denna sida finns inte (ännu), och du får inte skapa sidor."
+
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:57
+#: components/com_kisskontent/views/kisskontent/tmpl/translate.php:155
+msgid "Summary:"
+msgstr ""
+
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:63
+msgid "Save"
+msgstr "Spara"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:68
+msgid "Cancel"
+msgstr "Ångra"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:75
+msgid "Preview"
+msgstr "Förhandsgranska"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:81
+msgid "Complete"
+msgstr ""
+
+#: components/com_kisskontent/views/kisskontent/tmpl/edit.php:87
+msgid "Help !"
+msgstr ""
+
+#: components/com_kisskontent/views/kisskontent/tmpl/translate.php:26
+msgid "Loading Google Translation API"
+msgstr ""
+
+#: components/com_kisskontent/views/kisskontent/tmpl/translate.php:45
+#: components/com_kisskontent/views/kisskontent/tmpl/translate.php:158
+#: components/com_kisskontent/views/kisskontent/view.html.php:349
+msgid "Translate"
+msgstr ""
+
+#: components/com_kisskontent/views/kisskontent/tmpl/translate.php:60
+msgid "You have to translate the following Kontent items first"
+msgstr ""
+
+#: components/com_kisskontent/views/kisskontent/tmpl/translate.php:118
+msgid "Copy title"
+msgstr ""
+
+#: components/com_kisskontent/views/kisskontent/tmpl/translate.php:123
+msgid "Google translate title"
+msgstr ""
+
+#: components/com_kisskontent/views/kisskontent/tmpl/translate.php:131
+#: components/com_kisskontent/views/kisskontent/tmpl/translate.php:146
+msgid "Google translate"
+msgstr ""
+
+#: components/com_kisskontent/views/kisskontent/tmpl/translate.php:138
+msgid "Copy text"
+msgstr ""
+
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:18
+#: components/com_kisskontent/views/kisskontent/view.html.php:352
+msgid "Version history"
+msgstr "Versionshistorik"
+
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:23
+#: components/com_kisskontent/views/listkontent/tmpl/default.php:18
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:20
+msgid "Display options"
+msgstr ""
+
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:29
+msgid "No versions found."
+msgstr "Inga versioner hittades."
+
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:39
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:40
+msgid "Current"
+msgstr ""
+
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:43
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:44
+msgid "Previous"
+msgstr ""
+
+#: components/com_kisskontent/views/kisskontent/tmpl/versions.php:49
+#, php-format
+msgid "%s Bytes"
+msgstr ""
+
+#: components/com_kisskontent/views/kisskontent/view.html.php:200
+msgid "Default"
+msgstr ""
+
+#: components/com_kisskontent/views/kisskontent/view.html.php:341
+msgid "Read"
+msgstr "Läs"
+
+#. TRANSLATORS: A list of letters
+#: components/com_kisskontent/views/listkontent/tmpl/default.php:21
+#, php-format
+msgid "Display: %s"
+msgstr ""
+
+#: components/com_kisskontent/views/listkontent/tmpl/default.php:26
+msgid "No items found"
+msgstr "Inga poster hittades"
+
+#: components/com_kisskontent/views/listkontent/tmpl/default.php:41
+msgid "Nuke"
+msgstr ""
+
+#: components/com_kisskontent/views/listkontent/view.html.php:39
+msgid "Kontent list"
+msgstr ""
+
+#: components/com_kisskontent/views/listkontent/view.html.php:75
+msgid "Click to show all items"
+msgstr ""
+
+#: components/com_kisskontent/views/listkontent/view.html.php:77
+msgid "All items"
+msgstr ""
+
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:17
+msgid "Recent changes"
+msgstr ""
+
+#. TRANSLATORS: Numbers
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:24
+#, php-format
+msgid "Show the latest %1s | %2s | %3s | %4s | %5s changes."
+msgstr ""
+
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:39
+msgid "Nothing has changed"
+msgstr ""
+
+#: components/com_kisskontent/views/recentchanges/tmpl/default.php:78
+msgid "Versions"
+msgstr ""
+
+
