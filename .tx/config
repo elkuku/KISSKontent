@@ -1,0 +1,8 @@
+[main]
+host = https://www.transifex.net
+lang_map = de_DE: de-DE, es_ES: es-ES, nl: nl-NL, sv_SE: sv-SE
+
+[KISSKontent.com_kisskontent-site]
+file_filter = component/site/com_kisskontent/g11n/<lang>/<lang>.com_kisskontent.po
+host = http://www.transifex.net
+source_lang = en
