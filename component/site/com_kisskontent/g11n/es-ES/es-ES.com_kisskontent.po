@@ -1,26 +1,28 @@
-# Language es-ES translations for com_kisskontent - site package.
-# Copyright (C) 2011 NiK(C)
-# This file is distributed under the same license as the com_kisskontent - site package.
-# Nikolai Plath <EMAIL@ADDRESS>, 2011.
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR NiK(C)
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Luis  Méndez Alejo <gnumax@gmail.com>, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: com_kisskontent - site 123.456\n"
+"Project-Id-Version: KISSKontent\n"
 "Report-Msgid-Bugs-To: info@nik.it.de\n"
 "POT-Creation-Date: 2011-09-24 20:23-0500\n"
-"PO-Revision-Date: 2011-09-21 00:40-0500\n"
-"Last-Translator: Nikolai Plath <EMAIL@ADDRESS>\n"
-"Language-Team: Language es-ES\n"
-"Language: es-ES\n"
+"PO-Revision-Date: 2011-10-02 16:44+0000\n"
+"Last-Translator: elkuku <test1@nik-it.de>\n"
+"Language-Team: Spanish (Spain) (http://www.transifex.net/projects/p/opentranslators/team/es_ES/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: es_ES\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: components/com_kisskontent/controller.php:27
 #: components/com_kisskontent/models/kisskontent.php:333
 #: components/com_kisskontent/views/kisskontent/tmpl/edit.php:35
 msgid "You are not allowed to edit Kontent pages."
-msgstr ""
+msgstr "Usted no tiene permiso para editar páginas de Kontent."
 
 #: components/com_kisskontent/controller.php:37
 #: components/com_kisskontent/views/kisskontent/tmpl/translate.php:53
@@ -30,7 +32,7 @@ msgstr ""
 #: components/com_kisskontent/controller.php:45
 #: components/com_kisskontent/controller.php:63
 msgid "Invalid token"
-msgstr ""
+msgstr "Token no válido"
 
 #: components/com_kisskontent/controller.php:51
 msgid "Your Kontent has been saved"
@@ -43,12 +45,12 @@ msgstr ""
 #: components/com_kisskontent/controller.php:98
 #: components/com_kisskontent/controller.php:146
 msgid "This is a preview only. The content has not been saved yet !"
-msgstr ""
+msgstr "¡Esta es sólo una vista previa. El contenido no ha sido guardado todavía!"
 
 #: components/com_kisskontent/controller.php:100
 #: components/com_kisskontent/controller.php:148
 msgid "Close preview"
-msgstr ""
+msgstr "Cerrar vista previa"
 
 #: components/com_kisskontent/controller.php:133
 msgid "Saved version"
@@ -95,7 +97,7 @@ msgstr ""
 
 #: components/com_kisskontent/helpers/kisskontent.php:160
 msgid "Click to create this page..."
-msgstr ""
+msgstr "Clic para crear esta página..."
 
 #: components/com_kisskontent/helpers/kisskontent.php:317
 #, php-format
@@ -145,7 +147,7 @@ msgstr ""
 
 #: components/com_kisskontent/models/kisskontent.php:339
 msgid "You are not allowed to create Kontent pages"
-msgstr ""
+msgstr "Usted no tiene permiso para crear páginas de Kontent."
 
 #: components/com_kisskontent/models/kisskontent.php:370
 msgid "You are not allowed to translate Kontent pages"
@@ -201,15 +203,15 @@ msgstr ""
 #: components/com_kisskontent/views/kisskontent/tmpl/edit.php:20
 #: components/com_kisskontent/views/kisskontent/view.html.php:345
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
 #: components/com_kisskontent/views/kisskontent/tmpl/edit.php:20
 msgid "New"
-msgstr ""
+msgstr "Nueva"
 
 #: components/com_kisskontent/views/kisskontent/tmpl/edit.php:44
 msgid "This page does not exist (yet), and you are not allowed to create pages."
-msgstr ""
+msgstr "Esta página no existe (aún), y no se le permite crear páginas."
 
 #: components/com_kisskontent/views/kisskontent/tmpl/edit.php:57
 #: components/com_kisskontent/views/kisskontent/tmpl/translate.php:155
@@ -218,15 +220,15 @@ msgstr ""
 
 #: components/com_kisskontent/views/kisskontent/tmpl/edit.php:63
 msgid "Save"
-msgstr ""
+msgstr "Guardar"
 
 #: components/com_kisskontent/views/kisskontent/tmpl/edit.php:68
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: components/com_kisskontent/views/kisskontent/tmpl/edit.php:75
 msgid "Preview"
-msgstr ""
+msgstr "Vista previa"
 
 #: components/com_kisskontent/views/kisskontent/tmpl/edit.php:81
 msgid "Complete"
@@ -270,7 +272,7 @@ msgstr ""
 #: components/com_kisskontent/views/kisskontent/tmpl/versions.php:18
 #: components/com_kisskontent/views/kisskontent/view.html.php:352
 msgid "Version history"
-msgstr "Historial"
+msgstr "Historico de versiones"
 
 #: components/com_kisskontent/views/kisskontent/tmpl/versions.php:23
 #: components/com_kisskontent/views/listkontent/tmpl/default.php:18
@@ -280,7 +282,7 @@ msgstr ""
 
 #: components/com_kisskontent/views/kisskontent/tmpl/versions.php:29
 msgid "No versions found."
-msgstr ""
+msgstr "Ninguna versión encontrada"
 
 #: components/com_kisskontent/views/kisskontent/tmpl/versions.php:39
 #: components/com_kisskontent/views/kisskontent/tmpl/versions.php:40
@@ -313,7 +315,7 @@ msgstr ""
 
 #: components/com_kisskontent/views/listkontent/tmpl/default.php:26
 msgid "No items found"
-msgstr ""
+msgstr "Ningún elemento encontrado"
 
 #: components/com_kisskontent/views/listkontent/tmpl/default.php:41
 msgid "Nuke"
@@ -348,3 +350,5 @@ msgstr ""
 #: components/com_kisskontent/views/recentchanges/tmpl/default.php:78
 msgid "Versions"
 msgstr ""
+
+
