@@ -41,6 +41,10 @@ jimport('joomla.application.cli');
  */
 class Changelog extends JCli
 {
+    private $repo = '';
+
+    private $project = '';
+
     /**
      * Execute the application.
      *
@@ -53,11 +57,15 @@ class Changelog extends JCli
         // Import the JHttp class that will connect with the Github API.
         jimport('joomla.client.http');
 
-        echo 'Starting...';
+        $this->repo = 'elkuku';
+
+        $this->project = 'KISSKontent';
+
+        $this->out('Generating the changelog for '.$this->repo.'/'.$this->project.'...', false);
 
         $text = '';
 
-        $text = '# Changelog forKISSKontent'.NL.NL;
+        $text .= '# Changelog forKISSKontent'.NL.NL;
 
         // Set the maximum number of pages (and runaway failsafe).
         $cutoff = 10;
@@ -68,14 +76,14 @@ class Changelog extends JCli
         while ($cutoff --)
         {
             // Get a page of issues.
-            $list = $this->getCommits($page ++);
+            $commits = $this->getCommits($page ++);
 
             // Check if we've gone past the last page.
-            if( ! isset($list->commits))
+            if( ! isset($commits->commits))
             break;
 
             // Loop through each pull.
-            foreach($list->commits as $commit)
+            foreach($commits->commits as $commit)
             {
                 $list .= '* '.$commit->committed_date;
                 $list .= ' ['.$commit->message.'](https://github.com'.$commit->url.')'.PHP_EOL;
@@ -84,6 +92,8 @@ class Changelog extends JCli
 
         $text .= $list;//ElephantMarkdown::parse($list);
 
+        $this->out('ok');
+
         // Check if the output folder exists.
         if( ! is_dir('./docs'))
         mkdir('./docs');
@@ -91,7 +101,10 @@ class Changelog extends JCli
         // Write the file.
         file_put_contents('./docs/changelog.md', $text);
 
-        echo 'Finished =;)'.NL.NL;
+        $this->out('Page written to: '.'./docs/changelog.md');
+
+        $this->out();
+        $this->out('Finished =;)');
 
         // Close normally.
         $this->close();
@@ -111,7 +124,7 @@ class Changelog extends JCli
         $http = new JHttp;
 
         $r = $http->get(
-            'http://github.com/api/v2/json/commits/list/elkuku/KISSKontent/master?page='.$page.'&per_page=100'
+            'http://github.com/api/v2/json/commits/list/'.$this->repo.'/'.$this->project.'/master?page='.$page.'&per_page=100'
         );
 
         return json_decode($r->body);
