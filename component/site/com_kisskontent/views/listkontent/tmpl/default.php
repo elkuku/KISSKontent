@@ -39,6 +39,7 @@ defined('_JEXEC') || die('=;)');
 
         if($item->nukeHref) :
             echo '&nbsp; &rArr;';
+            // TRANSLATORS: The term Nuke refers to completely remove the Kontent item including versions and translations
             echo JHtml::link($item->nukeHref, jgettext('Nuke'), array('style' => 'font-weight: bold; color: red'));
         endif;
 //         var_dump($item);
