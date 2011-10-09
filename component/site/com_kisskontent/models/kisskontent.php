@@ -251,9 +251,12 @@ class KISSKontentModelKISSKontent extends JModel
     {
         static $versions;
 
+        $title =($title) ?: JRequest::getString('p');
+
         $db = $this->_db;
 
         $lang = '';
+        $filterLang = '';
 
         if(KISS_ML)
         {
@@ -268,17 +271,18 @@ class KISSKontentModelKISSKontent extends JModel
             else
             {
                 $lang =($lang) ?: g11n::getDefault();
+                $filterLang = 'default';
             }
         }
 
-        $key = serialize($lang.$title);
+        $key = serialize($filterLang.$title);
 
         if(isset($versions[$key]))
         return $versions[$key];
 
         $query = $db->getQuery(true);
 
-        $content = $this->getContent($lang, $title);
+        $content = $this->getContent($filterLang, $title);
 
         if( ! $content->id)
         {
@@ -316,9 +320,10 @@ class KISSKontentModelKISSKontent extends JModel
         if($title)
         $query->where('v.title='.$this->_db->quote($title));
 
-        if($lang)
+        if($filterLang
+        && 'default' != $filterLang)
         {
-            $l =('none' == $lang) ? '' : $lang;
+            $l =('none' == $filterLang) ? '' : $filterLang;
             $query->where('v.lang='.$this->_db->quote($l));
         }
 
