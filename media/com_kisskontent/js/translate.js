@@ -1,27 +1,27 @@
 function googleTranslate(src, dst)
 {
-	var source = document.id(src);
-	var destination = document.id(dst);
-	
-	alert(source.value);
-	
-	new Request({
-		url : 'index.php?option=com_kisskontent&task=translator.googleTranslate' + '&tmpl=component&format=raw',
+    var source = document.id(src);
+    var destination = document.id(dst);
+    
+    alert(source.value);
 
-		method : 'post',
-		data: 'text=' + source.value,
+    new Request({
+        url : 'index.php?option=com_kisskontent&task=translator.googleTranslate' + '&tmpl=component&format=raw',
 
-		// onRequest..
+        method : 'post',
+        data: 'text=' + source.value,
 
-		onSuccess : function(response) {
-			destination.set('value', response);
-		}
-	}).send();
+        // onRequest..
+
+        onSuccess : function(response) {
+            destination.set('value', response);
+        }
+    }).send();
 
 }
 
 var KISSTranslator = new Class({
-    
+
     /**
      * Copy the original to the translated field
      */
@@ -31,41 +31,31 @@ var KISSTranslator = new Class({
         $('translation').value = s;
         $('translation').focus();
     },// function
-    
+
     /**
      * Translate with the Google translation API
      */
     google_translate : function(langSrc, langTgt, idSrc, idTgt)
     {
-//        $('translation').value = jgettext('Translating...');
-//alert('aha'+langSrc+langTgt+idSrc+idTgt);
         if(0)// ! gbranding_displayed)
         {
             google.language.getBranding('gtranslate_branding');
             gbranding_displayed = true;
         }
-        
+
         var text = document.id(idSrc).value;
-        
+
         text =(undefined == text) ? document.id(idSrc).innerHTML : text;
 
         if(undefined == text)
         {
-        	return false;
-       	}
-        
- //       text = text.replace(/<br\s*\/?>/mg,"\\n\\r")
+            return false;
+        }
 
-//      var text = this.stripQuotes(php2js.trim($('default').innerHTML));
-//        var text = this.stripQuotes(php2js.trim($('default').innerHTML));
-//
         google.language.translate(text, '', langTgt, function(result)
         {
             if( ! result.error)
             {
-//            	var r = result.translation.replace(/<br\s*\/?>/mg,"\n");
-            	 //       text = text.replace(/<br\s*\/?>/mg,"\\n\\r")
-            	
                 document.id(idTgt).value = result.translation.replace(/<br\s*\/?>/mg,"\n");
             }
         });
@@ -73,29 +63,26 @@ var KISSTranslator = new Class({
     
     loadTranslation : function(p, target, lang)
     {
-    	console.log(p, target, lang);
-    	
-    	var destination = document.id(target);
-    	var destination2 = document.id(target+'Esc');
-    console.log(destination);
-    console.log(destination2);
-    	new Request({
-    		url : 'index.php?option=com_kisskontent&task=translator.load' 
-    			+ '&tmpl=component&format=raw',
+        console.log(p, target, lang);
 
-    		method : 'post',
-    		data: 'p=' + p,
+        var destination = document.id(target);
+        var destination2 = document.id(target+'Esc');
 
-    		// onRequest..
+        new Request({
+            url : 'index.php?option=com_kisskontent&task=translator.load' 
+                + '&tmpl=component&format=raw',
 
-    		onSuccess : function(response) {
-//    			alert(response);
-    			destination.set('html', response);
-    			destination2.set('html', response);
-    		}
-    	}).send();
+            method : 'post',
+            data: 'p=' + p,
+
+            // onRequest..
+
+            onSuccess : function(response) {
+                destination.set('html', response);
+                destination2.set('html', response);
+            }
+        }).send();
 
     }//function
 
-    
 });
