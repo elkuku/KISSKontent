@@ -156,7 +156,8 @@ class KISSKontentViewKISSKontent extends JView
 
         if( ! $this->translation->id)
         {
-            $this->translation->path = $model->getTranslation($targetLang, $this->content->path)->fullPath;
+            $this->translation->path = $model->getTranslation($targetLang, $this->content->path)
+            ->fullPath;
         }
 
         $this->translation->lang = $targetLang;

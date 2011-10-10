@@ -34,13 +34,15 @@ defined('_JEXEC') || die('=;)');
 
         foreach ($item->translations as $tag => $title) :
             echo '&nbsp;'.KISSKontentHelper::drawFlag($tag);
-            echo '&nbsp;'.JHtml::link(KISSKontentHelper::getLink($title), $tag, array('title' => $title));
+            echo '&nbsp;'.JHtml::link(KISSKontentHelper::getLink($title)
+            , $tag, array('title' => $title));
         endforeach;
 
         if($item->nukeHref) :
             echo '&nbsp; &rArr;';
             // TRANSLATORS: The term Nuke refers to completely remove the Kontent item including versions and translations
-            echo JHtml::link($item->nukeHref, jgettext('Nuke'), array('style' => 'font-weight: bold; color: red'));
+            echo JHtml::link($item->nukeHref, jgettext('Nuke')
+            , array('style' => 'font-weight: bold; color: red'));
         endif;
 //         var_dump($item);
 //         echo $item->level;
