@@ -21,7 +21,7 @@ define('_JEXEC', 1);
 define('NL', "\n");
 
 // Setup the path related constants.
-define('JPATH_BASE', dirname(__FILE__));
+define('JPATH_BASE', __DIR__);
 
 // Bootstrap the application.
 require $_SERVER['JOOMLA_PLATFORM_PATH'].'/libraries/import.php';

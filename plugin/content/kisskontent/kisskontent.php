@@ -19,7 +19,7 @@ class plgContentKISSKontent extends JPlugin
         if( ! $row->text)
         return true;
 
-        include_once dirname(__FILE__).'/parser/emarkdown.php';
+        include_once __DIR__.'/parser/emarkdown.php';
 
         $row->text = Markdown($row->text);
 

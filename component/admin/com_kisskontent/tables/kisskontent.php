@@ -2,7 +2,7 @@
 //-- No direct access
 defined('_JEXEC') || die('=;)');
 
-JLoader::register('KISSTableException', dirname(__FILE__).'/exception.php');
+JLoader::register('KISSTableException', __DIR__.'/exception.php');
 
 /**
  * KISSKontent table.

@@ -99,6 +99,8 @@ else
     <input type="hidden" name="transTitle" value="<?php echo $this->content->title; ?>" />
     <input type="hidden" name="id_kiss" value="<?php echo $this->content->id_kiss; ?>" />
 
+    <input type="hidden" name="p" value="<?php echo $this->content->title; ?>" />
+
     <input type="hidden" name="id" value="<?php echo $this->content->id; ?>" />
     <input type="hidden" name="task" value="save" />
 

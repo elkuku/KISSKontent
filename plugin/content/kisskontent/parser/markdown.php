@@ -14,7 +14,7 @@ defined('_JEXEC') || die('=;)');
 // <http://daringfireball.net/projects/markdown/>
 //
 
-require_once dirname(__FILE__).'/markdown_ext.php';
+require_once __DIR__.'/markdown_ext.php';
 
 define( 'MARKDOWN_VERSION',  "1.0.1m" ); // Sat 21 Jun 2008
 define( 'MARKDOWNEXTRA_VERSION',  "1.2.3" ); // Wed 31 Dec 2008
