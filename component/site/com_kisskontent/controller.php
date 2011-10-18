@@ -24,7 +24,8 @@ class KISSKontentController extends JController
     {
         if( ! KISSKontentHelper::getActions()->get('core.edit'))
         {
-            JError::raiseWarning(403, jgettext('You are not allowed to edit Kontent pages.'));
+            JFactory::getApplication()
+            ->enqueueMessage(jgettext('You are not allowed to edit Kontent pages.'), 'error');
         }
 
         parent::display();
@@ -34,7 +35,8 @@ class KISSKontentController extends JController
     {
         if( ! KISSKontentHelper::getActions()->get('core.translate'))
         {
-            JError::raiseWarning(403, jgettext('You are not allowed to translate Kontent pages.'));
+            JFactory::getApplication()
+            ->enqueueMessage(jgettext('You are not allowed to translate Kontent pages.'), 'error');
         }
 
         parent::display();
@@ -52,7 +54,7 @@ class KISSKontentController extends JController
         }
         catch(Exception $e)
         {
-            JError::raiseWarning(1, $e->getMessage());
+            JFactory::getApplication()->enqueueMessage($e->getMessage(), 'error');
         }//try
 
         parent::display();
@@ -70,7 +72,7 @@ class KISSKontentController extends JController
         }
         catch(Exception $e)
         {
-            JError::raiseWarning(1, $e->getMessage());
+            JFactory::getApplication()->enqueueMessage($e->getMessage(), 'error');
         }//try
 
         parent::display();
@@ -97,7 +99,8 @@ class KISSKontentController extends JController
         $previewText = '<p class="previewMessage">'
         .jgettext('This is a preview only. The content has not been saved yet !')
         .'<br />'
-        .'<a href="#" onclick="document.id(\'kisskontentPreview\').set(\'html\', \'\'); return false;">'.jgettext('Close preview').'</a>'
+        .'<a href="#" onclick="document.id(\'kisskontentPreview\').set(\'html\', \'\'); return false;">'
+        .jgettext('Close preview').'</a>'
         .'</p>';
 
         $params = null;
@@ -145,7 +148,8 @@ class KISSKontentController extends JController
        $previewText = '<p class="previewMessage">'
        .jgettext('This is a preview only. The content has not been saved yet !')
        .'<br />'
-       .'<a href="#" onclick="document.id(\'kisskontentPreview\').set(\'html\', \'\'); return false;">'.jgettext('Close preview').'</a>'
+       .'<a href="#" onclick="document.id(\'kisskontentPreview\').set(\'html\', \'\'); return false;">'
+       .jgettext('Close preview').'</a>'
        .'</p>';
 
        echo $previewText.$diff;
@@ -164,15 +168,9 @@ class KISSKontentController extends JController
 
        JPluginHelper::importPlugin('content');
 
-       JDispatcher::getInstance()->trigger('onContentPrepare'
-       , array('text', &$o, &$params));
+       JDispatcher::getInstance()->trigger('onContentPrepare', array('text', &$o, &$params));
 
        echo $o->text;
-    }//function
-
-    public function listkontent()
-    {
-        //foo;
     }//function
 
     public function nukeKonfirmed()
@@ -218,7 +216,7 @@ class KISSKontentController extends JController
         }
         catch(Exception $e)
         {
-            JError::raiseWarning(1, $e->getMessage());
+            JFactory::getApplication()->enqueueMessage($e->getMessage(), 'error');
         }//try
 
         JRequest::setVar('view', 'listkontent');

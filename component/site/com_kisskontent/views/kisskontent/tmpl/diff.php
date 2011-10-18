@@ -11,7 +11,7 @@
 defined('_JEXEC') || die('=;)');
 ?>
 
-<div class="kissKontent<?php echo $this->pageclass_sfx;?>">
+<div class="kissKontent<?php echo $this->pageclass_sfx;?>" id="KISSKontent">
 
 <?php echo $this->menu(); ?>
 

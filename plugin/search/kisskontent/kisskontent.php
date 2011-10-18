@@ -59,9 +59,7 @@ class plgSearchKISSKontent extends JPlugin
         }
         catch(Exception $e)
         {
-            JError::raiseWarning(0, $e->getMessage());
-
-            return;
+            JFactory::getApplication()->enqueueMessage($e->getMessage(), 'error');
         }//try
     }//function
 
@@ -170,7 +168,8 @@ class plgSearchKISSKontent extends JPlugin
 
         if($rows)
         {
-            JLoader::register('KISSKontentHelper', JPATH_ROOT.'/components/com_kisskontent/helpers/kisskontent.php');
+            JLoader::register('KISSKontentHelper'
+            , JPATH_ROOT.'/components/com_kisskontent/helpers/kisskontent.php');
 
             foreach($rows as $row)
             {

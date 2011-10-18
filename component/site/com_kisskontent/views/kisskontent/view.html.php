@@ -52,7 +52,13 @@ class KISSKontentViewKISSKontent extends JView
         }
 
         JHtml::_('stylesheet', 'com_kisskontent/kisskontent.css', array(), true);
+        JHtml::_('behavior.framework');
         JHtml::_('script', 'com_kisskontent/kisskontent.js', array(), true);
+        JFactory::getDocument()->addScriptDeclaration("window.addEvent('domready', function() {
+        	window.KISSKontent = new KISSKontent('KISSKontent'
+        	, '".JURI::root()."'
+        	, '".JRequest::getString('p')."');
+		});");
 
         $appParams = JFactory::getApplication()->getParams();
 

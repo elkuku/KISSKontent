@@ -11,7 +11,7 @@
 defined('_JEXEC') || die('=;)');
 
 ?>
-<div class="kissKontent<?php echo $this->pageclass_sfx;?>">
+<div class="kissKontent<?php echo $this->pageclass_sfx;?>" id="KISSKontent">
 
 <noscript><?php echo jgettext('You should enable JavaScript'); ?></noscript>
 
@@ -73,13 +73,14 @@ else
 
         <ul>
             <li>
-                <input type="button" value="<?php echo jgettext('Preview'); ?>"
-                onclick="kisskontentPreview('<?php echo JURI::root(); ?>', '<?php echo JRequest::getString('p'); ?>');" />
+                <input type="button" value="<?php echo jgettext('Preview'); ?>" onclick="KISSKontent.preview();" />
+                <!--
+                return;kisskontentPreview('<?php echo JURI::root(); ?>', '<?php echo JRequest::getString('p'); ?>');
+                 -->
             </li>
 
             <li>
-                <input type="button" value="<?php echo jgettext('Differences'); ?>"
-                onclick="kisskontentDifferences('<?php echo JURI::root(); ?>', '<?php echo JRequest::getString('p'); ?>');" />
+                <input type="button" value="<?php echo jgettext('Differences'); ?>" onclick="KISSKontent.differences();" />
                 <br />
                 <input type="checkbox" id="chkDiffAll" />&nbsp;<label for="chkDiffAll"><?php echo jgettext('Complete'); ?></label>
             </li>
@@ -87,7 +88,7 @@ else
 
         <ul class="center">
             <li>
-                <input type="button" value="<?php echo jgettext('Help !'); ?>" onclick="kissHelp('kisskontentPreview');" />
+                <input type="button" value="<?php echo jgettext('Help !'); ?>" onclick="KISSKontent.help('kisskontentPreview');" />
             </li>
         </ul>
 
@@ -110,6 +111,5 @@ else
 
 <div id="kisskontentPreview"></div>
 
-<?php //var_dump($this->content); ?>
 </div>
 <?php echo KISSKontentHelper::footer(); ?>

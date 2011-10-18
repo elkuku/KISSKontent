@@ -1,3 +1,11 @@
+/**
+ * @package    KISSKontent
+ * @subpackage JavaScript
+ * @author     Nikolai Plath {@link http://nik-it.de}
+ * @author     Created on 09-Sep-2011
+ * @license    GNU/GPL
+ */
+
 function googleTranslate(src, dst)
 {
     var source = document.id(src);

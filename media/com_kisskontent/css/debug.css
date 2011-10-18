@@ -1,4 +1,11 @@
 @CHARSET "UTF-8";
+/**
+ * @package    KISSKontent
+ * @subpackage CSS
+ * @author     Nikolai Plath {@link http://nik-it.de}
+ * @author     Created on 09-Sep-2011
+ * @license    GNU/GPL
+ */
 
 /* Colors for SQL queries */
 b.dbgOperator {

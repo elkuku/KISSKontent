@@ -1,4 +1,11 @@
 @CHARSET "UTF-8";
+/**
+ * @package    KISSKontent
+ * @subpackage CSS
+ * @author     Nikolai Plath {@link http://nik-it.de}
+ * @author     Created on 09-Sep-2011
+ * @license    GNU/GPL
+ */
 
 div.kissKontent noscript {
 	border: 2px solid orange;
@@ -106,4 +113,18 @@ div#origTextEsc {
 	background-color: #eee;
 	height: 150px;
 	overflow: auto;
+}
+
+/* Spinner */
+.spinner {
+	position: absolute;
+	opacity: 0.9;
+	z-index: 999;
+	background: #fff;
+}
+
+.spinner-img {
+	background: url('../images/spinner.gif') no-repeat;
+	width: 66px;
+	height: 66px;
 }

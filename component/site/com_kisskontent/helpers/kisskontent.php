@@ -466,7 +466,7 @@ class KISSKontentHelper
             , '&lArr; '.jgettext('To previous version difference')
             , array(
                 'class' => 'diffLink diffPrevLink'
-            , 'onclick' => 'loadDiff(this.href); return false;'
+            , 'onclick' => 'KISSKontent.loadDiff(this.href); return false;'
             ));
         }
 
@@ -481,7 +481,7 @@ class KISSKontentHelper
             , jgettext('To next version difference').' &rArr;'
             , array(
                 'class' => 'diffLink diffNextLink'
-            , 'onclick' => 'loadDiff(this.href); return false;'
+            , 'onclick' => 'KISSKontent.loadDiff(this.href); return false;'
             ));
         }
 

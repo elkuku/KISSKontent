@@ -9,10 +9,13 @@
 
 //-- No direct access
 defined('_JEXEC') || die('=;)');
-
+error_reporting(-1);
+jimport('joomla.client.ftp');
+$foo = new JFTP;
+$x = $foo->get('a', 'b');
 defined('NL') || define('NL', "\n");
 
-define('KISS_DBG', 1);//@@DEBUG
+define('KISS_DBG', 0);//@@DEBUG
 
 if(KISS_DBG)
 {
@@ -20,7 +23,7 @@ if(KISS_DBG)
     jimport('kuku.utility.log');//@@DEBUG
 
     JHtml::_('stylesheet'//@@DEBUG
-, 'com_kisskontent/debug.css', array(), true);
+    , 'com_kisskontent/debug.css', array(), true);
 }
 
 jimport('joomla.application.component.controller');
@@ -60,7 +63,7 @@ else
     }
     catch(Exception $e)
     {
-        JError::raiseWarning(0, $e->getMessage());
+        JFactory::getApplication()->enqueueMessage($e->getMessage(), 'error');
     }//try
 
     if( ! class_exists('g11n'))

@@ -1,9 +1,9 @@
 /**
- * @version SVN: $Id: diff.css 499 2011-08-12 08:59:55Z elkuku $
- * @package    EasyCreator
+ * @package    KISSKontent
  * @subpackage CSS
- * @author     Nikolai Plath (elkuku) {@link http://www.nik-it.de NiK-IT.de}
- * @author     Created on 20-Mar-2009
+ * @author     Nikolai Plath {@link http://nik-it.de}
+ * @author     Created on 09-Sep-2011
+ * @license    GNU/GPL
  */
 table.diff {
 	width: 100%;
